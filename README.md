@@ -1,6 +1,6 @@
 # Tungsten
 
-A compiler tooling inventory written in Rust
+An inventory of compiler tooling
 
 Currently building 👷‍♂️
 
