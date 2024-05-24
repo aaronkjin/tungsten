@@ -9,17 +9,17 @@ Currently building 👷‍♂️
 Quick setup to get the compiler running:
 
 ```bash
-# make sure Rust is installed locally; if not, install
+# ensure Rust is installed locally; if not, install
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# if Rust and Cargo are not in PATH, add them manually
+# if Rust and Cargo are not in PATH, add them
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Reload your shell configuration
+# reload shell configuration
 source ~/.zshrc   # For zsh
 source ~/.bashrc  # For bash
 
-# ensure Cargo is installed likewise
+# ensure Cargo is installed
 cargo --version
 ```
 
