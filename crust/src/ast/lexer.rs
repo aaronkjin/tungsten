@@ -47,4 +47,17 @@ impl <'a> Lexer<'a> {
     pub fn new(input: &'a str) -> Self {
         Self { input: input.chars().peekable() }
     }
+
+    pub fn next_token(&mut self) -> Option<Token> {
+        // Add functionality here
+    }
+
+    // Helper method
+    fn is_number_start(c: &char) -> bool {
+        c.is_digit( radix: 10)
+    }
+
+    fn peek(&mut self) -> Option<&char> {
+        self.input.peek()
+    }
 }
