@@ -41,3 +41,10 @@ impl Token {
 pub struct Lexer<'a> {
     input: Peekable<Chars<'a>>
 }
+
+impl <'a> Lexer<'a> {
+    
+    pub fn new(input: &'a str) -> Self {
+        Self { input: input.chars().peekable() }
+    }
+}
