@@ -36,3 +36,8 @@ impl Token {
         Self { kind, span }
     }
 }
+
+// Take expression in as input, transform into tokens as ouput
+pub struct Lexer<'a> {
+    input: Peekable<Chars<'a>>
+}
