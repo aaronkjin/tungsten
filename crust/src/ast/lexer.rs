@@ -12,12 +12,13 @@ pub enum TokenKind {
 pub struct TextSpan {
     start: usize,
     end: usize,
+    literal: String,
 }
 
 impl TextSpan {
     
-    pub fn new(start: usize, end: usize) -> Self {
-        TextSpan { start, end }
+    pub fn new(start: usize, end: usize, literal: String) -> Self {
+        TextSpan { start, end, literal }
     }
 
     pub fn length(&self) -> usize {
@@ -27,4 +28,5 @@ impl TextSpan {
 
 pub struct Token {
     kind: TokenKind,
+    span: TextSpan,
 }
