@@ -18,7 +18,7 @@ pub struct TextSpan {
 impl TextSpan {
     
     pub fn new(start: usize, end: usize, literal: String) -> Self {
-        TextSpan { start, end, literal }
+        Self { start, end, literal }
     }
 
     pub fn length(&self) -> usize {
@@ -29,4 +29,10 @@ impl TextSpan {
 pub struct Token {
     kind: TokenKind,
     span: TextSpan,
+}
+
+impl Token {
+    pub fn new(kind: TokenKind, span: TextSpan) -> Self {
+        Self { kind, span }
+    }
 }
