@@ -39,7 +39,7 @@ impl Token {
 
 // Take expression in as input, transform into tokens as ouput
 pub struct Lexer<'a> {
-    input: Peekable<Chars<'a>>
+    input: &'a str,
 }
 
 impl <'a> Lexer<'a> {
