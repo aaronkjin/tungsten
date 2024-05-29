@@ -49,7 +49,7 @@ impl <'a> Lexer<'a> {
     }
 
     pub fn next_token(&mut self) -> Option<Token> {
-        // Add functionality here
+        self.peek().map(|c : &char |)
     }
 
     // Helper method
