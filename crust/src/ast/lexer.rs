@@ -60,9 +60,15 @@ impl<'a> Lexer<'a> {
 
             return Some(Token::new(TokenKind::EOF, TextSpan::new(0, 0, eof_char.to_string())));
         }
+
+        // Check if char is number token
+        let c: char = self.current_char();
+        if self.is_number_start(&c) {
+            self.tokenize_number();
+        }
     }
 
-    // Helper method
+    // Helper method to see if char is a number
     fn is_number_start(c: &char) -> bool {
         c.is_digit(10)
     }
