@@ -40,12 +40,13 @@ impl Token {
 // Take expression in as input, transform into tokens as ouput
 pub struct Lexer<'a> {
     input: &'a str,
+    current_pos: usize,
 }
 
 impl <'a> Lexer<'a> {
     
     pub fn new(input: &'a str) -> Self {
-        Self { input: input.chars().peekable() }
+        Self { input, current_pos: 0 }
     }
 
     pub fn next_token(&mut self) -> Option<Token> {
