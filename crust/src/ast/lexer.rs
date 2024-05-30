@@ -48,17 +48,18 @@ impl<'a> Lexer<'a> {
     }
 
     pub fn next_token(&mut self) -> Option<Token> {
+        // Make sure we don't go over
         if self.current_pos > self.input.len() {
             return None;
         }
 
+        // End of token stream
         if self.current_pos == self.input.len() {
             let eof_char: char = '\0';
             self.current_pos += 1;
 
             return Some(Token::new(TokenKind::EOF, TextSpan::new(0, 0, eof_char.to_string())));
         }
-        None
     }
 
     // Helper method
