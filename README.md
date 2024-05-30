@@ -1,6 +1,6 @@
 # Tungsten
 
-A compiler, except build-it-yourself version
+A compiler, except build-it-yourself version. And by yourself, I mean me.
 
 Currently building 👷‍♂️
 
