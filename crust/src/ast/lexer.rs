@@ -16,7 +16,6 @@ pub struct TextSpan {
 }
 
 impl TextSpan {
-    
     pub fn new(start: usize, end: usize, literal: String) -> Self {
         Self { start, end, literal }
     }
@@ -37,14 +36,13 @@ impl Token {
     }
 }
 
-// Take expression in as input, transform into tokens as ouput
+// Take expression in as input, transform into tokens as output
 pub struct Lexer<'a> {
     input: &'a str,
     current_pos: usize,
 }
 
-impl <'a> Lexer<'a> {
-    
+impl<'a> Lexer<'a> {
     pub fn new(input: &'a str) -> Self {
         Self { input, current_pos: 0 }
     }
@@ -58,19 +56,17 @@ impl <'a> Lexer<'a> {
             let eof_char: char = '\0';
             self.current_pos += 1;
 
-            return Some(Token::new{
-                kind: TokenKind::EOF,
-                span: TextSpan::new( start: 0, end: 0, literal: eof_char.to_string())
-            });
+            return Some(Token::new(TokenKind::EOF, TextSpan::new(0, 0, eof_char.to_string())));
         }
+        None
     }
 
     // Helper method
     fn is_number_start(c: &char) -> bool {
-        c.is_digit( radix: 10)
+        c.is_digit(10)
     }
 
-    fn peek(&mut self) -> Option<&char> {
-        self.input.peek()
+    fn peek(&self) -> Option<&char> {
+        self.input.chars().nth(self.current_pos)
     }
 }
