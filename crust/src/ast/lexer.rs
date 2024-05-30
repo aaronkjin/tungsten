@@ -67,7 +67,9 @@ impl<'a> Lexer<'a> {
         c.is_digit(10)
     }
 
-    fn peek(&self) -> Option<&char> {
-        self.input.chars().nth(self.current_pos)
+    fn current_char(&self) -> char {
+        self.input.chars().nth(self.current_pos).unwrap()
     }
+
+    fn peek(&mut self) -> Option<&char> {}
 }
