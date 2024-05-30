@@ -1,6 +1,6 @@
 # Tungsten
 
-An inventory of compiler tooling
+A compiler, except build-it-yourself version
 
 Currently building 👷‍♂️
 
@@ -26,8 +26,8 @@ source ~/.bashrc  # For bash
 
 ## Progress
 
-- [ ] Lexer
-- [ ] Parser
+Currently: Building out the lexer.
+Next: The parser.
 
 ## Developer
 
