@@ -51,10 +51,12 @@ impl <'a> Lexer<'a> {
 
     pub fn next_token(&mut self) -> Option<Token> {
         if self.current_pos == self.input.len() {
-            return Token::new{
+            let eof_char: char = '\0';
+            
+            return Some(Token::new{
                 kind: TokenKind::EOF,
-                span: TextSpan::new( start: 0, end: 0, literal: '\u0000'.to_string())
-            };
+                span: TextSpan::new( start: 0, end: 0, literal: eof_char.to_string())
+            });
         }
     }
 
