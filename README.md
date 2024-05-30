@@ -27,6 +27,7 @@ source ~/.bashrc  # For bash
 ## Progress
 
 Currently: Building out the lexer.
+
 Next: The parser.
 
 ## Developer
