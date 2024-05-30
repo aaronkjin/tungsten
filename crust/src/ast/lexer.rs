@@ -70,6 +70,4 @@ impl<'a> Lexer<'a> {
     fn current_char(&self) -> char {
         self.input.chars().nth(self.current_pos).unwrap()
     }
-
-    fn peek(&mut self) -> Option<&char> {}
 }
