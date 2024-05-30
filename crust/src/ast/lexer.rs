@@ -50,6 +50,10 @@ impl <'a> Lexer<'a> {
     }
 
     pub fn next_token(&mut self) -> Option<Token> {
+        if self.current_pos > self.input.len() {
+            return None;
+        }
+
         if self.current_pos == self.input.len() {
             let eof_char: char = '\0';
             self.current_pos += 1;
