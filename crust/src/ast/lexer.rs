@@ -69,11 +69,13 @@ impl<'a> Lexer<'a> {
         let mut kind = TokenKind::Bad; // Char that we don't understand
         if self.is_number_start(&c) {
             let number: i64 = self.tokenize_number();
+            kind = TokenKind::Number(number);
         }
 
         let end = self.current_pos;
         let literal = self.input[start..end].to_string();
         let span = TextSpan::new(start, end, literal);
+        Some(Token::new(kind, span));
     }
 
     // Helper method to see if char is a number
