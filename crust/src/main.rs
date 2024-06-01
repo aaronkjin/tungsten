@@ -1,5 +1,15 @@
 mod ast;
 
 fn main() {
-    println!("Hello, world!");
+    let input = "7";
+
+    let mut lexer = ast::lexer::Lexer::new(input);
+    let mut tokens = Vec::new();
+
+    while let Some(token) = lexer.next_token() {
+        tokens.push(token);
+    }
+
+    // Macro print
+    println!("{:?}", tokens);
 }
