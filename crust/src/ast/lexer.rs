@@ -69,6 +69,7 @@ impl<'a> Lexer<'a> {
         }
 
         let end = self.current_pos;
+        let literal = self.input[start..end].to_string();
     }
 
     // Helper method to see if char is a number
