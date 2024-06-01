@@ -87,6 +87,7 @@ impl<'a> Lexer<'a> {
         self.input.chars().nth(self.current_pos).unwrap()
     }
 
+    // Helper to consume char for consume_number function
     fn consume(&mut self) -> Option<char> {
         let c = self.current_char();
         self.current_pos += 1;
@@ -96,5 +97,17 @@ impl<'a> Lexer<'a> {
         }
 
         Some(c);
+    }
+
+    fn consume_number(&mut self) -> i64 {
+        let mut number: i64 = 0;
+        while let Some(c) = self.consume() {
+            if c.is_digit(10) {
+                number = number * 10 + (c.to_digit(10).unwrap() as i64);
+            } else {
+                break;
+            }
+        }
+        number;
     }
 }
