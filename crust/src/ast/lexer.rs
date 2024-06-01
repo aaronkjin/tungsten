@@ -7,6 +7,8 @@ pub enum TokenKind {
     Slash,
     LeftParen,
     RightParen,
+    Bad,
+    Eof,
 }
 
 pub struct TextSpan {
@@ -58,18 +60,20 @@ impl<'a> Lexer<'a> {
             let eof_char: char = '\0';
             self.current_pos += 1;
 
-            return Some(Token::new(TokenKind::EOF, TextSpan::new(0, 0, eof_char.to_string())));
+            return Some(Token::new(TokenKind::Eof, TextSpan::new(0, 0, eof_char.to_string())));
         }
 
         // Check if char is number token
         let start = self.current_pos;
         let c: char = self.current_char();
+        let mut kind = TokenKind::Bad; // Char that we don't understand
         if self.is_number_start(&c) {
-            self.tokenize_number();
+            let number: i64 = self.tokenize_number();
         }
 
         let end = self.current_pos;
         let literal = self.input[start..end].to_string();
+        let span = TextSpan::new(start, end, literal);
     }
 
     // Helper method to see if char is a number
