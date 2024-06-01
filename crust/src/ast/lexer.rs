@@ -11,6 +11,7 @@ pub enum TokenKind {
     Eof,
 }
 
+#[derive(Debug)]
 pub struct TextSpan {
     start: usize,
     end: usize,
@@ -27,6 +28,7 @@ impl TextSpan {
     }
 }
 
+#[derive(Debug)]
 pub struct Token {
     kind: TokenKind,
     span: TextSpan,
