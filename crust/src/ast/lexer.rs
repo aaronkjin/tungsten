@@ -62,10 +62,13 @@ impl<'a> Lexer<'a> {
         }
 
         // Check if char is number token
+        let start = self.current_pos;
         let c: char = self.current_char();
         if self.is_number_start(&c) {
             self.tokenize_number();
         }
+
+        let end = self.current_pos;
     }
 
     // Helper method to see if char is a number
