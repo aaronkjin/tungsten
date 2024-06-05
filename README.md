@@ -22,6 +22,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # reload shell configuration
 source ~/.zshrc   # For zsh
 source ~/.bashrc  # For bash
+#-----------------------------------#
+# go into crust directory
+cd crust
+
+# run Cargo
+cargo run src/main.rs
 ```
 
 ## Progress
