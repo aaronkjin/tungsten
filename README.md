@@ -6,7 +6,7 @@ Currently building 👷‍♂️
 
 ## Getting Started
 
-Quick setup to get the compiler running:
+Prerequisites:
 
 ```bash
 # ensure Rust is installed; if not, install
@@ -22,7 +22,11 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # reload shell configuration
 source ~/.zshrc   # For zsh
 source ~/.bashrc  # For bash
-#-----------------------------------#
+```
+
+Quick setup to get the compiler running:
+
+```bash
 # go into crust directory
 cd crust
 
