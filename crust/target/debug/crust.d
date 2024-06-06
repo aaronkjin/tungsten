@@ -1,1 +1,0 @@
-/Users/aaronjin/Downloads/Projects/tungsten/crust/target/debug/crust: /Users/aaronjin/Downloads/Projects/tungsten/crust/src/ast/lexer.rs /Users/aaronjin/Downloads/Projects/tungsten/crust/src/ast/mod.rs /Users/aaronjin/Downloads/Projects/tungsten/crust/src/main.rs
