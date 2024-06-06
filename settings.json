@@ -1,0 +1,8 @@
+// Finna just use `cargo fmt` instead
+{
+    "[rust]": {
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "jinxdash.prettier-rust"
+    }
+}
