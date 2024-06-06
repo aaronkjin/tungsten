@@ -21,7 +21,11 @@ pub struct TextSpan {
 
 impl TextSpan {
     pub fn new(start: usize, end: usize, literal: String) -> Self {
-        Self { start, end, literal }
+        Self {
+            start,
+            end,
+            literal,
+        }
     }
 
     pub fn length(&self) -> usize {
@@ -49,7 +53,10 @@ pub struct Lexer<'a> {
 
 impl<'a> Lexer<'a> {
     pub fn new(input: &'a str) -> Self {
-        Self { input, current_pos: 0 }
+        Self {
+            input,
+            current_pos: 0,
+        }
     }
 
     pub fn next_token(&mut self) -> Option<Token> {
@@ -63,7 +70,10 @@ impl<'a> Lexer<'a> {
             let eof_char: char = '\0';
             self.current_pos += 1;
 
-            return Some(Token::new(TokenKind::Eof, TextSpan::new(0, 0, eof_char.to_string())));
+            return Some(Token::new(
+                TokenKind::Eof,
+                TextSpan::new(0, 0, eof_char.to_string()),
+            ));
         }
 
         // Check if char is number token
