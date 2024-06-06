@@ -68,7 +68,7 @@ impl<'a> Lexer<'a> {
 
         // Check if char is number token
         let start = self.current_pos;
-        let c: char = self.current_char();
+        let c: char = self.current_char()?;
         let mut kind = TokenKind::Bad; // Char that we don't understand
         if Lexer::is_number_start(&c) {
             let number: i64 = self.consume_number();
@@ -86,13 +86,13 @@ impl<'a> Lexer<'a> {
         c.is_digit(10)
     }
 
-    fn current_char(&self) -> char {
-        self.input.chars().nth(self.current_pos).unwrap()
+    fn current_char(&self) -> Option<char> {
+        self.input.chars().nth(self.current_pos)
     }
 
     // Helper to consume char for consume_number function
     fn consume(&mut self) -> Option<char> {
-        let c = self.current_char();
+        let c = self.current_char()?;
         self.current_pos += 1;
 
         if self.current_pos > self.input.len() {
