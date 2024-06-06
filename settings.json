@@ -1,5 +1,5 @@
-// Finna just use `cargo fmt` instead
 {
+    "_comment": "Finna just use `cargo fmt` instead",
     "[rust]": {
         "editor.formatOnPaste": true,
         "editor.formatOnSave": true,
