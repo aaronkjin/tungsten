@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub enum TokenKind {
     Number(i64),
     // PEMDAS operators
@@ -69,7 +70,7 @@ impl<'a> Lexer<'a> {
         let start = self.current_pos;
         let c: char = self.current_char();
         let mut kind = TokenKind::Bad; // Char that we don't understand
-        if self.is_number_start(&c) {
+        if Lexer::is_number_start(&c) {
             let number: i64 = self.consume_number();
             kind = TokenKind::Number(number);
         }
@@ -77,7 +78,7 @@ impl<'a> Lexer<'a> {
         let end = self.current_pos;
         let literal = self.input[start..end].to_string();
         let span = TextSpan::new(start, end, literal);
-        Some(Token::new(kind, span));
+        Some(Token::new(kind, span))
     }
 
     // Helper method to see if char is a number
@@ -98,7 +99,7 @@ impl<'a> Lexer<'a> {
             return None;
         }
 
-        Some(c);
+        Some(c)
     }
 
     fn consume_number(&mut self) -> i64 {
@@ -110,6 +111,6 @@ impl<'a> Lexer<'a> {
                 break;
             }
         }
-        number;
+        number
     }
 }
