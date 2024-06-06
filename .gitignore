@@ -1,1 +1,3 @@
 crust/target
+.prettierrc.json
+.DS_Store
