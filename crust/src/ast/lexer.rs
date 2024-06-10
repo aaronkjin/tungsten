@@ -100,7 +100,7 @@ impl<'a> Lexer<'a> {
         self.input.chars().nth(self.current_pos)
     }
 
-    // Helper to consume char for consume_number function
+    // Helper method to consume char for consume_number
     fn consume(&mut self) -> Option<char> {
         let c = self.current_char()?;
         self.current_pos += 1;
