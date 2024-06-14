@@ -100,6 +100,11 @@ impl<'a> Lexer<'a> {
         self.input.chars().nth(self.current_pos)
     }
 
+    // Helper method to observe char, no actions done
+    fn peek_char(&self) -> Option<char> {
+        self.input.chars().nth(self.current_pos + 1)
+    }
+
     // Helper method to consume char for consume_number
     fn consume(&mut self) -> Option<char> {
         let c = self.current_char()?;
