@@ -60,7 +60,6 @@ impl<'a> Lexer<'a> {
     }
 
     pub fn next_token(&mut self) -> Option<Token> {
-        let c: char = self.current_char();
         // Make sure we don't go over
         if self.current_pos > self.input.len() {
             return None;
@@ -76,6 +75,7 @@ impl<'a> Lexer<'a> {
 
         // Check if char is number token
         let start = self.current_pos;
+        let c: char = self.current_char();
         let mut kind = TokenKind::Bad; // Char that we don't understand
         if Lexer::is_number_start(&c) {
             let number: i64 = self.consume_number();
