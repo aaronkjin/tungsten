@@ -70,10 +70,7 @@ impl<'a> Lexer<'a> {
             let eof_char: char = '\0';
             self.current_pos += 1;
 
-            return Some(Token::new(
-                TokenKind::Eof,
-                TextSpan::new(0, 0, eof_char.to_string()),
-            ));
+            return Some(Token::new(TokenKind::Eof, TextSpan::new(0, 0, eof_char.to_string())));
         }
 
         // Check if char is number token
@@ -119,7 +116,8 @@ impl<'a> Lexer<'a> {
 
     fn consume_number(&mut self) -> i64 {
         let mut number: i64 = 0;
-        while let Some(c) = self.consume() {
+        while let Some(_) = self.current_char() {
+            let c = self.consume().unwrap();
             if c.is_digit(10) {
                 number = number * 10 + (c.to_digit(10).unwrap() as i64);
             } else {
