@@ -113,7 +113,7 @@ impl<'a> Lexer<'a> {
             return None;
         }
 
-        Some(c)
+        c
     }
 
     fn consume_number(&mut self) -> i64 {
