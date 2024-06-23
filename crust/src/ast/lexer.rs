@@ -113,14 +113,14 @@ impl<'a> Lexer<'a> {
             return None;
         }
 
-        c
+        Some(c);
     }
 
     fn consume_number(&mut self) -> i64 {
         let mut number: i64 = 0;
-        while let Some(_) = self.current_char() {
-            let c = self.consume().unwrap();
+        while let Some(c) = self.current_char() {
             if c.is_digit(10) {
+                self.consume().unwrap();
                 number = number * 10 + (c.to_digit(10).unwrap() as i64);
             } else {
                 break;
