@@ -73,23 +73,22 @@ impl<'a> Lexer<'a> {
             return Some(Token::new(TokenKind::Eof, TextSpan::new(0, 0, eof_char.to_string())));
         }
 
-        let c: char = self.current_char();
-        return c.map(|c| {
-            // Check if char is number token
-            let start = self.current_pos;
-            let mut kind = TokenKind::Bad; // Char that we don't understand
-            if Lexer::is_number_start(&c) {
-                let number: i64 = self.consume_number();
-                kind = TokenKind::Number(number);
-            } else {
-                self.consume();
-            }
+        let c: char = self.current_char()?;
 
-            let end = self.current_pos;
-            let literal = self.input[start..end].to_string();
-            let span = TextSpan::new(start, end, literal);
-            Token::new(kind, span)
-        });
+        // Check if char is number token
+        let start = self.current_pos;
+        let mut kind = TokenKind::Bad; // Char that we don't understand
+        if Lexer::is_number_start(&c) {
+            let number: i64 = self.consume_number();
+            kind = TokenKind::Number(number);
+        } else {
+            self.consume();
+        }
+
+        let end = self.current_pos;
+        let literal = self.input[start..end].to_string();
+        let span = TextSpan::new(start, end, literal);
+        Some(Token::new(kind, span))
     }
 
     // Helper method to see if char is a number
@@ -101,11 +100,6 @@ impl<'a> Lexer<'a> {
         self.input.chars().nth(self.current_pos)
     }
 
-    // Helper method to observe char, no actions done
-    // fn peek_char(&self) -> Option<char> {
-    //     self.input.chars().nth(self.current_pos + 1)
-    // }
-
     // Helper method to consume char for consume_number
     fn consume(&mut self) -> Option<char> {
         let c = self.current_char()?;
@@ -115,7 +109,7 @@ impl<'a> Lexer<'a> {
             return None;
         }
 
-        Some(c);
+        Some(c)
     }
 
     fn consume_number(&mut self) -> i64 {
