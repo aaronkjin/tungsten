@@ -83,13 +83,28 @@ impl<'a> Lexer<'a> {
             kind = TokenKind::Number(number);
         } else {
             // Edge case: Invalid token
-            self.consume();
+            kind = self.consume_symbol();
+            // self.consume();
         }
 
         let end = self.current_pos;
         let literal = self.input[start..end].to_string();
         let span = TextSpan::new(start, end, literal);
         Some(Token::new(kind, span))
+    }
+
+    fn consume_symbol(&mut self) -> TokenKind {
+        let c = self.consume().unwrap();
+
+        match c {
+            "+" => TokenKind::Plus,
+            "-" => TokenKind::Minus,
+            "*" => TokenKind::Asterisk,
+            "/" => TokenKind::Slash,
+            "(" => TokenKind::LeftParen,
+            ")" => TokenKind::RightParen,
+            _ => TokenKind::Bad,
+        }
     }
 
     // Helper method to see if char is a number
