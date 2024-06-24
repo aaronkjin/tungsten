@@ -116,7 +116,9 @@ impl<'a> Lexer<'a> {
         c.is_digit(10)
     }
 
-    fn is_whitespace();
+    fn is_whitespace(c: &char) -> bool {
+        c.is_whitespace()
+    }
 
     fn current_char(&self) -> Option<char> {
         self.input.chars().nth(self.current_pos)
