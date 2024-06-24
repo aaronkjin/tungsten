@@ -84,7 +84,6 @@ impl<'a> Lexer<'a> {
         } else {
             // Edge case: Invalid token
             kind = self.consume_symbol();
-            // self.consume();
         }
 
         let end = self.current_pos;
@@ -97,12 +96,12 @@ impl<'a> Lexer<'a> {
         let c = self.consume().unwrap();
 
         match c {
-            "+" => TokenKind::Plus,
-            "-" => TokenKind::Minus,
-            "*" => TokenKind::Asterisk,
-            "/" => TokenKind::Slash,
-            "(" => TokenKind::LeftParen,
-            ")" => TokenKind::RightParen,
+            '+' => TokenKind::Plus,
+            '-' => TokenKind::Minus,
+            '*' => TokenKind::Asterisk,
+            '/' => TokenKind::Slash,
+            '(' => TokenKind::LeftParen,
+            ')' => TokenKind::RightParen,
             _ => TokenKind::Bad,
         }
     }
