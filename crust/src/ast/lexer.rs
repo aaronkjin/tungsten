@@ -10,6 +10,7 @@ pub enum TokenKind {
     RightParen,
     Bad,
     Eof,
+    Whitespace,
 }
 
 #[derive(Debug)]
@@ -114,6 +115,8 @@ impl<'a> Lexer<'a> {
     fn is_number_start(c: &char) -> bool {
         c.is_digit(10)
     }
+
+    fn is_whitespace();
 
     fn current_char(&self) -> Option<char> {
         self.input.chars().nth(self.current_pos)
