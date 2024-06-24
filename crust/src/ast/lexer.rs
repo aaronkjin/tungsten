@@ -81,6 +81,8 @@ impl<'a> Lexer<'a> {
             if Lexer::is_number_start(&c) {
                 let number: i64 = self.consume_number();
                 kind = TokenKind::Number(number);
+            } else {
+                self.consume();
             }
 
             let end = self.current_pos;
