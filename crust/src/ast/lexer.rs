@@ -81,6 +81,10 @@ impl<'a> Lexer<'a> {
         if Lexer::is_number_start(&c) {
             let number: i64 = self.consume_number();
             kind = TokenKind::Number(number);
+        } else if Self::is_whitespace(&c) {
+            // Edge case: Whitespace as token
+            self.consume_whitespace();
+            return self.next_token().unwrap();
         } else {
             // Edge case: Invalid token
             kind = self.consume_symbol();
