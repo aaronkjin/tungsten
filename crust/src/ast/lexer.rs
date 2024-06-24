@@ -82,6 +82,7 @@ impl<'a> Lexer<'a> {
             let number: i64 = self.consume_number();
             kind = TokenKind::Number(number);
         } else {
+            // Edge case: Invalid token
             self.consume();
         }
 
