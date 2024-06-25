@@ -36,9 +36,11 @@ cargo run src/main.rs
 
 ## Progress
 
-Currently: Building out the lexer.
+Previously: Built out a basic lexer.
 
-Next: The parser.
+Currently: The parser.
+
+Next: Error-reporting.
 
 ## Developer
 
