@@ -6,6 +6,8 @@ pub struct Ast {
 }
 
 // Useful for Rust's pattern-matching
-pub enum ASTStatementKind {}
+pub enum ASTStatementKind {
+    Expression(ASTExpression),
+}
 
 pub struct ASTStatement {}
