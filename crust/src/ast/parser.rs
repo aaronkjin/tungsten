@@ -14,6 +14,10 @@ pub struct ASTStatement {
     kind: ASTStatementKind,
 }
 
+pub enum ASTExpressionKind {
+    Number(i64),
+}
+
 pub struct ASTExpression {
     kind: ASTExpressionKind,
 }
