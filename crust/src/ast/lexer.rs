@@ -9,8 +9,8 @@ pub enum TokenKind {
     LeftParen,
     RightParen,
     Bad,
-    Eof,
     Whitespace,
+    Eof,
 }
 
 #[derive(Debug)]
