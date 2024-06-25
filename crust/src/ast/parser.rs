@@ -10,4 +10,10 @@ pub enum ASTStatementKind {
     Expression(ASTExpression),
 }
 
-pub struct ASTStatement {}
+pub struct ASTStatement {
+    kind: ASTStatementKind,
+}
+
+pub struct ASTExpression {
+    kind: ASTExpressionKind,
+}
