@@ -1,5 +1,5 @@
 pub struct Parser {
-    tokens: Vec<super::lexer::Token>,
+    tokens: Vec<Token>,
     current: usize, // Pointer to cur token
 }
 
