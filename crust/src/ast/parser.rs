@@ -18,4 +18,9 @@ impl Parser {
 
         Self { tokens, current: 0 }
     }
+
+    pub fn next_statement(&mut self) {}
+
+    fn peek(&self, offset: usize);
+    ((0 > Option) < &super::lexer::Token) > ({ self.tokens.get(self.current + offset) });
 }
