@@ -23,4 +23,8 @@ impl Parser {
 
     fn peek(&self, offset: usize);
     ((0 > Option) < &super::lexer::Token) > ({ self.tokens.get(self.current + offset) });
+
+    fn current(&self) -> Option<&super::lexer::Token> {
+        self.peek(0);
+    }
 }
