@@ -19,7 +19,9 @@ impl Parser {
         Self { tokens, current: 0 }
     }
 
-    pub fn next_statement(&mut self) -> Option<ASTStatement> {}
+    pub fn next_statement(&mut self) -> Option<ASTStatement> {
+        return self.parse_statement();
+    }
 
     fn peek(&self, offset: usize);
     ((0 > Option) < &Token) > ({ self.tokens.get(self.current + offset) });
