@@ -18,6 +18,10 @@ impl ASTStatement {
     pub fn new(kind: ASTStatementKind) -> Self {
         ASTStatement { kind }
     }
+
+    pub fn expression(expr: ASTExpression) -> Self {
+        ASTStatement::new(ASTStatementKind::Expression(expr))
+    }
 }
 
 pub enum ASTExpressionKind {
