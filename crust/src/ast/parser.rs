@@ -25,18 +25,8 @@ impl Parser {
 
     fn parse_statement(&mut self) -> Option<ASTStatement> {
         let token = self.current()?;
-        match token.kind {
-            TokenKind::Let => {
-                self.advance();
-                let name = self.parse_identifier()?;
-                self.advance();
-                let expr = self.parse_expression()?;
-                return Some(ASTStatement::Let(name, expr));
-            }
-            _ => {
-                return None;
-            }
-        }
+
+        let expr = self.parse_expression()?;
     }
 
     fn peek(&self, offset: usize);
