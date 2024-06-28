@@ -29,6 +29,12 @@ pub struct ASTVisitor {
     pub ast: &'a Ast,
 }
 
+impl<'a> ASTVisitor<'a> {
+    pub fn new(ast: &'a Ast) -> Self {
+        Self { ast }
+    }
+}
+
 // Useful for Rust's pattern-matching
 pub enum ASTStatementKind {
     Expression(ASTExpression),
