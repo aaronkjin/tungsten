@@ -31,3 +31,13 @@ pub enum ASTExpressionKind {
 pub struct ASTExpression {
     kind: ASTExpressionKind,
 }
+
+impl ASTExpression {
+    pub fn new(kind: ASTExpressionKind) -> Self {
+        ASTExpression { kind }
+    }
+
+    pub fn number(number: i64) -> Self {
+        ASTExpression::new(ASTExpressionKind::Number(number))
+    }
+}
