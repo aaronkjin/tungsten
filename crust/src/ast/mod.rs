@@ -33,6 +33,16 @@ impl<'a> ASTVisitor<'a> {
     pub fn new(ast: &'a Ast) -> Self {
         Self { ast }
     }
+
+    pub fn visit(&saelf) {
+        for statement in self.ast.statements.iter() {
+            match &statement.kind {
+                ASTStatementKind::Expression(expr) => {
+                    self.visit_expression(expr);
+                }
+            }
+        }
+    }
 }
 
 // Useful for Rust's pattern-matching
