@@ -43,6 +43,14 @@ impl<'a> ASTVisitor<'a> {
             }
         }
     }
+
+    fn visit_expression(&self, expr: &ASTExpression) {
+        match &expr.kind {
+            ASTExpressionKind::Number(number) => {
+                println!("Number: {}", number);
+            }
+        }
+    }
 }
 
 // Useful for Rust's pattern-matching
