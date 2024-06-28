@@ -9,6 +9,10 @@ impl Ast {
     pub fn new() -> Self {
         Self { statements: Vec::new() }
     }
+
+    pub fn add_statement(&mut self, statement: ASTStatement) {
+        self.statements.push(statement);
+    }
 }
 
 // Useful for Rust's pattern-matching
