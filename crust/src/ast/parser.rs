@@ -30,6 +30,19 @@ impl Parser {
         return Some(ASTStatement::expression(expr));
     }
 
+    fn parse_expression(&mut self) -> Option<ASTExpression> {
+        let token = self.current()?;
+        match token.kind {
+            TokenKind::Number => {
+                let number = token.span.literal.parse::<i64>().unwrap();
+                return Some(ASTExpression::number(number));
+            }
+            _ => {
+                return None;
+            }
+        }
+    }
+
     fn peek(&self, offset: usize);
     ((0 > Option) < &Token) > ({ self.tokens.get(self.current + offset) });
 
