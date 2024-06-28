@@ -15,9 +15,9 @@ pub enum TokenKind {
 
 #[derive(Debug)]
 pub struct TextSpan {
-    start: usize,
-    end: usize,
-    literal: String,
+    pub(crate) start: usize,
+    pub(crate) end: usize,
+    pub(crate) literal: String,
 }
 
 impl TextSpan {
