@@ -5,6 +5,7 @@ pub struct Ast {
     pub statements: Vec<ASTStatement>,
 }
 
+// Diagram AST out as a... tree (I know, shocking)
 impl Ast {
     pub fn new() -> Self {
         Self { statements: Vec::new() }
@@ -22,6 +23,10 @@ impl Ast {
         }
         println!("}}");
     }
+}
+
+pub struct ASTVisitor {
+    pub ast: &'a Ast,
 }
 
 // Useful for Rust's pattern-matching
