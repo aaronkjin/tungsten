@@ -27,6 +27,7 @@ impl Parser {
         let token = self.current()?;
 
         let expr = self.parse_expression()?;
+        return Some(ASTStatement::expression(expr));
     }
 
     fn peek(&self, offset: usize);
