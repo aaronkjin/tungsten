@@ -14,6 +14,12 @@ pub struct ASTStatement {
     kind: ASTStatementKind,
 }
 
+impl ASTStatement {
+    pub fn new(kind: ASTStatementKind) -> Self {
+        ASTStatement { kind }
+    }
+}
+
 pub enum ASTExpressionKind {
     Number(i64),
 }
