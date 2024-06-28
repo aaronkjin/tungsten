@@ -5,10 +5,10 @@ pub struct Ast {
     pub statements: Vec<ASTStatement>,
 }
 
-imp Ast {
-  pub fn new() -> Self {
-    Self { statements: Vec::new() }
-  }
+impl Ast {
+    pub fn new() -> Self {
+        Self { statements: Vec::new() }
+    }
 }
 
 // Useful for Rust's pattern-matching
