@@ -42,6 +42,16 @@ pub trait ASTVisitor {
     fn visit_number(&mut self, number: &ASTNumberExpression);
 }
 
+pub struct ASTPrinter {
+    indent: usize,
+}
+
+impl ASTVisitor for ASTPrinter {
+    fn visit_number(&mut self, number: &ASTNumberExpression) {
+        println!("{}{}", " ".repeat(self.indent), number.number);
+    }
+}
+
 // AST statements
 pub enum ASTStatementKind {
     // Useful for Rust's pattern-matching
