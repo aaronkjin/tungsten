@@ -47,10 +47,6 @@ pub struct ASTPrinter {
 }
 
 impl ASTVisitor for ASTPrinter {
-    fn visit_number(&mut self, number: &ASTNumberExpression) {
-        self.print_with_indent(&format!("Number: {}", number.number));
-    }
-
     fn visit_statement(&mut self, statement: &ASTStatement) {
         self.print_with_indent("Statement:");
         self.indent += 2;
@@ -63,6 +59,10 @@ impl ASTVisitor for ASTPrinter {
         self.indent += 2;
         ASTVisitor::visit_expression(self, expression);
         self.indent -= 2;
+    }
+
+    fn visit_number(&mut self, number: &ASTNumberExpression) {
+        self.print_with_indent(&format!("Number: {}", number.number));
     }
 }
 
