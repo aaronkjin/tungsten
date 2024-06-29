@@ -15,10 +15,14 @@ impl Ast {
         self.statements.push(statement);
     }
 
-    pub fn visit(&mut self, statement: ASTStatement) {}
+    pub fn visit(&mut self, statement: ASTStatement) {
+        for statement in &self.statements {
+            visitor.visit_statement(statement);
+        }
+    }
 }
 
-trait ASTVisitor {
+pub trait ASTVisitor {
     fn visit_statement(&mut self, statement: &ASTStatement);
     fn visit_expression(&mut self, expression: &ASTExpression);
     fn visit_number(&mut self, number: &ASTNumberExpression);
