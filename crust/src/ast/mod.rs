@@ -57,6 +57,13 @@ impl ASTVisitor for ASTPrinter {
         ASTVisitor::visit_statement(self, statement);
         self.indent -= 2;
     }
+
+    fn visit_expression(&mut self, expression: &ASTExpression) {
+        self.print_with_indent("Expression:");
+        self.indent += 2;
+        ASTVisitor::visit_expression(self, expression);
+        self.indent -= 2;
+    }
 }
 
 impl ASTPrinter {
