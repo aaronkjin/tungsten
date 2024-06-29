@@ -27,6 +27,8 @@ impl Ast {
 
 trait ASTVisitor {
     fn visit_statement(&mut self, statement: &ASTStatement);
+    fn visit_expression(&mut self, expression: &ASTExpression);
+    fn visit_number(&mut self, number: &ASTExpression);
 }
 
 // Useful for Rust's pattern-matching
