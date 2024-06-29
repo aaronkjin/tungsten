@@ -23,8 +23,22 @@ impl Ast {
 }
 
 pub trait ASTVisitor {
-    fn visit_statement(&mut self, statement: &ASTStatement);
-    fn visit_expression(&mut self, expression: &ASTExpression);
+    fn visit_statement(&mut self, statement: &ASTStatement) {
+        match &statement.kind {
+            ASTStatementKind::Expression(expr) => {
+                self.visit_expression(expr);
+            }
+        }
+    }
+
+    fn visit_expression(&mut self, expression: &ASTExpression) {
+        match &expression.kind {
+            ASTExpressionKind::Number(number) => {
+                self.visit_number(number);
+            }
+        }
+    }
+
     fn visit_number(&mut self, number: &ASTNumberExpression);
 }
 
