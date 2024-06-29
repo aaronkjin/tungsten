@@ -48,13 +48,13 @@ pub struct ASTPrinter {
 
 impl ASTVisitor for ASTPrinter {
     fn visit_number(&mut self, number: &ASTNumberExpression) {
-        self.print_with_indent(self.indent, &format!("Number: {}", number.number));
+        self.print_with_indent(&format!("Number: {}", number.number));
     }
 }
 
 impl ASTPrinter {
-    fn print_with_indent(&mut self, indent: usize, text: &str) {
-        println!("{}{}", " ".repeat(indent), text);
+    fn print_with_indent(&mut self, text: &str) {
+        println!("{}{}", " ".repeat(self.indent), text);
     }
 }
 
