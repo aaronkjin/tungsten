@@ -15,14 +15,7 @@ impl Ast {
         self.statements.push(statement);
     }
 
-    pub fn visualize(&self) {
-        println!("digraph ast {{");
-        println!("   node [shape=box]");
-        for (i, statement) in self.statements.iter().enumerate() {
-            println!("   {} [label=\"{}\"];", i, statement);
-        }
-        println!("}}");
-    }
+    pub fn visit(&mut self, statement: ASTStatement) {}
 }
 
 trait ASTVisitor {
