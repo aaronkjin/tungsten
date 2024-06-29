@@ -25,32 +25,8 @@ impl Ast {
     }
 }
 
-pub struct ASTVisitor {
-    pub ast: &'a Ast,
-}
-
-impl<'a> ASTVisitor<'a> {
-    pub fn new(ast: &'a Ast) -> Self {
-        Self { ast }
-    }
-
-    pub fn visit(&saelf) {
-        for statement in self.ast.statements.iter() {
-            match &statement.kind {
-                ASTStatementKind::Expression(expr) => {
-                    self.visit_expression(expr);
-                }
-            }
-        }
-    }
-
-    fn visit_expression(&self, expr: &ASTExpression) {
-        match &expr.kind {
-            ASTExpressionKind::Number(number) => {
-                println!("Number: {}", number);
-            }
-        }
-    }
+trait ASTVisitor {
+    fn visit_statement(&mut self, statement: &ASTStatement);
 }
 
 // Useful for Rust's pattern-matching
