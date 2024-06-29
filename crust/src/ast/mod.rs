@@ -51,9 +51,14 @@ impl ASTStatement {
     }
 }
 
+// AST number expressions
+pub struct ASTNumberExpression {
+    number: i64,
+}
+
 // AST expressions
 pub enum ASTExpressionKind {
-    Number(i64),
+    Number(ASTNumberExpression),
 }
 
 pub struct ASTExpression {
@@ -66,11 +71,6 @@ impl ASTExpression {
     }
 
     pub fn number(number: i64) -> Self {
-        ASTExpression::new(ASTExpressionKind::Number(number))
+        ASTExpression::new(ASTExpressionKind::Number(ASTNumberExpression))
     }
-}
-
-// AST number expressions
-pub struct ASTNumberExpression {
-    number: i64,
 }
