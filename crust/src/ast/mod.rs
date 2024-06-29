@@ -28,11 +28,12 @@ impl Ast {
 trait ASTVisitor {
     fn visit_statement(&mut self, statement: &ASTStatement);
     fn visit_expression(&mut self, expression: &ASTExpression);
-    fn visit_number(&mut self, number: &ASTExpression);
+    fn visit_number(&mut self, number: &ASTNumberExpression);
 }
 
-// Useful for Rust's pattern-matching
+// AST statements
 pub enum ASTStatementKind {
+    // Useful for Rust's pattern-matching
     Expression(ASTExpression),
 }
 
@@ -50,6 +51,7 @@ impl ASTStatement {
     }
 }
 
+// AST expressions
 pub enum ASTExpressionKind {
     Number(i64),
 }
@@ -66,4 +68,9 @@ impl ASTExpression {
     pub fn number(number: i64) -> Self {
         ASTExpression::new(ASTExpressionKind::Number(number))
     }
+}
+
+// AST number expressions
+pub struct ASTNumberExpression {
+    number: i64,
 }
