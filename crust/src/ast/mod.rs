@@ -50,6 +50,13 @@ impl ASTVisitor for ASTPrinter {
     fn visit_number(&mut self, number: &ASTNumberExpression) {
         self.print_with_indent(&format!("Number: {}", number.number));
     }
+
+    fn visit_statement(&mut self, statement: &ASTStatement) {
+        self.print_with_indent("Statement:");
+        self.indent += 2;
+        ASTVisitor::visit_statement(self, statement);
+        self.indent -= 2;
+    }
 }
 
 impl ASTPrinter {
