@@ -62,7 +62,7 @@ impl ASTVisitor for ASTPrinter {
     }
 
     fn visit_number(&mut self, number: &ASTNumberExpression) {
-        self.print_with_indent(&format!("Number: {}", number.digit));
+        self.print_with_indent(&format!("Number: {}", number.number));
     }
 }
 
