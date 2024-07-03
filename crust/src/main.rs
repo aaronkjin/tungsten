@@ -10,6 +10,8 @@ fn main() {
         tokens.push(token);
     }
 
+    let mut ast: Ast = Ast::new();
+
     // Macro print
     println!("{:?}", tokens);
 }
