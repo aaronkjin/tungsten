@@ -11,6 +11,8 @@ fn main() {
         tokens.push(token);
     }
 
+    println!("{:?}", tokens);
+
     // Part 2: Parser
     let mut ast: Ast = Ast::new();
     let mut parser = Parser::new();
@@ -19,6 +21,5 @@ fn main() {
         ast.add_statement(statement);
     }
 
-    // Macro print
-    println!("{:?}", tokens);
+    ast.visualize();
 }
