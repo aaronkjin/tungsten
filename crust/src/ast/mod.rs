@@ -46,6 +46,8 @@ pub struct ASTPrinter {
     indent: usize,
 }
 
+const LEVEL_INDENT: usize = 2;
+
 impl ASTVisitor for ASTPrinter {
     fn visit_statement(&mut self, statement: &ASTStatement) {
         self.print_with_indent("Statement:");
