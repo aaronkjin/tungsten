@@ -51,16 +51,16 @@ const LEVEL_INDENT: usize = 2;
 impl ASTVisitor for ASTPrinter {
     fn visit_statement(&mut self, statement: &ASTStatement) {
         self.print_with_indent("Statement:");
-        self.indent += 2;
+        self.indent += LEVEL_INDENT;
         ASTVisitor::visit_statement(self, statement);
-        self.indent -= 2;
+        self.indent -= LEVEL_INDENT;
     }
 
     fn visit_expression(&mut self, expression: &ASTExpression) {
         self.print_with_indent("Expression:");
-        self.indent += 2;
+        self.indent += LEVEL_INDENT;
         ASTVisitor::visit_expression(self, expression);
-        self.indent -= 2;
+        self.indent -= LEVEL_INDENT;
     }
 
     fn visit_number(&mut self, number: &ASTNumberExpression) {
