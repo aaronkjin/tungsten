@@ -20,6 +20,11 @@ impl Ast {
             visitor.visit_statement(statement);
         }
     }
+
+    pub fn visualize(&self) -> String {
+        let mut printer = ASTPrinter { indent: 0 };
+        self.visit(&mut printer);
+    }
 }
 
 pub trait ASTVisitor {
