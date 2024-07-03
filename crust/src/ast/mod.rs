@@ -21,7 +21,7 @@ impl Ast {
         }
     }
 
-    pub fn visualize(&self) -> String {
+    pub fn visualize(&self) -> () {
         let mut printer = ASTPrinter { indent: 0 };
         self.visit(&mut printer);
     }
