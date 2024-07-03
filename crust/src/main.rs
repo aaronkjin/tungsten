@@ -11,6 +11,7 @@ fn main() {
     }
 
     let mut ast: Ast = Ast::new();
+    let mut parser = Parser::new();
 
     // Macro print
     println!("{:?}", tokens);
