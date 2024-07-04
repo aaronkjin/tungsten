@@ -8,6 +8,10 @@ impl Parser {
         Self { tokens: Vec::new(), current: 0 }
     }
 
+    pub fn from_tokens(tokens: Vec<Token>) -> Self {
+        Self { tokens, current: 0 }
+    }
+
     pub fn from_input(input: &str) -> Self {
         let mut lexer = Lexer::new(input);
         let mut tokens = Vec::new();
