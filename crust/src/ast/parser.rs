@@ -36,6 +36,12 @@ impl Parser {
 
     fn parse_expression(&mut self) -> Option<ASTExpression> {
         let token = self.current()?;
+
+        // Edge case: Reached the end of file
+        if token.kind == TokenKind::Eof {
+            return None;
+        }
+
         return match token.kind {
             TokenKind::Number(number) => {
                 Some(ASTExpression::number(number));
