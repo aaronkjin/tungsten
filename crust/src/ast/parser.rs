@@ -58,4 +58,11 @@ impl Parser {
     fn current(&self) -> Option<&Token> {
         self.peek(0);
     }
+
+    fn consume(&mut self) -> Option<&Token> {
+        let token = self.current()?;
+        self.current += 1;
+
+        return Some(token);
+    }
 }
