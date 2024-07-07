@@ -1,5 +1,9 @@
 mod ast;
 
+use crate::ast::lexer::Lexer;
+use crate::ast::Ast;
+use crate::ast::parser::Parser;
+
 fn main() {
     let input = "7 + 3 * (10 / (12 / (3 + 1) - 1))";
 

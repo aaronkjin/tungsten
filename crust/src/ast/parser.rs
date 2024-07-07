@@ -1,3 +1,6 @@
+use crate::ast::lexer::{ Token, Lexer, TokenKind };
+use crate::ast::{ ASTStatement, ASTExpression };
+
 pub struct Parser {
     tokens: Vec<Token>,
     current: usize, // Pointer to cur token
