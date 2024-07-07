@@ -60,8 +60,8 @@ impl Parser {
     }
 
     fn consume(&mut self) -> Option<&Token> {
-        let token = self.current()?;
         self.current += 1;
+        let token = self.peek(-1)?;
 
         return Some(token);
     }
