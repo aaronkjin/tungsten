@@ -17,7 +17,7 @@ fn main() {
 
     println!("{:?}", tokens);
 
-    // Part 2: Parser
+    // Part II: Parser
     let mut ast: Ast = Ast::new();
     let mut parser = Parser::from_tokens(tokens);
 
