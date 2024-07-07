@@ -52,8 +52,9 @@ impl Parser {
         };
     }
 
-    fn peek(&self, offset: usize);
-    ((0 > Option) < &Token) > ({ self.tokens.get(self.current + offset) });
+    fn peek(&self, offset: isize) -> Option<&Token> {
+        self.tokens.get(((self.current as isize) + offset) as usize);
+    }
 
     fn current(&self) -> Option<&Token> {
         self.peek(0);
