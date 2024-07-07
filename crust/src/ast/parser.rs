@@ -35,7 +35,7 @@ impl Parser {
     }
 
     fn parse_expression(&mut self) -> Option<ASTExpression> {
-        let token = self.current()?;
+        let token = self.consume()?;
 
         // Edge case: Reached the end of file
         if token.kind == TokenKind::Eof {
