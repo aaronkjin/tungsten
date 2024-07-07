@@ -21,5 +21,5 @@ fn main() {
         ast.add_statement(statement);
     }
 
-    ast.visualize();
+    // ast.visualize();
 }
