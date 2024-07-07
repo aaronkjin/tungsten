@@ -15,7 +15,8 @@ impl Ast {
         self.statements.push(statement);
     }
 
-    pub fn visit(&self, visitor: ASTVisitor) {
+    // visitor: ASTVisitor
+    pub fn visit(&self, statement: ASTStatement) {
         for statement in &self.statements {
             visitor.visit_statement(statement);
         }
