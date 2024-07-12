@@ -36,14 +36,20 @@ pub trait ASTVisitor {
         }
     }
 
-    fn visit_statement(&mut self, statement: &ASTStatement);
+    fn visit_statement(&mut self, statement: &ASTStatement) {
+        self.do_visit_statement(statement);
+    }
 
-    fn visit_expression(&mut self, expression: &ASTExpression) {
+    fn do_visit_expression(&mut self, expression: &ASTExpression) {
         match &expression.kind {
             ASTExpressionKind::Number(number) => {
                 self.visit_number(number);
             }
         }
+    }
+
+    fn visit_expression(&mut self, expression: &ASTExpression) {
+        self.do_visit_expression(expression);
     }
 
     fn visit_number(&mut self, number: &ASTNumberExpression);
