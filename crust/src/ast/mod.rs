@@ -127,6 +127,6 @@ impl ASTExpression {
     }
 
     pub fn number(number: i64) -> Self {
-        ASTExpression::new(ASTExpressionKind::Number(ASTNumberExpression))
+        ASTExpression::new(ASTExpressionKind::Number(ASTNumberExpression { number }))
     }
 }
