@@ -27,14 +27,14 @@ impl Parser {
     }
 
     pub fn next_statement(&mut self) -> Option<ASTStatement> {
-        return self.parse_statement();
+        self.parse_statement()
     }
 
     fn parse_statement(&mut self) -> Option<ASTStatement> {
-        let token = self.current()?;
+        let _token = self.current()?;
 
         let expr = self.parse_expression()?;
-        return Some(ASTStatement::expression(expr));
+        Some(ASTStatement::expression(expr))
     }
 
     fn parse_expression(&mut self) -> Option<ASTExpression> {
@@ -45,28 +45,23 @@ impl Parser {
             return None;
         }
 
-        return match token.kind {
-            TokenKind::Number(number) => {
-                Some(ASTExpression::number(number));
-            }
-            _ => {
-                None;
-            }
-        };
+        match token.kind {
+            TokenKind::Number(number) => { Some(ASTExpression::number(number)) }
+            _ => { None }
+        }
     }
 
     fn peek(&self, offset: isize) -> Option<&Token> {
-        self.tokens.get(((self.current as isize) + offset) as usize);
+        self.tokens.get(((self.current as isize) + offset) as usize)
     }
 
     fn current(&self) -> Option<&Token> {
-        self.peek(0);
+        self.peek(0)
     }
 
     fn consume(&mut self) -> Option<&Token> {
         self.current += 1;
         let token = self.peek(-1)?;
-
-        return Some(token);
+        Some(token)
     }
 }
