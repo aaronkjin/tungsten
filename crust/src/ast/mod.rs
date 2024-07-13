@@ -65,14 +65,14 @@ impl ASTVisitor for ASTPrinter {
     fn visit_statement(&mut self, statement: &ASTStatement) {
         self.print_with_indent("Statement:");
         self.indent += LEVEL_INDENT;
-        ASTVisitor::visit_statement(self, statement);
+        ASTVisitor::do_visit_statement(self, statement);
         self.indent -= LEVEL_INDENT;
     }
 
     fn visit_expression(&mut self, expression: &ASTExpression) {
         self.print_with_indent("Expression:");
         self.indent += LEVEL_INDENT;
-        ASTVisitor::visit_expression(self, expression);
+        ASTVisitor::do_visit_expression(self, expression);
         self.indent -= LEVEL_INDENT;
     }
 
