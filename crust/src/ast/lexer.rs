@@ -137,15 +137,16 @@ impl<'a> Lexer<'a> {
     }
 
     fn consume_number(&mut self) -> i64 {
-        let mut number: i64 = 0;
+        let start = self.current_pos;
+
         while let Some(c) = self.current_char() {
             if c.is_digit(10) {
-                self.consume().unwrap();
-                number = number * 10 + (c.to_digit(10).unwrap() as i64);
+                self.consume();
             } else {
                 break;
             }
         }
-        number
+
+        self.input[start..self.current_pos].parse::<i64>().unwrap()
     }
 }
