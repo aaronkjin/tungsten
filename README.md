@@ -16,7 +16,7 @@ curl --proto '=https' --tlsv1.2 -sSf \
 # ensure Cargo is installed
 cargo --version
 
-# if Rust and Cargo are not in PATH, add them
+# if Cargo are not in PATH, add them
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # reload shell configuration
