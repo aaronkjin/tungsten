@@ -119,6 +119,13 @@ pub struct ASTBinaryExpression {
     right: Box<ASTExpression>,
 }
 
+pub enum ASTBinaryOperator {
+    Plus,
+    Minus,
+    Multiply,
+    Divide,
+}
+
 // AST expressions
 pub enum ASTExpressionKind {
     Number(ASTNumberExpression),
