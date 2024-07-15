@@ -112,9 +112,17 @@ pub struct ASTNumberExpression {
     number: i64,
 }
 
+// AST binary expressions
+pub struct ASTBinaryExpression {
+    left: ASTexpression,
+    operator: ASTBinaryOperator,
+    right: ASTExpression,
+}
+
 // AST expressions
 pub enum ASTExpressionKind {
     Number(ASTNumberExpression),
+    Binary(ASTBinaryExpression),
 }
 
 pub struct ASTExpression {
