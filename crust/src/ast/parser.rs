@@ -31,22 +31,16 @@ impl Parser {
     }
 
     fn parse_statement(&mut self) -> Option<ASTStatement> {
-        // let _token = self.current()?;
+        let _token = self.current()?;
 
-        // let expr = self.parse_expression()?;
-        // Some(ASTStatement::expression(expr))
-
-        let token = self.consume()?;
-        return match token.kind {
-            TokenKind::Number(number) => { Some(ASTExpression::number(number)) }
-            _ => { None }
-        };
+        let expr = self.parse_expression()?;
+        Some(ASTStatement::expression(expr))
     }
 
-    // fn parse_binary_expression(&mut self, precedence: u8) -> Option<ASTExpression> {}
+    fn parse_binary_expression(&mut self, precedence: u8) -> Option<ASTExpression> {}
 
-    // // For function calls, literals, strings, etc.
-    // fn parse_primary_expression(&mut self) -> Option<ASTExpression> {}
+    // For function calls, literals, strings, etc.
+    fn parse_primary_expression(&mut self) -> Option<ASTExpression> {}
 
     fn parse_expression(&mut self) -> Option<ASTExpression> {
         let token = self.consume()?;
