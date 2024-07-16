@@ -37,6 +37,8 @@ impl Parser {
         Some(ASTStatement::expression(expr))
     }
 
+    fn parse_binary_expression(&mut self, precedence: u8) -> Option<ASTExpression> {}
+
     fn parse_expression(&mut self) -> Option<ASTExpression> {
         let token = self.consume()?;
 
