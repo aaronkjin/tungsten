@@ -144,4 +144,14 @@ impl ASTExpression {
     pub fn number(number: i64) -> Self {
         ASTExpression::new(ASTExpressionKind::Number(ASTNumberExpression { number }))
     }
+
+    pub fn binary(operator: ASTBinaryOperator, left: ASTExpression, right: ASTExpression) -> Self {
+        ASTExpression::new(
+            ASTExpressionKind::Binary(ASTBinaryExpression {
+                left: Box::new(left),
+                operator,
+                right: Box::new(right),
+            })
+        )
+    }
 }
