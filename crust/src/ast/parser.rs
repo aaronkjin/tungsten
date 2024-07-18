@@ -50,6 +50,18 @@ impl Parser {
         return Some(left);
     }
 
+    fn parse_operator(&mut self) -> Option<&Token> {
+        let token = self.current()?;
+
+        return match token.kind {
+            TokenKind::Plus => Some(token),
+            TokenKind::Minus => Some(token),
+            TokenKind::Asterisk => Some(token),
+            TokenKind::Slash => Some(token),
+            _ => None,
+        };
+    }
+
     // For function calls, literals, strings, etc.
     fn parse_primary_expression(&mut self) -> Option<ASTExpression> {
         let token = self.consume()?;
