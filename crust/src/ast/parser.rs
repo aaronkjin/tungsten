@@ -37,7 +37,13 @@ impl Parser {
         Some(ASTStatement::expression(expr))
     }
 
-    fn parse_binary_expression(&mut self, precedence: u8) -> Option<ASTExpression> {}
+    fn parse_binary_expression(&mut self, precedence: u8) -> Option<ASTExpression> {
+        let left = self.parse_primary_expression()?;
+
+        while let Some(operator_precedence) = self.current_precedence() {
+            let operator = self.consume()?;
+        }
+    }
 
     // For function calls, literals, strings, etc.
     fn parse_primary_expression(&mut self) -> Option<ASTExpression> {
