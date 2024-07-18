@@ -42,9 +42,12 @@ impl Parser {
 
         while let Some(operator_precedence) = self.current_precedence() {
             let operator = self.consume()?;
+
             let right = self.parse_binary_expression(operator_precedence)?;
             left = ASTExpression::binary(operator, left, right);
         }
+
+        return Some(left);
     }
 
     // For function calls, literals, strings, etc.
