@@ -115,21 +115,21 @@ pub struct ASTNumberExpression {
 // AST binary expressions
 pub struct ASTBinaryExpression {
     left: Box<ASTexpression>,
-    operator: Token,
+    operator: ASTBinaryOperator,
     right: Box<ASTExpression>,
 }
 
-// pub enum ASTBinaryOperatorKind {
-//     Plus,
-//     Minus,
-//     Multiply,
-//     Divide,
-// }
+pub enum ASTBinaryOperatorKind {
+    Plus,
+    Minus,
+    Multiply,
+    Divide,
+}
 
-// pub struct ASTBinaryOperator {
-//     kind: ASTBinaryOperatorKind,
-//     token: Token,
-// }
+pub struct ASTBinaryOperator {
+    kind: ASTBinaryOperatorKind,
+    token: Token,
+}
 
 // AST expressions
 pub enum ASTExpressionKind {
