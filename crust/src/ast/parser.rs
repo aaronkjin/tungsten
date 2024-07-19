@@ -51,7 +51,7 @@ impl Parser {
     }
 
     fn parse_operator(&mut self) -> Option<&Token> {
-        let token = self.current()?;
+        let token = self.consume()?;
 
         return match token.kind {
             TokenKind::Plus => Some(token),
