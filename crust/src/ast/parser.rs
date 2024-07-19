@@ -58,6 +58,7 @@ impl Parser {
             TokenKind::Minus => { Some(ASTBinaryOperatorKind::Minus) }
             TokenKind::Multiply => { Some(ASTBinaryOperatorKind::Multiply) }
             TokenKind::Slash => { Some(ASTBinaryOperatorKind::Divide) }
+            _ => { None }
         };
     }
 
