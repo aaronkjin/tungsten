@@ -54,13 +54,15 @@ impl Parser {
     fn parse_binary_operator(&mut self) -> Option<ASTBinaryOperator> {
         let token = self.consume()?;
 
-        return match token.kind {
+        let kind = match token.kind {
             TokenKind::Plus => { Some(ASTBinaryOperatorKind::Plus) }
             TokenKind::Minus => { Some(ASTBinaryOperatorKind::Minus) }
             TokenKind::Multiply => { Some(ASTBinaryOperatorKind::Multiply) }
             TokenKind::Slash => { Some(ASTBinaryOperatorKind::Divide) }
             _ => { None }
         };
+
+        return kind.map(ASTBinaryOperator::new(kind, token.span));
     }
 
     // For function calls, literals, strings, etc.
