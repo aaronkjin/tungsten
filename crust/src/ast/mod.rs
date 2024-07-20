@@ -131,6 +131,12 @@ pub struct ASTBinaryOperator {
     token: Token,
 }
 
+impl ASTBinaryOperator {
+    pub fn new(kind: ASTBinaryOperatorKind, token: Token) -> self {
+        ASTBinaryOperator { kind, token }
+    }
+}
+
 // AST expressions
 pub enum ASTExpressionKind {
     Number(ASTNumberExpression),
