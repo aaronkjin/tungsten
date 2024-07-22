@@ -34,7 +34,7 @@ impl TextSpan {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Token {
     pub(crate) kind: TokenKind,
     pub(crate) span: TextSpan,
