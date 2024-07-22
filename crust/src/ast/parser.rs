@@ -42,10 +42,8 @@ impl Parser {
         let operator = self.parse_binary_operator();
 
         while let Some(operator_precedence) = self.current_precedence() {
-            operator = self.consume()?;
-
             let right = self.parse_binary_expression(operator_precedence)?;
-            left = ASTExpression::binary(operator, left, right);
+            left = ASTExpression::binary(operator.unwrap(), left, right);
         }
 
         return Some(left);
