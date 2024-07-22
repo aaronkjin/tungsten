@@ -42,6 +42,11 @@ impl Parser {
         let operator = self.parse_binary_operator();
 
         while let Some(operator_precedence) = operator.map(operator.precedence()) {
+            // Base case
+            if operator_precedence < precedence {
+                break;
+            }
+
             let right = self.parse_binary_expression(operator_precedence)?;
             left = ASTExpression::binary(operator.unwrap(), left, right);
         }
