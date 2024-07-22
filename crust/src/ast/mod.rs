@@ -135,6 +135,16 @@ impl ASTBinaryOperator {
     pub fn new(kind: ASTBinaryOperatorKind, token: Token) -> self {
         ASTBinaryOperator { kind, token }
     }
+
+    // Precedence of +/- 0, 1, 2...
+    pub fn precedence(&self) -> u8 {
+        match self.kind {
+            ASTBinaryOperatorKind::Plus => 1,
+            ASTBinaryOperatorKind::Minus => 1,
+            ASTBinaryOperatorKind::Multiply => 2,
+            ASTBinaryOperatorKind::Divide => 2,
+        }
+    }
 }
 
 // AST expressions
