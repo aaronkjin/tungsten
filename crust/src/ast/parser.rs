@@ -1,5 +1,5 @@
-use crate::ast::lexer::{ Token, Lexer, TokenKind };
-use crate::ast::{ ASTStatement, ASTExpression };
+use crate::ast::lexer::{ Lexer, Token, TokenKind };
+use crate::ast::{ ASTStatement, ASTExpression, ASTBinaryOperator, ASTBinaryOperatorKind };
 
 pub struct Parser {
     tokens: Vec<Token>,
