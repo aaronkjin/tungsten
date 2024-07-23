@@ -116,7 +116,7 @@ pub struct ASTNumberExpression {
 
 // AST binary expressions
 pub struct ASTBinaryExpression {
-    left: Box<ASTexpression>,
+    left: Box<ASTExpression>,
     operator: ASTBinaryOperator,
     right: Box<ASTExpression>,
 }
