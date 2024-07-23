@@ -60,7 +60,7 @@ impl Parser {
         let kind = match token.kind {
             TokenKind::Plus => { Some(ASTBinaryOperatorKind::Plus) }
             TokenKind::Minus => { Some(ASTBinaryOperatorKind::Minus) }
-            TokenKind::Multiply => { Some(ASTBinaryOperatorKind::Multiply) }
+            TokenKind::Asterisk => { Some(ASTBinaryOperatorKind::Multiply) }
             TokenKind::Slash => { Some(ASTBinaryOperatorKind::Divide) }
             _ => { None }
         };

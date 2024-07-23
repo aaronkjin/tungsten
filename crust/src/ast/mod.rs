@@ -1,6 +1,8 @@
 pub mod lexer;
 pub mod parser;
 
+use crate::ast::lexer::Token;
+
 pub struct Ast {
     pub statements: Vec<ASTStatement>,
 }
