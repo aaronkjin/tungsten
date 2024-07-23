@@ -83,7 +83,9 @@ impl Parser {
         }
     }
 
-    fn parse_expression(&mut self) -> Option<ASTExpression> {}
+    fn parse_expression(&mut self) -> Option<ASTExpression> {
+        return self.parse_binary_expression(0);
+    }
 
     fn peek(&self, offset: isize) -> Option<&Token> {
         self.tokens.get(((self.current as isize) + offset) as usize)
