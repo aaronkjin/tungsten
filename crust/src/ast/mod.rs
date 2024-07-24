@@ -134,7 +134,7 @@ pub struct ASTBinaryOperator {
 }
 
 impl ASTBinaryOperator {
-    pub fn new(kind: ASTBinaryOperatorKind, token: Token) -> self {
+    pub fn new(kind: ASTBinaryOperatorKind, token: Token) -> Self {
         ASTBinaryOperator { kind, token }
     }
 
