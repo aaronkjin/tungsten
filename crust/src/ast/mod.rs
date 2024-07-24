@@ -47,6 +47,7 @@ pub trait ASTVisitor {
             ASTExpressionKind::Number(number) => {
                 self.visit_number(number);
             }
+            ASTExpressionKind::Binary(_) => {}
         }
     }
 

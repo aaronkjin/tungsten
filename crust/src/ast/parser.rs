@@ -66,7 +66,7 @@ impl Parser {
             _ => { None }
         };
 
-        return kind.map(ASTBinaryOperator::new(kind, token.clone()));
+        return kind.map(|k| ASTBinaryOperator::new(k, token.clone()));
     }
 
     // For function calls, literals, strings, etc.
