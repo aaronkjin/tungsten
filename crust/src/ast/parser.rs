@@ -39,16 +39,17 @@ impl Parser {
 
     fn parse_binary_expression(&mut self, precedence: u8) -> Option<ASTExpression> {
         let mut left = self.parse_primary_expression()?;
-        let operator = self.parse_binary_operator();
 
-        while let Some(operator_precedence) = &operator.as_ref().map(operator.precedence()) {
+        while let Some(operator) = self.parse_binary_operator() {
+            let operator_precedence = operator.precedence();
+
             // Base case
             if operator_precedence < precedence {
                 break;
             }
 
             let right = self.parse_binary_expression(operator_precedence)?;
-            left = ASTExpression::binary(operator.unwrap(), left, right);
+            left = ASTExpression::binary(operator, left, right);
         }
 
         return Some(left);
