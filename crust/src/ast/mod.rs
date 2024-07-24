@@ -47,15 +47,22 @@ pub trait ASTVisitor {
             ASTExpressionKind::Number(number) => {
                 self.visit_number(number);
             }
-            ASTExpressionKind::Binary(_) => {}
+            ASTExpressionKind::Binary(expr) => {
+                self.visit_binary_expression(expr);
+            }
         }
     }
+
+    fn visit_number(&mut self, number: &ASTNumberExpression);
 
     fn visit_expression(&mut self, expression: &ASTExpression) {
         self.do_visit_expression(expression);
     }
 
-    fn visit_number(&mut self, number: &ASTNumberExpression);
+    fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
+        self.visit_expression(&binary_expression.left);
+        self.visit_expression(&binary_expression.right);
+    }
 }
 
 pub struct ASTPrinter {
