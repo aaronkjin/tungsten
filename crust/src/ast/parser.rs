@@ -41,9 +41,9 @@ impl Parser {
         let mut left = self.parse_primary_expression()?;
         let operator = self.parse_binary_operator();
 
-        while let Some(operator_precedence) = &operator.map(operator.precedence()) {
+        while let Some(operator_precedence) = &operator.as_ref().map(operator.precedence()) {
             // Base case
-            if *operator_precedence < precedence {
+            if operator_precedence < precedence {
                 break;
             }
 
