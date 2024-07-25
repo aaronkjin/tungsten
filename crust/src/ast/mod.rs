@@ -89,6 +89,15 @@ impl ASTVisitor for ASTPrinter {
     fn visit_number(&mut self, number: &ASTNumberExpression) {
         self.print_with_indent(&format!("Number: {}", number.number));
     }
+
+    fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
+        self.print_with_indent("Binary Expression:");
+        self.idnent += LEVEL_INDENT;
+        self.print_with_indent(&format!("Operator: {:?}", binary_expression.operator.kind));
+        self.visit_expression(&binary_expression.left);
+        self.visit_expression(&binary_expression.right);
+        self.indent -= LEVEL_INDENT;
+    }
 }
 
 impl ASTPrinter {
