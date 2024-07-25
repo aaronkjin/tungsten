@@ -138,6 +138,7 @@ pub struct ASTBinaryExpression {
     right: Box<ASTExpression>,
 }
 
+#[derive(Debug)]
 pub enum ASTBinaryOperatorKind {
     Plus,
     Minus,
