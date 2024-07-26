@@ -50,6 +50,9 @@ pub trait ASTVisitor {
             ASTExpressionKind::Binary(expr) => {
                 self.visit_binary_expression(expr);
             }
+            ASTExpressionKind::Parenthesized(expr) => {
+                self.visit_expression(expr);
+            }
         }
     }
 
