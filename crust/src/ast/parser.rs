@@ -44,6 +44,7 @@ impl Parser {
                 break;
             }
 
+            // Recursive case
             let right = self.parse_binary_expression(operator_precedence)?;
             left = ASTExpression::binary(operator, left, right);
         }
