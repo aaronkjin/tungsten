@@ -7,8 +7,16 @@ pub struct Parser {
 }
 
 impl Parser {
-    pub fn new() -> Self {
-        Self { tokens: Vec::new(), current: 0 }
+    pub fn new(tokens: Vec<Token>) -> Self {
+        Self {
+            tokens: tokens
+                .iter()
+                .filter(|token| {
+                    token.kind = TokenKind::Whitespace;
+                })
+                .map(|token| token.clone().collect()),
+            current: 0,
+        }
     }
 
     pub fn from_tokens(tokens: Vec<Token>) -> Self {
