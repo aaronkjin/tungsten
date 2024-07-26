@@ -51,7 +51,7 @@ pub trait ASTVisitor {
                 self.visit_binary_expression(expr);
             }
             ASTExpressionKind::Parenthesized(expr) => {
-                self.visit_parenthesized_expr(expr);
+                self.visit_parenthesized_expression(expr);
             }
         }
     }
@@ -65,6 +65,13 @@ pub trait ASTVisitor {
     fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
         self.visit_expression(&binary_expression.left);
         self.visit_expression(&binary_expression.right);
+    }
+
+    fn visit_parenthesized_expression(
+        &mut self,
+        parenthesized_expression: &ASTParenthesizedExpression
+    ) {
+        self.visit_expression(&parenthesized_expression.expression);
     }
 }
 
@@ -135,7 +142,7 @@ pub struct ASTNumberExpression {
 }
 
 // AST parenthesized expressions
-pub struct ParenthesizedExpression {
+pub struct ASTParenthesizedExpression {
     expression: Box<ASTExpression>,
 }
 
