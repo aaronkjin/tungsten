@@ -131,6 +131,11 @@ pub struct ASTNumberExpression {
     number: i64,
 }
 
+// AST parenthesized expressions
+pub struct ParenthesizedExpression {
+    expression: Box<ASTExpression>,
+}
+
 // AST binary expressions
 pub struct ASTBinaryExpression {
     left: Box<ASTExpression>,
