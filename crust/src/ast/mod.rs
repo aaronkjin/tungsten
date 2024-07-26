@@ -108,6 +108,16 @@ impl ASTVisitor for ASTPrinter {
         self.visit_expression(&binary_expression.right);
         self.indent -= LEVEL_INDENT;
     }
+
+    fn visit_parenthesized_expression(
+        &mut self,
+        parenthesized_expression: &ASTParenthesizedExpression
+    ) {
+        self.print_with_indent("Parenthesized Expression:");
+        self.indent += LEVEL_INDENT;
+        self.visit_expression(&parenthesized_expression.expression);
+        self.indent -= LEVEL_INDENT;
+    }
 }
 
 impl ASTPrinter {
