@@ -205,7 +205,7 @@ impl ASTExpression {
     pub fn parenthesized(expression: ASTExpression) -> Self {
         ASTExpression::new(
             ASTExpressionKind::Parenthesized(ParenthesizedExpression {
-                expression: Boxx::new(expression),
+                expression: Box::new(expression),
             })
         )
     }
