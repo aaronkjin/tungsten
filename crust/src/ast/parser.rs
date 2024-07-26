@@ -77,6 +77,15 @@ impl Parser {
 
         match token.kind {
             TokenKind::Number(number) => { Some(ASTExpression::number(number)) }
+            TokenKind::LeftParen => {
+                let expr = self.parse_expression()?;
+                let token = self.consume()?;
+
+                if token.kind != TokenKind::RightParen {
+                    panic!("Expected right parenthesis!");
+                }
+                Some(expr)
+            }
             _ => { None }
         }
     }
