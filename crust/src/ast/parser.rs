@@ -10,11 +10,14 @@ impl Parser {
     pub fn new(tokens: Vec<Token>) -> Self {
         Self {
             tokens: tokens
-                .iter()
+                .into_iter()
                 .filter(|token| {
-                    token.kind = TokenKind::Whitespace;
+                    match token.kind {
+                        TokenKind::Whitespace => false,
+                        _ => true,
+                    }
                 })
-                .map(|token| token.clone().collect()),
+                .collect(),
             current: 0,
         }
     }
