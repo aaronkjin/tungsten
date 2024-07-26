@@ -176,6 +176,7 @@ impl ASTBinaryOperator {
 pub enum ASTExpressionKind {
     Number(ASTNumberExpression),
     Binary(ASTBinaryExpression),
+    Parenthesized(ParenthesizedExpression),
 }
 
 pub struct ASTExpression {
@@ -197,6 +198,14 @@ impl ASTExpression {
                 left: Box::new(left),
                 operator,
                 right: Box::new(right),
+            })
+        )
+    }
+
+    pub fn parenthesized(expression: ASTExpression) -> Self {
+        ASTExpression::new(
+            ASTExpressionKind::Parenthesized(ParenthesizedExpression {
+                expression: Boxx::new(expression),
             })
         )
     }
