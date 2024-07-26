@@ -21,7 +21,7 @@ fn main() {
 
     // Part II: Parser
     let mut ast: Ast = Ast::new();
-    let mut parser = Parser::from_tokens(tokens);
+    let mut parser = Parser::new(tokens);
 
     while let Some(statement) = parser.next_statement() {
         ast.add_statement(statement);
