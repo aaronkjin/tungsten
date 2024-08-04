@@ -1,5 +1,6 @@
 pub mod lexer;
 pub mod parser;
+pub mod evaluator;
 
 use crate::ast::lexer::Token;
 
