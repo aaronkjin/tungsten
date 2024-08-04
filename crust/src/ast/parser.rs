@@ -37,6 +37,7 @@ impl Parser {
         let mut left = self.parse_primary_expression()?;
 
         while let Some(operator) = self.parse_binary_operator() {
+            self.consume();
             let operator_precedence = operator.precedence();
 
             // Base case
@@ -53,7 +54,7 @@ impl Parser {
     }
 
     fn parse_binary_operator(&mut self) -> Option<ASTBinaryOperator> {
-        let token = self.consume()?;
+        let token = self.current()?;
 
         let kind = match token.kind {
             TokenKind::Plus => { Some(ASTBinaryOperatorKind::Plus) }
