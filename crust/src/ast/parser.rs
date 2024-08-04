@@ -85,7 +85,7 @@ impl Parser {
                 if token.kind != TokenKind::RightParen {
                     panic!("Expected right parenthesis!");
                 }
-                Some(expr)
+                Some(ASTExpression::parenthesized(expr))
             }
             _ => { None }
         }
