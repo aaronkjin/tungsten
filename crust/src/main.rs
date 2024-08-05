@@ -6,9 +6,8 @@ use crate::ast::parser::Parser;
 use crate::ast::evaluator::ASTEvaluator;
 
 fn main() {
-    // Test binary expression (e.g. 7 + 8) + order of precedence (e.g. PEMDAS)
-    let input = "(7 + 8) * 9";
-    // Previous test input: 7 + 3 * (10 / (12 / (3 + 1) - 1))
+    // Test precedence: Getting 2, Expected -141
+    let input = "7 - (30 + 7) * 8 / 2";
 
     // Part I: Lexer
     let mut lexer = Lexer::new(input);
