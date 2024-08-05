@@ -6,7 +6,6 @@ use crate::ast::parser::Parser;
 use crate::ast::evaluator::ASTEvaluator;
 
 fn main() {
-    // Test precedence: Getting 2, Expected -141
     let input = "7 - (30 + 7) * 8 / 2";
 
     // Part I: Lexer
