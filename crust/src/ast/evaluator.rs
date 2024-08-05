@@ -10,10 +10,10 @@ impl ASTVisitor for ASTEvaluator {
     }
 
     fn visit_binary_expression(&mut self, expr: &ASTBinaryExpression) {
-        expr.left.visit(self);
+        self.visit_expression(&expr.left);
         let left = self.last_value.unwrap();
 
-        expr.right.visit(self);
+        self.visit_expression(&expr.right);
         let right = self.last_value.unwrap();
 
         self.last_value = Some(match expr.operator.kind {
@@ -21,4 +21,6 @@ impl ASTVisitor for ASTEvaluator {
             ASTBinaryOperatorKind::Minus => left - right,
         });
     }
+
+    // 1:39:28
 }
