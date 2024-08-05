@@ -36,9 +36,9 @@ cargo run src/main.rs
 
 ## Progress
 
-Previously: Built out a basic arithmetic lexer.
+Previously: Built out a basic arithmetic lexer and parser.
 
-Currently: The parser.
+Currently: The evaluator.
 
 Next: Error-reporting.
 
