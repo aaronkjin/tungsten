@@ -1,4 +1,4 @@
-use crate::ast::ASTVisitor;
+use crate::ast::{ ASTVisitor, ASTNumberExpression, ASTBinaryExpression, ASTBinaryOperatorKind };
 
 pub struct ASTEvaluator {
     pub last_value: Option<i64>,
@@ -12,7 +12,7 @@ impl ASTEvaluator {
 
 impl ASTVisitor for ASTEvaluator {
     fn visit_number(&mut self, number: &ASTNumberExpression) {
-        self.last_value = Some(number.value);
+        self.last_value = Some(number.number);
     }
 
     fn visit_binary_expression(&mut self, expr: &ASTBinaryExpression) {
@@ -29,6 +29,4 @@ impl ASTVisitor for ASTEvaluator {
             ASTBinaryOperatorKind::Divide => left / right,
         });
     }
-
-    // 1:39:28
 }

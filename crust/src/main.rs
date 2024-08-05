@@ -3,6 +3,7 @@ mod ast;
 use crate::ast::lexer::Lexer;
 use crate::ast::Ast;
 use crate::ast::parser::Parser;
+use crate::ast::evaluator::ASTEvaluator;
 
 fn main() {
     // Test binary expression (e.g. 7 + 8) + order of precedence (e.g. PEMDAS)
@@ -33,4 +34,5 @@ fn main() {
     // Evaluator
     let mut eval = ASTEvaluator::new();
     ast.visit(&mut eval);
+    println!("Result: {:?}", eval.last_value);
 }
