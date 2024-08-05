@@ -19,6 +19,8 @@ impl ASTVisitor for ASTEvaluator {
         self.last_value = Some(match expr.operator.kind {
             ASTBinaryOperatorKind::Plus => left + right,
             ASTBinaryOperatorKind::Minus => left - right,
+            ASTBinaryOperatorKind::Multiply => left * right,
+            ASTBinaryOperatorKind::Divide => left / right,
         });
     }
 
