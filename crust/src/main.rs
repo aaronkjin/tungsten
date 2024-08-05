@@ -27,5 +27,10 @@ fn main() {
         ast.add_statement(statement);
     }
 
+    // Visualizer
     ast.visualize();
+
+    // Evaluator
+    let mut eval = ASTEvaluator::new();
+    ast.visit(&mut eval);
 }
