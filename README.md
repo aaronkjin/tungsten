@@ -40,7 +40,7 @@ Previously: Built out a basic arithmetic lexer and parser.
 
 Currently: The evaluator.
 
-Next: Add variable adoption.
+Next: Add support for variables, error-reporting, and let + if statements.
 
 ## Developer
 
