@@ -13,6 +13,13 @@ pub enum TokenKind {
     Eof,
 }
 
+impl Display for TokenKind {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+        }
+    }
+}
+
 #[derive(Debug, PartialEq, Clone)]
 pub struct TextSpan {
     pub(crate) start: usize,
