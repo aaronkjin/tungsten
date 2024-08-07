@@ -10,3 +10,9 @@ pub struct Diagnostic {
     pub span: TextSpan,
     pub kind: DiagnosticKind,
 }
+
+impl Diagnostic {
+    pub fn new(message: String, span: TextSpan, kind: DiagnosticKind) -> Self {
+        Diagnostic { message, span, kind };
+    }
+}
