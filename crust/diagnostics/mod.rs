@@ -25,4 +25,14 @@ impl DiagnosticsBag {
     pub fn new() -> Self {
         DiagnosticsBag { diagnostics: vec![] };
     }
+
+    pub fn report_error(&mut self, message: String, span: TextSpan) {
+        let error = Diagnostic::new(message, span, DiagnosticKind::Error);
+        self.diagnostics.push(error);
+    }
+
+    pub fn report_warning(&mut self, message: String, span: TextSpan) {
+        let warning = Diagnostic::new(message, span, DiagnosticKind::Warning);
+        self.diagnostics.push(warning);
+    }
 }
