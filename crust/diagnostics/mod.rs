@@ -35,4 +35,8 @@ impl DiagnosticsBag {
         let warning = Diagnostic::new(message, span, DiagnosticKind::Warning);
         self.diagnostics.push(warning);
     }
+
+    pub fn report_unexpected_token(&mut self, expected: &TokenKind, token: &Token, span: TextSpan) {
+        self.report_error(format!("Expected <{}>, Found <{}>", expected, token.kind), span);
+    }
 }
