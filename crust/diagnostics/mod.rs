@@ -20,3 +20,9 @@ impl Diagnostic {
 pub struct DiagnosticsBag {
     pub diagnostics: Vec<Diagnostic>,
 }
+
+impl DiagnosticsBag {
+    pub fn new() -> Self {
+        DiagnosticsBag { diagnostics: vec![] };
+    }
+}
