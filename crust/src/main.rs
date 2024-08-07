@@ -1,4 +1,5 @@
 mod ast;
+mod diagnostics;
 
 use crate::ast::lexer::Lexer;
 use crate::ast::Ast;
