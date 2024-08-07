@@ -6,7 +6,7 @@ use crate::ast::parser::Parser;
 use crate::ast::evaluator::ASTEvaluator;
 
 fn main() {
-    let input = "7 - (30 + 7) * 8 / 2";
+    let input = "7 - (30 + 7) * 8 & 2";
 
     // Part I: Lexer
     let mut lexer = Lexer::new(input);
