@@ -16,3 +16,7 @@ impl Diagnostic {
         Diagnostic { message, span, kind };
     }
 }
+
+pub struct DiagnosticsBag {
+    pub diagnostics: Vec<Diagnostic>,
+}
