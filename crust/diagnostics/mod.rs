@@ -17,6 +17,8 @@ impl Diagnostic {
     }
 }
 
+pub type DiagnosticsBagCell = Rc<RefCell<DiagnosticsBag>>;
+
 pub struct DiagnosticsBag {
     pub diagnostics: Vec<Diagnostic>,
 }
