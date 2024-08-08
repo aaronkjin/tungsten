@@ -19,6 +19,8 @@ fn main() {
 
     println!("{:?}", tokens);
 
+    let diagnostics_bag = Rc::new(RefCell::new(diagnostics::DiagnosticsBag::new()));
+
     // Part II: Parser
     let mut ast: Ast = Ast::new();
     let mut parser = Parser::new(tokens);
