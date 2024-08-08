@@ -16,6 +16,16 @@ pub enum TokenKind {
 impl Display for TokenKind {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
+            TokenKind::Number(_) => write!(f, "Number"),
+            TokenKind::Plus => write!(f, "+"),
+            TokenKind::Minus => write!(f, "-"),
+            TokenKind::Asterisk => write!(f, "*"),
+            TokenKind::Slash => write!(f, "/"),
+            TokenKind::LeftParen => write!(f, "("),
+            TokenKind::RightParen => write!(f, ")"),
+            TokenKind::Bad => write!(f, "Bad"),
+            TokenKind::Whitespace => write!(f, "Whitespace"),
+            TokenKind::Eof => write!(f, "Eof"),
         }
     }
 }
