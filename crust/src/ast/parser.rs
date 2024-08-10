@@ -4,7 +4,7 @@ use crate::ast::{ ASTStatement, ASTExpression, ASTBinaryOperator, ASTBinaryOpera
 pub struct Parser {
     tokens: Vec<Token>,
     current: usize, // Pointer to cur token
-    diagnostics_bag: DiagnosticsBagCell,
+    diagnostics_bag: DiagnosticsBagCell, // Error handling: https://www.geeksforgeeks.org/error-handling-compiler-design/
 }
 
 impl Parser {
