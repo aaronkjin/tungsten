@@ -20,11 +20,12 @@ impl Parser {
                 })
                 .collect(),
             current: 0,
+            diagnostics_bag,
         }
     }
 
     pub fn next_statement(&mut self) -> Option<ASTStatement> {
-        self.parse_statement()
+        self.parse_statement();
     }
 
     fn parse_statement(&mut self) -> Option<ASTStatement> {
