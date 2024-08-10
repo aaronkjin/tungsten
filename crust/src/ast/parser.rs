@@ -24,19 +24,19 @@ impl Parser {
         }
     }
 
-    pub fn next_statement(&mut self) -> Option<ASTStatement> {
+    pub fn next_statement(&mut self) -> ASTStatement {
         self.parse_statement();
     }
 
-    fn parse_statement(&mut self) -> Option<ASTStatement> {
-        let _token = self.current()?;
+    fn parse_statement(&mut self) -> ASTStatement {
+        let _token = self.current();
 
-        let expr = self.parse_expression()?;
-        Some(ASTStatement::expression(expr))
+        let expr = self.parse_expression();
+        return ASTStatement::expression(expr);
     }
 
-    fn parse_binary_expression(&mut self, precedence: u8) -> Option<ASTExpression> {
-        let mut left = self.parse_primary_expression()?;
+    fn parse_binary_expression(&mut self, precedence: u8) -> ASTExpression {
+        let mut left = self.parse_primary_expression();
 
         while let Some(operator) = self.parse_binary_operator() {
             self.consume();
@@ -48,7 +48,7 @@ impl Parser {
             }
 
             // Recursive case
-            let right = self.parse_binary_expression(operator_precedence)?;
+            let right = self.parse_binary_expression(operator_precedence);
             left = ASTExpression::binary(operator, left, right);
         }
 
@@ -93,7 +93,7 @@ impl Parser {
         }
     }
 
-    fn parse_expression(&mut self) -> Option<ASTExpression> {
+    fn parse_expression(&mut self) -> ASTExpression {
         return self.parse_binary_expression(0);
     }
 
