@@ -52,7 +52,7 @@ impl Parser {
             left = ASTExpression::binary(operator, left, right);
         }
 
-        return Some(left);
+        return left;
     }
 
     fn parse_binary_operator(&mut self) -> Option<ASTBinaryOperator> {
@@ -70,8 +70,8 @@ impl Parser {
     }
 
     // For function calls, literals, strings, etc.
-    fn parse_primary_expression(&mut self) -> Option<ASTExpression> {
-        let token = self.consume()?;
+    fn parse_primary_expression(&mut self) -> ASTExpression {
+        let token = self.consume();
 
         // Edge case: Reached the end of file
         if token.kind == TokenKind::Eof {
@@ -79,7 +79,7 @@ impl Parser {
         }
 
         match token.kind {
-            TokenKind::Number(number) => { Some(ASTExpression::number(number)) }
+            TokenKind::Number(number) => { ASTExpression::number(number) }
             TokenKind::LeftParen => {
                 let expr = self.parse_expression()?;
                 let token = self.consume()?;
@@ -87,9 +87,11 @@ impl Parser {
                 if token.kind != TokenKind::RightParen {
                     panic!("Expected right parenthesis!");
                 }
-                Some(ASTExpression::parenthesized(expr))
+                ASTExpression::parenthesized(expr);
             }
-            _ => { None }
+            _ => {
+                // FIXME: handle error cases
+            }
         }
     }
 
