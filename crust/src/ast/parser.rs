@@ -25,7 +25,7 @@ impl Parser {
     }
 
     pub fn next_statement(&mut self) -> ASTStatement {
-        self.parse_statement();
+        self.parse_statement()
     }
 
     fn parse_statement(&mut self) -> ASTStatement {
@@ -99,17 +99,21 @@ impl Parser {
         return self.parse_binary_expression(0);
     }
 
-    fn peek(&self, offset: isize) -> Option<&Token> {
-        self.tokens.get(((self.current as isize) + offset) as usize)
+    fn peek(&self, offset: isize) -> &Token {
+        let mut index = ((self.current as isize) + offset) as usize;
+
+        if index >= self.tokens.len() {
+            index = self.tokens.len() - 1;
+        }
+        self.tokens.get(index).unwrap()
     }
 
-    fn current(&self) -> Option<&Token> {
+    fn current(&self) -> &Token {
         self.peek(0)
     }
 
-    fn consume(&mut self) -> Option<&Token> {
+    fn consume(&mut self) -> &Token {
         self.current += 1;
-        let token = self.peek(-1)?;
-        Some(token)
+        self.peek(-1)
     }
 }
