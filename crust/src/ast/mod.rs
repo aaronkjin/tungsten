@@ -198,6 +198,7 @@ pub enum ASTExpressionKind {
     Number(ASTNumberExpression),
     Binary(ASTBinaryExpression),
     Parenthesized(ASTParenthesizedExpression),
+    Error(TextSpan),
 }
 
 pub struct ASTExpression {
