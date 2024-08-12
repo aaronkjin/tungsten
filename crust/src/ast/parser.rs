@@ -28,8 +28,7 @@ impl Parser {
         if self.is_at_end() {
             return None;
         }
-
-        return self.parse_statement();
+        Some(self.parse_statement())
     }
 
     fn is_at_end(&self) -> bool {
