@@ -36,8 +36,6 @@ impl Parser {
     }
 
     fn parse_statement(&mut self) -> ASTStatement {
-        let _token = self.current();
-
         let expr = self.parse_expression();
         return ASTStatement::expression(expr);
     }
@@ -63,7 +61,7 @@ impl Parser {
     }
 
     fn parse_binary_operator(&mut self) -> Option<ASTBinaryOperator> {
-        let token = self.current()?;
+        let token = self.current();
 
         let kind = match token.kind {
             TokenKind::Plus => { Some(ASTBinaryOperatorKind::Plus) }
@@ -88,8 +86,8 @@ impl Parser {
         match token.kind {
             TokenKind::Number(number) => { ASTExpression::number(number) }
             TokenKind::LeftParen => {
-                let expr = self.parse_expression()?;
-                let token = self.consume()?;
+                let expr = self.parse_expression();
+                let token = self.consume();
 
                 if token.kind != TokenKind::RightParen {
                     panic!("Expected right parenthesis!");
@@ -98,6 +96,7 @@ impl Parser {
             }
             _ => {
                 // FIXME: handle error cases
+                self.diagnostics_bag.borrow_mut().report_expected_expression(token);
             }
         }
     }
@@ -122,5 +121,13 @@ impl Parser {
     fn consume(&mut self) -> &Token {
         self.current += 1;
         self.peek(-1)
+    }
+
+    fn consume_and_check(&mut self, kind: TokenKind) -> &Token {
+        let token = self.consume();
+        if token.kind != kind {
+            self.diagnostics_bag.borrow_mut().report_unexpected_token(&kind, token);
+        }
+        token
     }
 }
