@@ -24,8 +24,16 @@ impl Parser {
         }
     }
 
-    pub fn next_statement(&mut self) -> ASTStatement {
-        self.parse_statement()
+    pub fn next_statement(&mut self) -> Option<ASTStatement> {
+        if self.is_at_end() {
+            return None;
+        }
+
+        return self.parse_statement();
+    }
+
+    fn is_at_end(&self) -> bool {
+        self.current().kind == TokenKind::Eof
     }
 
     fn parse_statement(&mut self) -> ASTStatement {
