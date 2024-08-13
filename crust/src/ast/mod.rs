@@ -54,6 +54,9 @@ pub trait ASTVisitor {
             ASTExpressionKind::Parenthesized(expr) => {
                 self.visit_parenthesized_expression(expr);
             }
+            ASTExpressionKind::Error(span) => {
+                self.visit_error(span);
+            }
         }
     }
 
