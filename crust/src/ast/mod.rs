@@ -100,15 +100,15 @@ impl ASTVisitor for ASTPrinter {
         self.indent -= LEVEL_INDENT;
     }
 
+    fn visit_number(&mut self, number: &ASTNumberExpression) {
+        self.print_with_indent(&format!("Number: {}", number.number));
+    }
+
     fn visit_expression(&mut self, expression: &ASTExpression) {
         self.print_with_indent("Expression:");
         self.indent += LEVEL_INDENT;
         ASTVisitor::do_visit_expression(self, expression);
         self.indent -= LEVEL_INDENT;
-    }
-
-    fn visit_number(&mut self, number: &ASTNumberExpression) {
-        self.print_with_indent(&format!("Number: {}", number.number));
     }
 
     fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
