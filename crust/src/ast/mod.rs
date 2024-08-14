@@ -104,6 +104,10 @@ impl ASTVisitor for ASTPrinter {
         self.print_with_indent(&format!("Number: {}", number.number));
     }
 
+    fn visit_error(&mut self, span: &TextSpan) {
+        self.print_with_indent(&format!("Error: {}", span));
+    }
+
     fn visit_expression(&mut self, expression: &ASTExpression) {
         self.print_with_indent("Expression:");
         self.indent += LEVEL_INDENT;
