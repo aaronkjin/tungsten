@@ -12,4 +12,10 @@ impl<'a> DiagnosticsPrinter<'a> {
             diagnostics,
         }
     }
+
+    /*
+     * Stringify the diagnostic by using the format:
+     * let <red>x<reset> = 5;
+     */
+    pub fn stringify_diagnostic(&self, diagnostic: &Diagnostic) -> Result<String, ()> {}
 }
