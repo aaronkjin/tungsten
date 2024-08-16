@@ -8,4 +8,8 @@ impl SourceText {
             text,
         }
     }
+
+    pub fn line_index(&self, position: usize) -> usize {
+        self.text[..position].lines().count();
+    }
 }
