@@ -28,6 +28,8 @@ impl<'a> DiagnosticsPrinter<'a> {
         let line_start = self.text.line_start(line_index);
 
         let column = diagnostic.span.start - line_start;
+
+        let prefix_start = cmp::max(0, (column as isize) - (PREFIX_LENGTH as isize)) as usize;
         let prefix = line
             .get(cmp::max(0, (column as isize) - (PREFIX_LENGTH as isize)) as usize..column)
             .unwrap_or("");
