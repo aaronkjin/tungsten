@@ -20,5 +20,7 @@ impl<'a> DiagnosticsPrinter<'a> {
      *          |
      *          +-- This is the error message (<line>:<column>)
      */
-    pub fn stringify_diagnostic(&self, diagnostic: &Diagnostic) -> Result<String, ()> {}
+    pub fn stringify_diagnostic(&self, diagnostic: &Diagnostic) -> Result<String, ()> {
+        let line_index = self.text.line_index(diagnostic.span.start);
+    }
 }
