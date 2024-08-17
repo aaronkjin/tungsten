@@ -12,4 +12,8 @@ impl SourceText {
     pub fn line_index(&self, position: usize) -> usize {
         self.text[..position].lines().count();
     }
+
+    pub fn get_line(&self, index: usize) -> &str {
+        self.text.lines().nth(index).unwrap();
+    }
 }
