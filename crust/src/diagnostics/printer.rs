@@ -5,6 +5,8 @@ pub struct DiagnosticsPrinter<'a> {
     diagnostics: &'a [Diagnostic],
 }
 
+const PREFIX_LENGTH: usize = 8;
+
 impl<'a> DiagnosticsPrinter<'a> {
     pub fn new(text: &'a SourceText, diagnostics: &'a [Diagnostic]) -> Self {
         Self {
@@ -26,5 +28,8 @@ impl<'a> DiagnosticsPrinter<'a> {
         let line_start = self.text.line_start(line_index);
 
         let column = diagnostic.span.start - line_start;
+        let prefix = line
+            .get(cmp::max(0, (column as isize) - (PREFIX_LENGTH as isize)) as usize..column)
+            .unwrap_or("");
     }
 }
