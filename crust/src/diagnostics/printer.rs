@@ -23,5 +23,8 @@ impl<'a> DiagnosticsPrinter<'a> {
     pub fn stringify_diagnostic(&self, diagnostic: &Diagnostic) -> String {
         let line_index = self.text.line_index(diagnostic.span.start);
         let line = self.text.get_line(line_index);
+        let line_start = self.text.line_start(line_index);
+
+        let column = diagnostic.span.start - line_start;
     }
 }
