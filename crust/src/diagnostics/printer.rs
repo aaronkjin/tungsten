@@ -32,5 +32,6 @@ impl<'a> DiagnosticsPrinter<'a> {
         let prefix_start = cmp::max(0, (column as isize) - (PREFIX_LENGTH as isize)) as usize;
         let prefix_end = column;
         let suffix_start = cmp::min(column + diagnostic.span.length(), line.len()) + 1;
+        let suffix_end = cmp::min(suffix_start + PREFIX_LENGTH, line.len());
     }
 }
