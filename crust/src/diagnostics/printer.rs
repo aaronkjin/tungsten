@@ -35,5 +35,6 @@ impl<'a> DiagnosticsPrinter<'a> {
 
         let prefix = &line[prefix_start..prefix_end];
         let span = &line[prefix_end..suffix_start];
+        let suffix = &line[suffix_start..suffix_end];
     }
 }
