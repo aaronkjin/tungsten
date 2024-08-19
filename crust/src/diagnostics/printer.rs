@@ -30,8 +30,7 @@ impl<'a> DiagnosticsPrinter<'a> {
         let column = diagnostic.span.start - line_start;
 
         let prefix_start = cmp::max(0, (column as isize) - (PREFIX_LENGTH as isize)) as usize;
-        let prefix = line
-            .get(cmp::max(0, (column as isize) - (PREFIX_LENGTH as isize)) as usize..column)
-            .unwrap_or("");
+        let prefix_end = column;
+        let suffix_start = cmp::min(column + diagnostic.span.length(), line.len());
     }
 }
