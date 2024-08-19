@@ -39,5 +39,6 @@ impl<'a> DiagnosticsPrinter<'a> {
 
         let indent = cmp::max(cmp::min(PREFIX_LENGTH, column), 0) as usize;
         // let indent = cmp::min(PREFIX_LENGTH, column);
+        let arrow_pointers = format!("{:indent$}^", "", indent = indent);
     }
 }
