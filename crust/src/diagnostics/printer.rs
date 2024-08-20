@@ -47,5 +47,6 @@ impl<'a> DiagnosticsPrinter<'a> {
         ).collect::<String>(
         ), indent = indent);
         let arrow_line = format!("{:indent$}|", "", indent = indent);
+        let error_message = format!("{:indent$}+-- {}", "", diagnostic.message, indent = indent);
     }
 }
