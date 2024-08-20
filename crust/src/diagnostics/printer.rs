@@ -48,5 +48,17 @@ impl<'a> DiagnosticsPrinter<'a> {
         ), indent = indent);
         let arrow_line = format!("{:indent$}|", "", indent = indent);
         let error_message = format!("{:indent$}+-- {}", "", diagnostic.message, indent = indent);
+
+        format!(
+            "{}{}{}{}{}\n{}\n{}",
+            prefix,
+            Fg(Red),
+            span,
+            Fg(Reset),
+            suffix,
+            arrow_pointers,
+            arrow_line,
+            error_message
+        );
     }
 }
