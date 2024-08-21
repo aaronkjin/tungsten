@@ -1,4 +1,7 @@
+extern crate termion;
+
 use crate::diagnostics::Diagnostic;
+use termion::color::{ Fg, Red, Reset };
 
 pub struct DiagnosticsPrinter<'a> {
     text: &'a SourceText,
