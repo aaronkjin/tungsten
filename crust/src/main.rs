@@ -9,6 +9,7 @@ use crate::ast::evaluator::ASTEvaluator;
 
 fn main() {
     let input = "7 - (30 + 7) * 8 & 2";
+    let text = text::SourceText::new(input.to_string());
 
     // Part I: Lexer
     let mut lexer = Lexer::new(input);
@@ -39,6 +40,7 @@ fn main() {
     let diagnostics_binding = diagnostics_bag.borrow();
     if diagnostics_binding.diagnostics.len() > 0 {
         let diagnostics_printer = diagnostics::printer::DiagnosticsPrinter::new(
+            &text,
             &diagnostics_binding.diagnostics
         );
         diagnostics_printer.print();
