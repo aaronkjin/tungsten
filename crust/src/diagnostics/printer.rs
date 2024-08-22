@@ -53,7 +53,7 @@ impl<'a> DiagnosticsPrinter<'a> {
         let error_message = format!("{:indent$}+-- {}", "", diagnostic.message, indent = indent);
 
         format!(
-            "{}{}{}{}{}\n{}\n{}",
+            "{}{}{}{}{}\n{}\n{}\n{}",
             prefix,
             Fg(Red),
             span,
