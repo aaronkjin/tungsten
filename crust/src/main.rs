@@ -41,6 +41,8 @@ fn main() {
         let diagnostics_printer = diagnostics::printer::DiagnosticsPrinter::new(
             &diagnostics_binding.diagnostics
         );
+        diagnostics_printer.print();
+        return;
     }
 
     // Evaluator
