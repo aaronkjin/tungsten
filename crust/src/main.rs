@@ -5,6 +5,7 @@ use crate::ast::lexer::Lexer;
 use crate::ast::parser::Parser;
 use crate::ast::evaluator::ASTEvaluator;
 use crate::diagnostics::DiagnosticsBagCell;
+use crate::diagnostics::printer::DiagnosticsPrinter;
 
 mod ast;
 mod diagnostics;
@@ -42,10 +43,7 @@ fn main() {
     // Diagnostics printer
     let diagnostics_binding = diagnostics_bag.borrow();
     if diagnostics_binding.diagnostics.len() > 0 {
-        let diagnostics_printer = diagnostics::printer::DiagnosticsPrinter::new(
-            &text,
-            &diagnostics_binding.diagnostics
-        );
+        let diagnostics_printer = DiagnosticsPrinter::new(&text, &diagnostics_binding.diagnostics);
         diagnostics_printer.print();
         return;
     }
