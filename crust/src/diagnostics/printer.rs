@@ -64,4 +64,10 @@ impl<'a> DiagnosticsPrinter<'a> {
             error_message
         );
     }
+
+    pub fn print(&self) {
+        for diagnostic in self.diagnostics {
+            printlin!("{}", self.stringify_diagnostic(diagnostic));
+        }
+    }
 }
