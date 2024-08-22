@@ -1,11 +1,15 @@
+use std::cell::RefCell;
+use std::rc::Rc;
+
+use crate::ast::Ast;
+use crate::ast::lexer::Lexer;
+use crate::ast::parser::Parser;
+use crate::ast::evaluator::ASTEvaluator;
+use crate::diagnostics::DiagnosticsBagCell;
+
 mod ast;
 mod diagnostics;
 mod text;
-
-use crate::ast::lexer::Lexer;
-use crate::ast::Ast;
-use crate::ast::parser::Parser;
-use crate::ast::evaluator::ASTEvaluator;
 
 fn main() {
     let input = "7 - (30 + 7) * 8 & 2";
