@@ -16,4 +16,12 @@ impl SourceText {
     pub fn get_line(&self, index: usize) -> &str {
         self.text.lines().nth(index).unwrap()
     }
+
+    pub fn line_start(&self, index: usize) -> usize {
+        self.text
+            .lines()
+            .take(index)
+            .map(|line| line.len() + 1)
+            .sum()
+    }
 }
