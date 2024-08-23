@@ -15,6 +15,10 @@ impl ASTVisitor for ASTEvaluator {
         self.last_value = Some(number.number);
     }
 
+    fn visit_error(&mut self, span: &TextSpan) {
+        todo!()
+    }
+
     fn visit_binary_expression(&mut self, expr: &ASTBinaryExpression) {
         self.visit_expression(&expr.left);
         let left = self.last_value.unwrap();
