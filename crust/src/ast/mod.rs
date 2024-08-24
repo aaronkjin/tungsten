@@ -245,4 +245,8 @@ impl ASTExpression {
             })
         )
     }
+
+    pub fn error(span: TextSpan) -> Self {
+        ASTExpression::new(ASTExpressionKind::Error(span))
+    }
 }
