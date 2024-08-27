@@ -89,15 +89,11 @@ impl Parser {
                 let expr = self.parse_expression();
                 let token = self.consume();
 
-                if token.kind != TokenKind::RightParen {
-                    panic!("Expected right parenthesis!");
-                }
                 ASTExpression::parenthesized(expr);
             }
             _ => {
                 // FIXME: handle error cases
                 self.diagnostics_bag.borrow_mut().report_expected_expression(token);
-
                 ASTExpression::error(token.span.clone())
             }
         }
