@@ -2,6 +2,10 @@ use crate::ast::lexer::{ Lexer, Token, TokenKind };
 use crate::ast::{ ASTBinaryOperator, ASTBinaryOperatorKind, ASTExpression, ASTStatement };
 use crate::diagnostics::DiagnosticsBagCell;
 
+pub struct Counter {
+    value: Cell<usize>,
+}
+
 pub struct Parser {
     tokens: Vec<Token>,
     current: usize, // Pointer to cur token
