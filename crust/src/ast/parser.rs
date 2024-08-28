@@ -143,7 +143,7 @@ impl Parser {
         self.peek(-1)
     }
 
-    fn consume_and_check(&mut self, kind: TokenKind) -> &Token {
+    fn consume_and_check(&self, kind: TokenKind) -> &Token {
         let token = self.consume();
         if token.kind != kind {
             self.diagnostics_bag.borrow_mut().report_unexpected_token(&kind, token);
