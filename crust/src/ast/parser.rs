@@ -139,7 +139,7 @@ impl Parser {
     }
 
     fn consume(&self) -> &Token {
-        self.current.increement();
+        self.current.increment();
         self.peek(-1)
     }
 
