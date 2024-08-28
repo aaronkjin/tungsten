@@ -25,7 +25,7 @@ impl Counter {
 
 pub struct Parser {
     tokens: Vec<Token>,
-    current: usize, // Pointer to cur token
+    current: Counter, // Pointer to cur token
     diagnostics_bag: DiagnosticsBagCell, // Cool stuff: https://www.geeksforgeeks.org/error-handling-compiler-design/
 }
 
@@ -41,7 +41,7 @@ impl Parser {
                     }
                 })
                 .collect(),
-            current: 0,
+            current: Counter::new(),
             diagnostics_bag,
         }
     }
