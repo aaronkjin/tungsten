@@ -69,7 +69,7 @@ impl<'a> DiagnosticsPrinter<'a> {
 
     pub fn print(&self) {
         for diagnostic in self.diagnostics {
-            printlin!("{}", self.stringify_diagnostic(diagnostic));
+            println!("{}", self.stringify_diagnostic(diagnostic));
         }
     }
 }
