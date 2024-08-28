@@ -126,7 +126,7 @@ impl Parser {
     }
 
     fn peek(&self, offset: isize) -> &Token {
-        let mut index = ((self.current as isize) + offset) as usize;
+        let mut index = ((self.current.get_value() as isize) + offset) as usize;
 
         if index >= self.tokens.len() {
             index = self.tokens.len() - 1;
@@ -138,8 +138,8 @@ impl Parser {
         self.peek(0)
     }
 
-    fn consume(&mut self) -> &Token {
-        self.current += 1;
+    fn consume(&self) -> &Token {
+        self.current.increement();
         self.peek(-1)
     }
 
