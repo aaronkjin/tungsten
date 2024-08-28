@@ -1,4 +1,10 @@
-use crate::ast::{ ASTVisitor, ASTNumberExpression, ASTBinaryExpression, ASTBinaryOperatorKind };
+use crate::ast::{
+    ASTBinaryExpression,
+    ASTBinaryOperatorKind,
+    ASTNumberExpression,
+    ASTVisitor,
+    TextSpan,
+};
 
 pub struct ASTEvaluator {
     pub last_value: Option<i64>,

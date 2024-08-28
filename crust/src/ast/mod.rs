@@ -2,8 +2,7 @@ pub mod lexer;
 pub mod parser;
 pub mod evaluator;
 
-use crate::ast::lexer::Token;
-use crate::ast::lexer::TextSpan;
+use crate::ast::lexer::{ TextSpan, Token };
 
 pub struct Ast {
     pub statements: Vec<ASTStatement>,

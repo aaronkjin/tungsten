@@ -1,8 +1,8 @@
 extern crate termion;
 
-use std::cmp;
 use crate::diagnostics::Diagnostic;
 use crate::text::SourceText;
+use std::cmp;
 use termion::color::{ Fg, Red, Reset };
 
 pub struct DiagnosticsPrinter<'a> {
