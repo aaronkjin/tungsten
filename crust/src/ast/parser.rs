@@ -1,7 +1,7 @@
 use crate::ast::{ ASTBinaryOperator, ASTBinaryOperatorKind, ASTExpression, ASTStatement };
 use crate::ast::lexer::{ Lexer, Token, TokenKind };
 use crate::diagnostics::DiagnosticsBagCell;
-use std::cell;
+use std::cell::Cell;
 
 pub struct Counter {
     value: Cell<usize>,
