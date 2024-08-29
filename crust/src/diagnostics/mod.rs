@@ -17,7 +17,7 @@ pub struct Diagnostic {
 
 impl Diagnostic {
     pub fn new(message: String, span: TextSpan, kind: DiagnosticKind) -> Self {
-        Diagnostic { message, span, kind };
+        Diagnostic { message, span, kind }
     }
 }
 
@@ -29,7 +29,7 @@ pub struct DiagnosticsBag {
 
 impl DiagnosticsBag {
     pub fn new() -> Self {
-        DiagnosticsBag { diagnostics: vec![] };
+        DiagnosticsBag { diagnostics: vec![] }
     }
 
     pub fn report_error(&mut self, message: String, span: TextSpan) {
