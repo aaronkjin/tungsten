@@ -22,7 +22,8 @@ impl ASTVisitor for ASTEvaluator {
     }
 
     fn visit_error(&mut self, span: &TextSpan) {
-        todo!()
+        // FIXME: Implement error handling logic here
+        self.last_value = None;
     }
 
     fn visit_binary_expression(&mut self, expr: &ASTBinaryExpression) {
