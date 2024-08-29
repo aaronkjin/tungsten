@@ -118,7 +118,6 @@ impl<'a> Lexer<'a> {
 
     fn consume_symbol(&mut self) -> TokenKind {
         let c = self.consume().unwrap();
-
         match c {
             '+' => TokenKind::Plus,
             '-' => TokenKind::Minus,
