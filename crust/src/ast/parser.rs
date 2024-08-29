@@ -102,20 +102,20 @@ impl Parser {
         let token = self.consume();
 
         // Edge case: Reached the end of file
+        /*
         if token.kind == TokenKind::Eof {
             return None;
         }
+        */
 
         match token.kind {
-            TokenKind::Number(number) => { ASTExpression::number(number) }
+            TokenKind::Number(number) => ASTExpression::number(number),
             TokenKind::LeftParen => {
                 let expr = self.parse_expression();
                 let token = self.consume_and_check(TokenKind::RightParen);
-
                 ASTExpression::parenthesized(expr);
             }
             _ => {
-                // FIXME: handle error cases
                 self.diagnostics_bag.borrow_mut().report_expected_expression(token);
                 ASTExpression::error(token.span.clone())
             }
