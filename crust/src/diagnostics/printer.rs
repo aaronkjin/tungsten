@@ -63,7 +63,7 @@ impl<'a> DiagnosticsPrinter<'a> {
             arrow_pointers,
             arrow_line,
             error_message
-        );
+        )
     }
 
     pub fn print(&self) {
