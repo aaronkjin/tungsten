@@ -105,7 +105,7 @@ impl Parser {
             TokenKind::Number(number) => ASTExpression::number(number),
             TokenKind::LeftParen => {
                 let expr = self.parse_expression();
-                let token = self.consume_and_check(TokenKind::RightParen);
+                let _token = self.consume_and_check(TokenKind::RightParen);
                 ASTExpression::parenthesized(expr)
             }
             _ => {

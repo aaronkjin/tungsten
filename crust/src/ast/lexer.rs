@@ -98,7 +98,7 @@ impl<'a> Lexer<'a> {
         // Check if char is number token
         let start = self.current_pos;
         // let mut kind = TokenKind::Bad; // Char that we don't understand
-        let mut kind: TokenKind;
+        let kind: TokenKind;
         if Lexer::is_number_start(&c) {
             let number: i64 = self.consume_number();
             kind = TokenKind::Number(number);
