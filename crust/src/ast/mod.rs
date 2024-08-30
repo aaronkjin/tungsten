@@ -60,12 +60,10 @@ pub trait ASTVisitor {
         }
     }
 
-    fn visit_error(&mut self, span: &TextSpan);
-    /*
-    {
-        self.visit_number(&(ASTNumberExpression { number: 0.0, span: *span }));
+    fn visit_error(&mut self, span: &TextSpan) {
+        // FIXME: Actually visit the error
+        self.print_with_indent(&format!("Error: {:?}", span));
     }
-    */
 
     fn visit_number(&mut self, number: &ASTNumberExpression);
 
