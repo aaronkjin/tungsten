@@ -21,7 +21,7 @@ impl ASTVisitor for ASTEvaluator {
         self.last_value = Some(number.number);
     }
 
-    fn visit_error(&mut self, span: &TextSpan) {
+    fn visit_error(&mut self, _span: &TextSpan) {
         // FIXME: Implement error handling logic here
         self.last_value = None;
     }
