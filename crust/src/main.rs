@@ -12,7 +12,7 @@ mod diagnostics;
 mod text;
 
 fn main() {
-    let input = "7 - (30 + 7) * 8 & 2";
+    let input = "7 - (30 + 7) * 8 ! 2";
     let text = text::SourceText::new(input.to_string());
 
     // Part I: Lexer
