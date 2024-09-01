@@ -36,14 +36,9 @@ impl<'a> DiagnosticsPrinter<'a> {
         let (prefix, span, suffix) = Self::get_text_spans(diagnostic, &line, column);
 
         let indent = cmp::max(cmp::min(PREFIX_LENGTH, column), 0) as usize;
-        let arrow_pointers = format!(
-            "{:indent$}{}",
-            "",
-            std::iter::repeat('^').take(diagnostic.span.length()).collect::<String>(),
-            indent = indent
-        );
-        let arrow_line = format!("{:indent$}|", "", indent = indent);
-        let error_message = format!("{:indent$}+-- {}", "", diagnostic.message, indent = indent);
+        let (arrow_pointers, arrow_line) = Self::format_arrow(diagnostic, indent);
+
+        let error_message = Self::format_error_message(diagnostic, indent);
 
         format!(
             "{}{}{}{}{}\n{}\n{}\n{}",
@@ -58,7 +53,7 @@ impl<'a> DiagnosticsPrinter<'a> {
         )
     }
 
-    // Logic for prefix, span, and suffix
+    // Refactored logic for prefix, span, and suffix
     fn get_text_spans(diagnostic: &Diagnostic, line: &str, column: usize) -> (&str, &str, &str) {
         let prefix_start = cmp::max(0, (column as isize) - (PREFIX_LENGTH as isize)) as usize;
         let prefix_end = column;
@@ -69,6 +64,17 @@ impl<'a> DiagnosticsPrinter<'a> {
         let span = &line[prefix_end..suffix_start];
         let suffix = &line[suffix_start..suffix_end];
         (prefix, span, suffix)
+    }
+
+    // Refactored logic for arrow-formatting
+    fn format_arrow(diagnostic: &Diagnostic, indent: usize) -> (String, String) {
+        let arrow_pointers = format!(
+            "{:indent$}{}",
+            "",
+            std::iter::repeat('^').take(diagnostic.span.length()).collect::<String>(),
+            indent = indent
+        );
+        let arrow_line = format!("{:indent$}|", "", indent = indent);
     }
 
     pub fn print(&self) {
