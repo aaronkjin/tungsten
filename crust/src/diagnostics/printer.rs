@@ -77,6 +77,11 @@ impl<'a> DiagnosticsPrinter<'a> {
         let arrow_line = format!("{:indent$}|", "", indent = indent);
     }
 
+    // Refactored logic for error message-formatting
+    fn format_error_message(diagnostic: &Diagnostic, indent: usize) -> String {
+        format!("{:indent$}+-- {}", "", diagnostic.message, indent = indent)
+    }
+
     pub fn print(&self) {
         for diagnostic in self.diagnostics {
             println!("{}", self.stringify_diagnostic(diagnostic));
