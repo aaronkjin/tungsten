@@ -75,6 +75,7 @@ impl<'a> DiagnosticsPrinter<'a> {
             indent = indent
         );
         let arrow_line = format!("{:indent$}|", "", indent = indent);
+        (arrow_pointers, arrow_line)
     }
 
     // Refactored logic for error message-formatting
