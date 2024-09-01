@@ -33,17 +33,9 @@ impl<'a> DiagnosticsPrinter<'a> {
         let line_start = self.text.line_start(line_index);
 
         let column = diagnostic.span.start - line_start;
-        let prefix_start = cmp::max(0, (column as isize) - (PREFIX_LENGTH as isize)) as usize;
-        let prefix_end = column;
-        let suffix_start = cmp::min(column + diagnostic.span.length(), line.len()) + 1;
-        let suffix_end = cmp::min(suffix_start + PREFIX_LENGTH, line.len());
-
-        let prefix = &line[prefix_start..prefix_end];
-        let span = &line[prefix_end..suffix_start];
-        let suffix = &line[suffix_start..suffix_end];
+        let (prefix, span, suffix) = Self::get_text_spans(diagnostic, &line, column);
 
         let indent = cmp::max(cmp::min(PREFIX_LENGTH, column), 0) as usize;
-        // let indent = cmp::min(PREFIX_LENGTH, column);
         let arrow_pointers = format!(
             "{:indent$}{}",
             "",
@@ -64,6 +56,19 @@ impl<'a> DiagnosticsPrinter<'a> {
             arrow_line,
             error_message
         )
+    }
+
+    // Logic for prefix, span, and suffix
+    fn get_text_spans(diagnostic: &Diagnostic, line: &str, column: usize) -> (&str, &str, &str) {
+        let prefix_start = cmp::max(0, (column as isize) - (PREFIX_LENGTH as isize)) as usize;
+        let prefix_end = column;
+        let suffix_start = cmp::min(column + diagnostic.span.length(), line.len()) + 1;
+        let suffix_end = cmp::min(suffix_start + PREFIX_LENGTH, line.len());
+
+        let prefix = &line[prefix_start..prefix_end];
+        let span = &line[prefix_end..suffix_start];
+        let suffix = &line[suffix_start..suffix_end];
+        (prefix, span, suffix)
     }
 
     pub fn print(&self) {
