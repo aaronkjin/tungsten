@@ -36,11 +36,16 @@ cargo run src/main.rs
 
 ## Progress
 
-Previously: Built out a basic arithmetic lexer and parser.
+Previously:
 
-Currently: The evaluator.
+- Lexer
+- Parser
+- Evaluator
+- Error-reporter
 
-Next: Add support for variables, error-reporting, and let + if statements.
+Currently: Add suport for variables.
+
+Next: Add support let + if statements.
 
 ## Developer
 
