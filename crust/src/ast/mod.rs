@@ -109,7 +109,8 @@ impl ASTVisitor for ASTPrinter {
     }
 
     fn visit_error(&mut self, span: &TextSpan) {
-        self.print_with_indent(&format!("Error: {:?}", span));
+        // self.print_with_indent(&format!("Error: {:?}", span));
+        self.result.push_str(&format!("{}{}", Self::TEXT_COLOR.fg_str(), span.literal));
     }
 
     /*
