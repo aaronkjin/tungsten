@@ -87,15 +87,19 @@ pub struct ASTPrinter {
     indent: usize,
 }
 
-const LEVEL_INDENT: usize = 2;
+impl ASTPrinter {
+    const NUMBER_COLOR: color::Cyan = color::Cyan;
+}
 
 impl ASTVisitor for ASTPrinter {
+    /*
     fn visit_statement(&mut self, statement: &ASTStatement) {
         self.print_with_indent("Statement:");
         self.indent += LEVEL_INDENT;
         ASTVisitor::do_visit_statement(self, statement);
         self.indent -= LEVEL_INDENT;
     }
+    */
 
     fn visit_number(&mut self, number: &ASTNumberExpression) {
         self.print_with_indent(&format!("Number: {}", number.number));
@@ -105,12 +109,14 @@ impl ASTVisitor for ASTPrinter {
         self.print_with_indent(&format!("Error: {:?}", span));
     }
 
+    /*
     fn visit_expression(&mut self, expression: &ASTExpression) {
         self.print_with_indent("Expression:");
         self.indent += LEVEL_INDENT;
         ASTVisitor::do_visit_expression(self, expression);
         self.indent -= LEVEL_INDENT;
     }
+    */
 
     fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
         self.print_with_indent("Binary Expression:");
