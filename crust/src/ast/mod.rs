@@ -85,10 +85,12 @@ pub trait ASTVisitor {
 
 pub struct ASTPrinter {
     indent: usize,
+    result: String,
 }
 
 impl ASTPrinter {
     const NUMBER_COLOR: color::Cyan = color::Cyan;
+    const TEXT_COLOR: color::White = color::White;
 }
 
 impl ASTVisitor for ASTPrinter {
@@ -102,7 +104,8 @@ impl ASTVisitor for ASTPrinter {
     */
 
     fn visit_number(&mut self, number: &ASTNumberExpression) {
-        self.print_with_indent(&format!("Number: {}", number.number));
+        // self.print_with_indent(&format!("Number: {}", number.number));
+        self.result.push_str(&format!("{}{}", Self::NUMBER_COLOR.fg_str(), number.number));
     }
 
     fn visit_error(&mut self, span: &TextSpan) {
