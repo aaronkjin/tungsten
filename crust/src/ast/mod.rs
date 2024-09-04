@@ -92,13 +92,13 @@ impl ASTPrinter {
     const NUMBER_COLOR: color::Cyan = color::Cyan;
     const TEXT_COLOR: color::White = color::White;
 
-    fn add_whitespace(&mut self, text: &str) {
+    fn add_whitespace(&mut self) {
         self.result.push_str(" ");
     }
 
     fn add_newline(&mut self) {
         self.result.push_str("
-        ");
+");
     }
 }
 
@@ -132,12 +132,30 @@ impl ASTVisitor for ASTPrinter {
     */
 
     fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
+        /*
         self.print_with_indent("Binary Expression:");
         self.indent += LEVEL_INDENT;
         self.print_with_indent(&format!("Operator: {:?}", binary_expression.operator.kind));
         self.visit_expression(&binary_expression.left);
         self.visit_expression(&binary_expression.right);
         self.indent -= LEVEL_INDENT;
+        */
+        // Left
+        self.visit_expression(&binary_expression.left);
+        self.add_whitespace();
+
+        // Operator
+        self.result.push_str(
+            &format!(
+                "{}{}",
+                Self::TEXT_COLOR.fg_str(),
+                binary_expression.operator.token.span.literal
+            )
+        );
+
+        // Right
+        self.add_whitespace();
+        self.visit_expression(&binary_expression.right);
     }
 
     fn visit_parenthesized_expression(
