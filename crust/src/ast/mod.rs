@@ -95,6 +95,11 @@ impl ASTPrinter {
     fn add_whitespace(&mut self, text: &str) {
         self.result.push_str(" ");
     }
+
+    fn add_newline(&mut self) {
+        self.result.push_str("
+        ");
+    }
 }
 
 impl ASTVisitor for ASTPrinter {
