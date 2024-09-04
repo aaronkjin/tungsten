@@ -91,6 +91,10 @@ pub struct ASTPrinter {
 impl ASTPrinter {
     const NUMBER_COLOR: color::Cyan = color::Cyan;
     const TEXT_COLOR: color::White = color::White;
+
+    fn add_whitespace(&mut self, text: &str) {
+        self.result.push_str(" ");
+    }
 }
 
 impl ASTVisitor for ASTPrinter {
