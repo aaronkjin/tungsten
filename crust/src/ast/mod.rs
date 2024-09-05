@@ -162,10 +162,19 @@ impl ASTVisitor for ASTPrinter {
         &mut self,
         parenthesized_expression: &ASTParenthesizedExpression
     ) {
+        /*
         self.print_with_indent("Parenthesized Expression:");
         self.indent += LEVEL_INDENT;
         self.visit_expression(&parenthesized_expression.expression);
         self.indent -= LEVEL_INDENT;
+        */
+        // Left
+        self.result.push_str(&format!("{}{}", Self::TEXT_COLOR.fg_str(), "("));
+
+        self.visit_expression(&parenthesized_expression.expression);
+
+        // Right
+        self.result.push_str(&format!("{}{}", Self::TEXT_COLOR.fg_str(), ")"));
     }
 }
 
