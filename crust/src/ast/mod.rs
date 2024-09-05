@@ -113,12 +113,10 @@ impl ASTVisitor for ASTPrinter {
     */
 
     fn visit_number(&mut self, number: &ASTNumberExpression) {
-        // self.print_with_indent(&format!("Number: {}", number.number));
         self.result.push_str(&format!("{}{}", Self::NUMBER_COLOR.fg_str(), number.number));
     }
 
     fn visit_error(&mut self, span: &TextSpan) {
-        // self.print_with_indent(&format!("Error: {:?}", span));
         self.result.push_str(&format!("{}{}", Self::TEXT_COLOR.fg_str(), span.literal));
     }
 
@@ -132,14 +130,6 @@ impl ASTVisitor for ASTPrinter {
     */
 
     fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
-        /*
-        self.print_with_indent("Binary Expression:");
-        self.indent += LEVEL_INDENT;
-        self.print_with_indent(&format!("Operator: {:?}", binary_expression.operator.kind));
-        self.visit_expression(&binary_expression.left);
-        self.visit_expression(&binary_expression.right);
-        self.indent -= LEVEL_INDENT;
-        */
         // Left
         self.visit_expression(&binary_expression.left);
         self.add_whitespace();
@@ -162,12 +152,6 @@ impl ASTVisitor for ASTPrinter {
         &mut self,
         parenthesized_expression: &ASTParenthesizedExpression
     ) {
-        /*
-        self.print_with_indent("Parenthesized Expression:");
-        self.indent += LEVEL_INDENT;
-        self.visit_expression(&parenthesized_expression.expression);
-        self.indent -= LEVEL_INDENT;
-        */
         // Left
         self.result.push_str(&format!("{}{}", Self::TEXT_COLOR.fg_str(), "("));
 
