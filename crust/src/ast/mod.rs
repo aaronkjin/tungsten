@@ -29,6 +29,7 @@ impl Ast {
     pub fn visualize(&self) -> () {
         let mut printer = ASTPrinter::new();
         self.visit(&mut printer);
+        println!("{}", printer.result);
     }
 }
 
