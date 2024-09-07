@@ -103,15 +103,6 @@ impl ASTPrinter {
 }
 
 impl ASTVisitor for ASTPrinter {
-    /*
-    fn visit_statement(&mut self, statement: &ASTStatement) {
-        self.print_with_indent("Statement:");
-        self.indent += LEVEL_INDENT;
-        ASTVisitor::do_visit_statement(self, statement);
-        self.indent -= LEVEL_INDENT;
-    }
-    */
-
     fn visit_number(&mut self, number: &ASTNumberExpression) {
         self.result.push_str(&format!("{}{}", Self::NUMBER_COLOR.fg_str(), number.number));
     }
@@ -119,15 +110,6 @@ impl ASTVisitor for ASTPrinter {
     fn visit_error(&mut self, span: &TextSpan) {
         self.result.push_str(&format!("{}{}", Self::TEXT_COLOR.fg_str(), span.literal));
     }
-
-    /*
-    fn visit_expression(&mut self, expression: &ASTExpression) {
-        self.print_with_indent("Expression:");
-        self.indent += LEVEL_INDENT;
-        ASTVisitor::do_visit_expression(self, expression);
-        self.indent -= LEVEL_INDENT;
-    }
-    */
 
     fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
         // Left
