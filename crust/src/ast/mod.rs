@@ -146,12 +146,6 @@ impl ASTVisitor for ASTPrinter {
     }
 }
 
-impl ASTPrinter {
-    fn print_with_indent(&mut self, text: &str) {
-        println!("{}{}", " ".repeat(self.indent), text);
-    }
-}
-
 // AST statements
 pub enum ASTStatementKind {
     // Useful for Rust's pattern-matching
