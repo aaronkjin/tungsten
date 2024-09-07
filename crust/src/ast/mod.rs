@@ -4,6 +4,8 @@ pub mod evaluator;
 
 use crate::ast::lexer::{ TextSpan, Token };
 
+use termion::color;
+
 pub struct Ast {
     pub statements: Vec<ASTStatement>,
 }
