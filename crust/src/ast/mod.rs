@@ -27,7 +27,7 @@ impl Ast {
     }
 
     pub fn visualize(&self) -> () {
-        let mut printer = ASTPrinter { indent: 0 };
+        let mut printer = ASTPrinter::new();
         self.visit(&mut printer);
     }
 }
@@ -93,6 +93,10 @@ pub struct ASTPrinter {
 impl ASTPrinter {
     const NUMBER_COLOR: color::Cyan = color::Cyan;
     const TEXT_COLOR: color::White = color::White;
+
+    pub fn new() -> Self {
+        Self { indent: 0, result: String::new() }
+    }
 
     fn add_whitespace(&mut self) {
         self.result.push_str(" ");
