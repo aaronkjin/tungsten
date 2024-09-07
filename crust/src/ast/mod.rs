@@ -5,6 +5,7 @@ pub mod evaluator;
 use crate::ast::lexer::{ TextSpan, Token };
 
 use termion::color;
+use termion::color::{ Fg, Reset };
 
 pub struct Ast {
     pub statements: Vec<ASTStatement>,
@@ -112,6 +113,7 @@ impl ASTPrinter {
 impl ASTVisitor for ASTPrinter {
     fn visit_statement(&mut self, statement: &ASTStatement) {
         self.result.push_str(&format!("{}", Fg(Reset)));
+        Self::do_visit_statement(self, statement);
     }
 
     fn visit_number(&mut self, number: &ASTNumberExpression) {
