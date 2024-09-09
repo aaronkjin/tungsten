@@ -12,6 +12,9 @@ pub enum TokenKind {
     RightParen,
     Bad,
     Whitespace,
+    Let,
+    Identifier(String),
+    Equals,
     Eof,
 }
 
@@ -27,6 +30,9 @@ impl Display for TokenKind {
             TokenKind::RightParen => write!(f, ")"),
             TokenKind::Bad => write!(f, "Bad"),
             TokenKind::Whitespace => write!(f, "Whitespace"),
+            TokenKind::Let => write!(f, "Let"),
+            TokenKind::Identifier(_) => write!(f, "Identifier"),
+            TokenKind::Equals => write!(f, "="),
             TokenKind::Eof => write!(f, "Eof"),
         }
     }
