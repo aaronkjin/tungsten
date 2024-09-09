@@ -103,7 +103,6 @@ impl<'a> Lexer<'a> {
 
         // Check if char is number token
         let start = self.current_pos;
-        // let mut kind = TokenKind::Bad; // Char that we don't understand
         let kind: TokenKind;
         if Lexer::is_number_start(&c) {
             let number: i64 = self.consume_number();
@@ -113,6 +112,7 @@ impl<'a> Lexer<'a> {
             self.consume();
             kind = TokenKind::Whitespace;
         } else if Self::is_identifier_start(&c) {
+            // Edge case: Variable identifier as token
             let identifier = self.consume_identifier();
             kind = match &identifier.as_str() {
                 "let" => TokenKind::Let,
