@@ -12,7 +12,11 @@ mod diagnostics;
 mod text;
 
 fn main() {
-    let input = "7 + 8 * 9";
+    let input = "
+        let a = 10
+        let b = 20
+        let c = a + b
+    ";
     let text = text::SourceText::new(input.to_string());
 
     // Part I: Lexer
