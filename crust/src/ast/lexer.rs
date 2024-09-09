@@ -132,6 +132,7 @@ impl<'a> Lexer<'a> {
             '/' => TokenKind::Slash,
             '(' => TokenKind::LeftParen,
             ')' => TokenKind::RightParen,
+            '=' => TokenKind::Equals,
             _ => TokenKind::Bad,
         }
     }
