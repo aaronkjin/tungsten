@@ -142,6 +142,10 @@ impl<'a> Lexer<'a> {
         c.is_digit(10)
     }
 
+    fn is_identifier_start(c: &char) -> bool {
+        c.is_alphabetic()
+    }
+
     fn is_whitespace(c: &char) -> bool {
         c.is_whitespace()
     }
