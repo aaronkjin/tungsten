@@ -114,6 +114,10 @@ impl<'a> Lexer<'a> {
             kind = TokenKind::Whitespace;
         } else if Self::is_identifier_start(&c) {
             let identifier = self.consume_identifier();
+            kind = match &identifier.as_str() {
+                "let" => TokenKind::Let,
+                _ => TokenKind::Identifier(identifier),
+            };
         } else {
             // Edge case: Invalid token
             kind = self.consume_symbol();
