@@ -112,8 +112,8 @@ impl ASTPrinter {
 
 impl ASTVisitor for ASTPrinter {
     fn visit_statement(&mut self, statement: &ASTStatement) {
-        self.result.push_str(&format!("{}", Fg(Reset)));
         Self::do_visit_statement(self, statement);
+        self.result.push_str(&format!("{}", Fg(Reset)));
     }
 
     fn visit_number(&mut self, number: &ASTNumberExpression) {
