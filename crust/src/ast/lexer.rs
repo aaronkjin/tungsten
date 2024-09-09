@@ -112,6 +112,8 @@ impl<'a> Lexer<'a> {
             // Edge case: Whitespace as token
             self.consume();
             kind = TokenKind::Whitespace;
+        } else if Self::is_identifier_start(&c) {
+            let identifier = self.consume_identifier();
         } else {
             // Edge case: Invalid token
             kind = self.consume_symbol();
@@ -178,5 +180,19 @@ impl<'a> Lexer<'a> {
         }
 
         self.input[start..self.current_pos].parse::<i64>().unwrap()
+    }
+
+    // To consume non-numeric, alphabetical identifiers
+    fn consume_identifier(&mut self) -> String {
+        let mut identifier = String::new();
+
+        while let Some(c) = self.current_char() {
+            if Self::is_identifier_start(&c) {
+                self.consume().unwrap();
+                identifier.push(c);
+            } else {
+                break;
+            }
+        }
     }
 }
