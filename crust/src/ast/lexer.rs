@@ -114,7 +114,7 @@ impl<'a> Lexer<'a> {
         } else if Self::is_identifier_start(&c) {
             // Edge case: Variable identifier as token
             let identifier = self.consume_identifier();
-            kind = match &identifier.as_str() {
+            kind = match identifier.as_str() {
                 "let" => TokenKind::Let,
                 _ => TokenKind::Identifier(identifier),
             };
