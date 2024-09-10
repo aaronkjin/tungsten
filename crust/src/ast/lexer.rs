@@ -198,5 +198,6 @@ impl<'a> Lexer<'a> {
                 break;
             }
         }
+        identifier
     }
 }
