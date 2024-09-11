@@ -59,8 +59,10 @@ impl Parser {
     }
 
     fn parse_statement(&mut self) -> ASTStatement {
-        let expr = self.parse_expression();
-        return ASTStatement::expression(expr);
+        match self.current().kind {
+            TokenKind::Let => { self.parse_let_statement() }
+            _ => { self.parse_expression_statement() }
+        }
     }
 
     fn parse_binary_expression(&mut self, precedence: u8) -> ASTExpression {
