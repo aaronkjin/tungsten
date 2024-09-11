@@ -161,6 +161,7 @@ impl ASTVisitor for ASTPrinter {
 pub enum ASTStatementKind {
     // Useful for Rust's pattern-matching
     Expression(ASTExpression),
+    LetStatement(ASTLetStatement),
 }
 
 pub struct ASTStatement {
@@ -175,6 +176,12 @@ impl ASTStatement {
     pub fn expression(expr: ASTExpression) -> Self {
         ASTStatement::new(ASTStatementKind::Expression(expr))
     }
+}
+
+// AST let statements
+pub struct ASTLetStatement {
+    identifier: Token,
+    initializer: ASTExpression,
 }
 
 // AST number expressions
