@@ -65,6 +65,11 @@ impl Parser {
         }
     }
 
+    fn parse_expression_statement(&mut self) -> ASTStatement {
+        let expr = self.parse_expression();
+        return ASTStatement::expression(expr);
+    }
+
     fn parse_binary_expression(&mut self, precedence: u8) -> ASTExpression {
         let mut left = self.parse_primary_expression();
 
