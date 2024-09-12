@@ -176,6 +176,12 @@ impl ASTStatement {
     pub fn expression(expr: ASTExpression) -> Self {
         ASTStatement::new(ASTStatementKind::Expression(expr))
     }
+
+    pub fn let_statement(identifier: Token, initializer: ASTExpression) -> Self {
+        ASTStatement::new(
+            ASTStatementKind::LetStatement(ASTLetStatement { identifier, initializer })
+        )
+    }
 }
 
 // AST let statements
