@@ -70,6 +70,11 @@ impl Parser {
         return ASTStatement::expression(expr);
     }
 
+    fn parse_let_statement(&mut self) -> ASTStatement {
+        self.consume_and_check(TokenKind::Let);
+        let identifier = self.consume_and_check(TokenKind::Identifier);
+    }
+
     fn parse_binary_expression(&mut self, precedence: u8) -> ASTExpression {
         let mut left = self.parse_primary_expression();
 
