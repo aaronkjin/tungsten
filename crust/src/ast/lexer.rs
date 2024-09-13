@@ -13,7 +13,7 @@ pub enum TokenKind {
     Bad,
     Whitespace,
     Let,
-    Identifier(String),
+    Identifier,
     Equals,
     Eof,
 }
@@ -31,7 +31,7 @@ impl Display for TokenKind {
             TokenKind::Bad => write!(f, "Bad"),
             TokenKind::Whitespace => write!(f, "Whitespace"),
             TokenKind::Let => write!(f, "Let"),
-            TokenKind::Identifier(_) => write!(f, "Identifier"),
+            TokenKind::Identifier => write!(f, "Identifier"),
             TokenKind::Equals => write!(f, "="),
             TokenKind::Eof => write!(f, "Eof"),
         }
