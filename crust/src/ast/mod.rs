@@ -40,6 +40,9 @@ pub trait ASTVisitor {
             ASTStatementKind::Expression(expr) => {
                 self.visit_expression(expr);
             }
+            ASTStatementKind::LetStatement(expr) => {
+                self.visit_let_statement(expr);
+            }
         }
     }
 
