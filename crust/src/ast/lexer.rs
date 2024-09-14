@@ -116,7 +116,7 @@ impl<'a> Lexer<'a> {
             let identifier = self.consume_identifier();
             kind = match identifier.as_str() {
                 "let" => TokenKind::Let,
-                _ => TokenKind::Identifier(identifier),
+                _ => TokenKind::Identifier,
             };
         } else {
             // Edge case: Invalid token
