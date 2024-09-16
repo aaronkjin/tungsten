@@ -102,6 +102,7 @@ pub struct ASTPrinter {
 impl ASTPrinter {
     const NUMBER_COLOR: color::Cyan = color::Cyan;
     const TEXT_COLOR: color::White = color::White;
+    const KEYWORD_COLOR: color::Magenta = color::Magenta;
 
     pub fn new() -> Self {
         Self { indent: 0, result: String::new() }
@@ -123,7 +124,6 @@ impl ASTVisitor for ASTPrinter {
         self.result.push_str(&format!("{}", Fg(Reset)));
     }
 
-    // FIXME: Actually visit the let statement
     fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
         self.result.push_str(&format!("let{}", Self::TEXT_COLOR.fg_str()));
 
