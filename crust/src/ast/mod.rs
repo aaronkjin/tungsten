@@ -125,15 +125,11 @@ impl ASTVisitor for ASTPrinter {
     }
 
     fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
-        self.result.push_str(&format!("let{}", Self::TEXT_COLOR.fg_str()));
+        self.result.push_str(&format!("{}let", Self::KEYWORD_COLOR.fg_str()));
 
         self.add_whitespace();
         self.result.push_str(
-            &format!(
-                "{}{}",
-                Self::TEXT_COLOR.fg_str(),
-                let_statement.initializer.token.span.literal
-            )
+            &format!("{}=", Self::TEXT_COLOR.fg_str(), let_statement.initializer.token.span.literal)
         );
     }
 
