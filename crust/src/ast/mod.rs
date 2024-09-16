@@ -128,9 +128,10 @@ impl ASTVisitor for ASTPrinter {
         self.result.push_str(&format!("{}let", Self::KEYWORD_COLOR.fg_str()));
 
         self.add_whitespace();
-        self.result.push_str(
-            &format!("{}=", Self::TEXT_COLOR.fg_str(), let_statement.initializer.token.span.literal)
-        );
+        self.result.push_str(&format!("{}=", Self::TEXT_COLOR.fg_str()));
+
+        self.add_whitespace();
+        self.visit_expression(&let_statement.initializer);
     }
 
     fn visit_number(&mut self, number: &ASTNumberExpression) {
