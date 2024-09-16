@@ -72,11 +72,11 @@ impl Parser {
 
     fn parse_let_statement(&mut self) -> ASTStatement {
         self.consume_and_check(TokenKind::Let); // let
-        let identifier = self.consume_and_check(TokenKind::Identifier); // x
+        let identifier = self.consume_and_check(TokenKind::Identifier).clone(); // x
         self.consume_and_check(TokenKind::Equals); // =
         let expr = self.parse_expression(); // 21
 
-        return ASTStatement::let_statement(identifier.clone(), expr);
+        return ASTStatement::let_statement(identifier, expr);
     }
 
     fn parse_binary_expression(&mut self, precedence: u8) -> ASTExpression {
