@@ -50,6 +50,10 @@ pub trait ASTVisitor {
         self.do_visit_statement(statement);
     }
 
+    fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
+        self.visit_expression(&let_statement.initializer);
+    }
+
     fn do_visit_expression(&mut self, expression: &ASTExpression) {
         match &expression.kind {
             ASTExpressionKind::Number(number) => {
