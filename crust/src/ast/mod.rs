@@ -129,6 +129,11 @@ impl ASTVisitor for ASTPrinter {
         self.result.push_str(&format!("{}let", Self::KEYWORD_COLOR.fg_str()));
 
         self.add_whitespace();
+        self.result.push_str(
+            &format!("{}{}", Self::TEXT_COLOR.fg_str(), let_statement.identifier.span.literal)
+        );
+
+        self.add_whitespace();
         self.result.push_str(&format!("{}=", Self::TEXT_COLOR.fg_str()));
 
         self.add_whitespace();
