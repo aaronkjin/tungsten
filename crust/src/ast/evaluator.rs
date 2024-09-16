@@ -17,6 +17,10 @@ impl ASTEvaluator {
 }
 
 impl ASTVisitor for ASTEvaluator {
+    fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
+        todo!()
+    }
+
     fn visit_number(&mut self, number: &ASTNumberExpression) {
         self.last_value = Some(number.number);
     }
