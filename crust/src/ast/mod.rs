@@ -123,6 +123,7 @@ impl ASTVisitor for ASTPrinter {
         Self::do_visit_statement(self, statement);
         self.result.push_str(&format!("{}", Fg(Reset)));
         self.add_newline();
+        // Testing cursor
     }
 
     fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
