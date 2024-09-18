@@ -68,6 +68,9 @@ pub trait ASTVisitor {
             ASTExpressionKind::Error(span) => {
                 self.visit_error(span);
             }
+            ASTExpressionKind::Variable(expr) => {
+                self.visit_variable_expression(expr);
+            }
         }
     }
 
