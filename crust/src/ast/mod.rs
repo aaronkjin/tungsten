@@ -74,24 +74,19 @@ pub trait ASTVisitor {
     // FIXME: Actually visit the error
     fn visit_error(&mut self, span: &TextSpan) {}
 
-    // FIXME: Actually visit the number
-    fn visit_number(&mut self, number: &ASTNumberExpression);
-
     fn visit_expression(&mut self, expression: &ASTExpression) {
         self.do_visit_expression(expression);
     }
 
-    fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
-        self.visit_expression(&binary_expression.left);
-        self.visit_expression(&binary_expression.right);
-    }
+    // FIXME: Actually visit the number
+    fn visit_number_expression(&mut self, number: &ASTNumberExpression);
+
+    fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression);
 
     fn visit_parenthesized_expression(
         &mut self,
         parenthesized_expression: &ASTParenthesizedExpression
-    ) {
-        self.visit_expression(&parenthesized_expression.expression);
-    }
+    );
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression);
 }
