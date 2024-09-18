@@ -92,6 +92,8 @@ pub trait ASTVisitor {
     ) {
         self.visit_expression(&parenthesized_expression.expression);
     }
+
+    fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression);
 }
 
 pub struct ASTPrinter {
