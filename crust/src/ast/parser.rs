@@ -124,6 +124,7 @@ impl Parser {
                 let _token = self.consume_and_check(TokenKind::RightParen);
                 ASTExpression::parenthesized(expr)
             }
+            TokenKind::Identifier => { ASTExpression::identifier(token.clone()) }
             _ => {
                 self.diagnostics_bag.borrow_mut().report_expected_expression(token);
                 ASTExpression::error(token.span.clone())
