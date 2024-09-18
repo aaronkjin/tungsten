@@ -231,6 +231,7 @@ pub struct ASTBinaryExpression {
     right: Box<ASTExpression>,
 }
 
+// AST binary operators
 #[derive(Debug)]
 pub enum ASTBinaryOperatorKind {
     Plus,
@@ -265,6 +266,7 @@ pub enum ASTExpressionKind {
     Number(ASTNumberExpression),
     Binary(ASTBinaryExpression),
     Parenthesized(ASTParenthesizedExpression),
+    Variable(ASTVariableExpression),
     Error(TextSpan),
 }
 
@@ -301,5 +303,14 @@ impl ASTExpression {
 
     pub fn error(span: TextSpan) -> Self {
         ASTExpression::new(ASTExpressionKind::Error(span))
+    }
+}
+pub struct ASTVariableExpression {
+    identifier: Token,
+}
+
+impl ASTVariableExpression {
+    pub fn identifier(&self) -> &str {
+        &self.identifier.span.literal
     }
 }
