@@ -312,6 +312,10 @@ impl ASTExpression {
         )
     }
 
+    pub fn identifier(identifier: Token) -> Self {
+        ASTExpression::new(ASTExpressionKind::Variable(ASTVariableExpression { identifier }));
+    }
+
     pub fn error(span: TextSpan) -> Self {
         ASTExpression::new(ASTExpressionKind::Error(span))
     }
