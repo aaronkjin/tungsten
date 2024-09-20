@@ -5,6 +5,8 @@ use crate::ast::{
     ASTNumberExpression,
     ASTVisitor,
     TextSpan,
+    ASTParenthesizedExpression,
+    ASTVariableExpression,
 };
 
 pub struct ASTEvaluator {
@@ -18,11 +20,11 @@ impl ASTEvaluator {
 }
 
 impl ASTVisitor for ASTEvaluator {
-    fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
+    fn visit_let_statement(&mut self, _let_statement: &ASTLetStatement) {
         todo!()
     }
 
-    fn visit_number(&mut self, number: &ASTNumberExpression) {
+    fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
         self.last_value = Some(number.number);
     }
 
@@ -44,5 +46,14 @@ impl ASTVisitor for ASTEvaluator {
             ASTBinaryOperatorKind::Multiply => left * right,
             ASTBinaryOperatorKind::Divide => left / right,
         });
+    }
+
+    fn visit_parenthesized_expression(&mut self, expr: &ASTParenthesizedExpression) {
+        self.visit_expression(&expr.expression);
+    }
+
+    fn visit_variable_expression(&mut self, _expr: &ASTVariableExpression) {
+        // TODO: Implement variable lookup logic
+        self.last_value = None;
     }
 }

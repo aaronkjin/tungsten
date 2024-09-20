@@ -57,7 +57,7 @@ pub trait ASTVisitor {
     fn do_visit_expression(&mut self, expression: &ASTExpression) {
         match &expression.kind {
             ASTExpressionKind::Number(number) => {
-                self.visit_number(number);
+                self.visit_number_expression(number);
             }
             ASTExpressionKind::Binary(expr) => {
                 self.visit_binary_expression(expr);
@@ -144,14 +144,15 @@ impl ASTVisitor for ASTPrinter {
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
         self.result.push_str(
             &format!(
-                "{{}{}",
+                "{}{}",
                 Self::VARIABLE_COLOR.fg_str(),
                 variable_expression.identifier.span.literal
             )
         )
     }
 
-    fn visit_number(&mut self, number: &ASTNumberExpression) {
+    // Change this method to visit_number_expression
+    fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
         self.result.push_str(&format!("{}{}", Self::NUMBER_COLOR.fg_str(), number.number));
     }
 
@@ -313,7 +314,7 @@ impl ASTExpression {
     }
 
     pub fn identifier(identifier: Token) -> Self {
-        ASTExpression::new(ASTExpressionKind::Variable(ASTVariableExpression { identifier }));
+        ASTExpression::new(ASTExpressionKind::Variable(ASTVariableExpression { identifier }))
     }
 
     pub fn error(span: TextSpan) -> Self {
