@@ -101,8 +101,9 @@ pub struct ASTPrinter {
 
 impl ASTPrinter {
     const NUMBER_COLOR: color::Cyan = color::Cyan;
-    const TEXT_COLOR: color::White = color::White;
+    const TEXT_COLOR: color::LightWhite = color::LightWhite;
     const KEYWORD_COLOR: color::Magenta = color::Magenta;
+    const VARIABLE_COLOR: color::Green = color::Green;
 
     pub fn new() -> Self {
         Self { indent: 0, result: String::new() }
