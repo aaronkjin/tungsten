@@ -140,6 +140,16 @@ impl ASTVisitor for ASTPrinter {
         self.visit_expression(&let_statement.initializer);
     }
 
+    fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
+        self.result.push_str(
+            &format!(
+                "{{}{}",
+                Self::VARIABLE_COLOR.fg_str(),
+                variable_expression.identifier.span.literal
+            )
+        )
+    }
+
     fn visit_number(&mut self, number: &ASTNumberExpression) {
         self.result.push_str(&format!("{}{}", Self::NUMBER_COLOR.fg_str(), number.number));
     }
