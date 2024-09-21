@@ -9,6 +9,8 @@ use crate::ast::{
     ASTVariableExpression,
 };
 
+use std::collections::HashMap;
+
 pub struct ASTEvaluator {
     pub last_value: Option<i64>,
     pub variables: HashMap<String, i64>,
@@ -26,7 +28,7 @@ impl ASTVisitor for ASTEvaluator {
         self.variables.insert(
             let_statement.identifier.span.literal.clone(),
             self.last_value.unwrap()
-        )
+        );
     }
 
     fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
@@ -57,8 +59,9 @@ impl ASTVisitor for ASTEvaluator {
         self.visit_expression(&expr.expression);
     }
 
-    fn visit_variable_expression(&mut self, _expr: &ASTVariableExpression) {
-        // TODO: Implement variable lookup logic
-        self.last_value = None;
+    fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
+        self.last_value = Some(
+            self.variables.get(&variable_expression.identifier.span.literal).unwrap()
+        );
     }
 }
