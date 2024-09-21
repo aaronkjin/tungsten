@@ -55,8 +55,11 @@ impl ASTVisitor for ASTEvaluator {
         });
     }
 
-    fn visit_parenthesized_expression(&mut self, expr: &ASTParenthesizedExpression) {
-        self.visit_expression(&expr.expression);
+    fn visit_parenthesized_expression(
+        &mut self,
+        parenthesized_expression: &ASTParenthesizedExpression
+    ) {
+        self.visit_expression(&parenthesized_expression.expression);
     }
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
