@@ -11,11 +11,12 @@ use crate::ast::{
 
 pub struct ASTEvaluator {
     pub last_value: Option<i64>,
+    pub variables: HashMap<String, i64>,
 }
 
 impl ASTEvaluator {
     pub fn new() -> Self {
-        Self { last_value: None }
+        Self { last_value: None, variables: HashMap::new() }
     }
 }
 
