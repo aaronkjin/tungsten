@@ -21,8 +21,12 @@ impl ASTEvaluator {
 }
 
 impl ASTVisitor for ASTEvaluator {
-    fn visit_let_statement(&mut self, _let_statement: &ASTLetStatement) {
-        todo!()
+    fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
+        self.visit_expression(&let_statement.initializer);
+        self.variables.insert(
+            let_statement.identifier.span.literal.clone(),
+            self.last_value.unwrap()
+        )
     }
 
     fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
