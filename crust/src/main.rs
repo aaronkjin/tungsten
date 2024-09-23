@@ -13,7 +13,7 @@ mod text;
 
 fn main() {
     let input = "
-        let a = 10
+        let a = 10 + 30
         let b = 20
         let c = a + b
     ";
