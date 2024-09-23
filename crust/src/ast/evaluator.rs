@@ -53,7 +53,6 @@ impl ASTVisitor for ASTEvaluator {
             ASTBinaryOperatorKind::Multiply => left * right,
             ASTBinaryOperatorKind::Divide => left / right,
         });
-        // todo!()
     }
 
     fn visit_parenthesized_expression(
@@ -65,7 +64,7 @@ impl ASTVisitor for ASTEvaluator {
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
         self.last_value = Some(
-            self.variables.get(&variable_expression.identifier.span.literal).unwrap()
+            *self.variables.get(&variable_expression.identifier.span.literal).unwrap()
         );
     }
 }
