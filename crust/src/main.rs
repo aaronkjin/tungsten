@@ -12,10 +12,12 @@ mod diagnostics;
 mod text;
 
 fn main() {
-    let input = "
+    let input =
+        "
         let a = 10 + 30
         let b = 20
-        let c = a + b
+        let c = 10
+        let d = (a + b) * c 
     ";
     let text = text::SourceText::new(input.to_string());
 
