@@ -222,7 +222,7 @@ impl ASTStatement {
 
 // AST let statements
 pub struct ASTLetStatement {
-    identifier: Token,
+    pub identifier: Token,
     initializer: ASTExpression,
 }
 
