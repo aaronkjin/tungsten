@@ -11,6 +11,10 @@ mod ast;
 mod diagnostics;
 mod text;
 
+struct SymbolChecker {
+    symbols: Vec<String>,
+}
+
 fn main() {
     let input =
         "
