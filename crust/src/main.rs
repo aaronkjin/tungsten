@@ -16,7 +16,7 @@ fn main() {
         "
         let a = 10 + 30
         let b = 20
-        let c = 10
+        let c = 10 + e
         let d = (a + b) * c 
     ";
     let text = text::SourceText::new(input.to_string());
