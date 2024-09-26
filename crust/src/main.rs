@@ -15,6 +15,12 @@ struct SymbolChecker {
     symbols: Vec<String>,
 }
 
+impl ASTVisitor for SymbolChecker {
+    fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
+        self.symbols.push(let_statement.identifier.span.literal.clone());
+    }
+}
+
 fn main() {
     let input =
         "
