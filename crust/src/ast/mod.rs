@@ -322,7 +322,7 @@ impl ASTExpression {
     }
 }
 pub struct ASTVariableExpression {
-    identifier: Token,
+    pub identifier: Token,
 }
 
 impl ASTVariableExpression {
