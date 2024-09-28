@@ -15,11 +15,19 @@ mod text;
 
 struct SymbolChecker {
     symbols: Vec<String>,
+    diagnostics_bag: DiagnosticsBagCell,
 }
 
 impl ASTVisitor for SymbolChecker {
     fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
         self.symbols.push(let_statement.identifier.span.literal.clone());
+    }
+
+    fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
+        if !self.symbols.contains(&variable_expression.identifier.to_string()) {
+            let mut diagnostics_binding = self.diagnostics_bag.borrow_mut();
+            diagnostics_binding.report_undeclared_variable(variable_expression.identifier());
+        }
     }
 }
 
