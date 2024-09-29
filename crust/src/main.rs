@@ -67,15 +67,20 @@ fn main() {
     ast.visualize();
 
     // Diagnostics printer
-    let diagnostics_binding = diagnostics_bag.borrow();
-    if diagnostics_binding.diagnostics.len() > 0 {
-        let diagnostics_printer = DiagnosticsPrinter::new(&text, &diagnostics_binding.diagnostics);
-        diagnostics_printer.print();
-        return;
-    }
+    check_diagnostics(&text, diagnostics_bag);
 
     // Evaluator
     let mut eval = ASTEvaluator::new();
     ast.visit(&mut eval);
     println!("Result: {:?}", eval.last_value);
+}
+
+fn check_diagnostics(text: &SourceText, diagnostics_bag: DiagnosticsBagCell) {
+    let diagnostics_binding = diagnostics_bag.borrow();
+
+    if diagnostics_binding.diagnostics.len() > 0 {
+        let diagnostics_printer = DiagnosticsPrinter::new(&text, &diagnostics_binding.diagnostics);
+        diagnostics_printer.print();
+        return;
+    }
 }
