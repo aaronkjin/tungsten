@@ -33,13 +33,13 @@ impl ASTVisitor for SymbolChecker {
         }
     }
 
-    fn visit_error(&mut self, span: &TextSpan) {}
+    fn visit_error(&mut self, _span: &TextSpan) {}
 
     fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {}
 
     fn visit_parenthesized_expression(
         &mut self,
-        parenthesized_expression: &ASTParenthesizedExpression
+        _parenthesized_expression: &ASTParenthesizedExpression
     ) {}
 }
 
@@ -82,7 +82,7 @@ fn main() -> Result<(), ()> {
     check_diagnostics(&text, &diagnostics_bag)?;
     let mut symbol_checker = SymbolChecker {
         symbols: Vec::new(),
-        diagnostics: Rc::clone(&diagnostics_bag),
+        diagnostics_bag: Rc::clone(&diagnostics_bag),
     };
     ast.visit(&mut symbol_checker);
     check_diagnostics(&text, &diagnostics_bag)?;
