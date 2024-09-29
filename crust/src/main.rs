@@ -31,7 +31,7 @@ impl ASTVisitor for SymbolChecker {
     }
 }
 
-fn main() {
+fn main() -> Result<(), ()> {
     let input =
         "
         let a = 10 + 30
@@ -67,20 +67,24 @@ fn main() {
     ast.visualize();
 
     // Diagnostics printer
-    check_diagnostics(&text, diagnostics_bag);
+    check_diagnostics(&text, diagnostics_bag)?;
 
     // Evaluator
     let mut eval = ASTEvaluator::new();
     ast.visit(&mut eval);
     println!("Result: {:?}", eval.last_value);
+
+    Ok(())
 }
 
-fn check_diagnostics(text: &SourceText, diagnostics_bag: DiagnosticsBagCell) {
+fn check_diagnostics(text: &SourceText, diagnostics_bag: DiagnosticsBagCell) -> Result<(), ()> {
     let diagnostics_binding = diagnostics_bag.borrow();
 
     if diagnostics_binding.diagnostics.len() > 0 {
         let diagnostics_printer = DiagnosticsPrinter::new(&text, &diagnostics_binding.diagnostics);
         diagnostics_printer.print();
-        return;
+        return Err(());
     }
+
+    Ok(())
 }
