@@ -73,6 +73,7 @@ fn main() -> Result<(), ()> {
         diagnostics: Rc::clone(&diagnostics_bag),
     };
     ast.visit(&mut symbol_checker);
+    check_diagnostics(&text, &diagnostics_bag)?;
 
     // Evaluator
     let mut eval = ASTEvaluator::new();
