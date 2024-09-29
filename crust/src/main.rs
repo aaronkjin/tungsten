@@ -2,6 +2,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 use crate::ast::Ast;
 use crate::ast::ASTLetStatement;
+use crate::ast::ASTParenthesizedExpression;
 use crate::ast::ASTVariableExpression;
 use crate::ast::ASTVisitor;
 use crate::ast::evaluator::ASTEvaluator;
@@ -27,7 +28,7 @@ impl ASTVisitor for SymbolChecker {
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
         if !self.symbols.contains(&variable_expression.identifier.to_string()) {
-            let mut diagnostics_binding = self.diagnostics.borrow_mut();
+            let mut diagnostics_binding = self.diagnostics_bag.borrow_mut();
             diagnostics_binding.report_undeclared_variable(variable_expression.identifier());
         }
     }
