@@ -67,7 +67,11 @@ fn main() -> Result<(), ()> {
     ast.visualize();
 
     // Diagnostics printer
-    check_diagnostics(&text, diagnostics_bag)?;
+    check_diagnostics(&text, &diagnostics_bag)?;
+    let symbol_checker = SymbolChecker {
+        symbols: Vec::new(),
+        diagnostics: Rc::clone(&diagnostics_bag),
+    };
 
     // Evaluator
     let mut eval = ASTEvaluator::new();
@@ -77,7 +81,7 @@ fn main() -> Result<(), ()> {
     Ok(())
 }
 
-fn check_diagnostics(text: &SourceText, diagnostics_bag: DiagnosticsBagCell) -> Result<(), ()> {
+fn check_diagnostics(text: &SourceText, diagnostics_bag: &DiagnosticsBagCell) -> Result<(), ()> {
     let diagnostics_binding = diagnostics_bag.borrow();
 
     if diagnostics_binding.diagnostics.len() > 0 {
