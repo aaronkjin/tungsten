@@ -31,6 +31,15 @@ impl ASTVisitor for SymbolChecker {
             diagnostics_binding.report_undeclared_variable(variable_expression.identifier());
         }
     }
+
+    fn visit_error(&mut self, span: &TextSpan) {}
+
+    fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {}
+
+    fn visit_parenthesized_expression(
+        &mut self,
+        parenthesized_expression: &ASTParenthesizedExpression
+    ) {}
 }
 
 fn main() -> Result<(), ()> {
