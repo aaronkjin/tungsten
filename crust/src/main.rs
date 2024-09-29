@@ -68,10 +68,11 @@ fn main() -> Result<(), ()> {
 
     // Diagnostics printer
     check_diagnostics(&text, &diagnostics_bag)?;
-    let symbol_checker = SymbolChecker {
+    let mut symbol_checker = SymbolChecker {
         symbols: Vec::new(),
         diagnostics: Rc::clone(&diagnostics_bag),
     };
+    ast.visit(&mut symbol_checker);
 
     // Evaluator
     let mut eval = ASTEvaluator::new();
