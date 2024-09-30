@@ -3,6 +3,7 @@ use std::rc::Rc;
 use crate::ast::Ast;
 use crate::ast::ASTBinaryExpression;
 use crate::ast::ASTLetStatement;
+use crate::ast::ASTNumberExpression;
 use crate::ast::ASTParenthesizedExpression;
 use crate::ast::ASTVariableExpression;
 use crate::ast::ASTVisitor;
