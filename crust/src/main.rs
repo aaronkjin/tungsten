@@ -37,7 +37,9 @@ impl ASTVisitor for SymbolChecker {
 
     fn visit_error(&mut self, _span: &TextSpan) {}
 
-    fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {}
+    fn visit_number_expression(&mut self, _number: &ASTNumberExpression) {}
+
+    fn visit_binary_expression(&mut self, _binary_expression: &ASTBinaryExpression) {}
 
     fn visit_parenthesized_expression(
         &mut self,
