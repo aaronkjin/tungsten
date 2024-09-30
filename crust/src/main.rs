@@ -1,12 +1,14 @@
 use std::cell::RefCell;
 use std::rc::Rc;
 use crate::ast::Ast;
+use crate::ast::ASTBinaryExpression;
 use crate::ast::ASTLetStatement;
 use crate::ast::ASTParenthesizedExpression;
 use crate::ast::ASTVariableExpression;
 use crate::ast::ASTVisitor;
 use crate::ast::evaluator::ASTEvaluator;
 use crate::ast::lexer::Lexer;
+use crate::ast::lexer::TextSpan;
 use crate::ast::parser::Parser;
 use crate::diagnostics::DiagnosticsBagCell;
 use crate::diagnostics::printer::DiagnosticsPrinter;
