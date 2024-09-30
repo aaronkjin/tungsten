@@ -71,6 +71,12 @@ impl Token {
     }
 }
 
+impl Display for Token {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.kind)
+    }
+}
+
 // Take expression in as input, transform into tokens as output
 pub struct Lexer<'a> {
     input: &'a str,
