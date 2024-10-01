@@ -1,5 +1,3 @@
-use std::cell::RefCell;
-use std::rc::Rc;
 use crate::ast::Ast;
 use crate::ast::ASTBinaryExpression;
 use crate::ast::ASTLetStatement;
@@ -15,13 +13,26 @@ use crate::diagnostics::DiagnosticsBagCell;
 use crate::diagnostics::printer::DiagnosticsPrinter;
 use crate::text::SourceText;
 
+use std::cell::RefCell;
+use std::collections::HashMap;
+use std::rc::Rc;
+
 mod ast;
 mod diagnostics;
 mod text;
 
 struct SymbolChecker {
     symbols: HashMap<String, ()>,
-    diagnostics_bag: DiagnosticsBagCell,
+    diagnostics: DiagnosticsBagCell,
+}
+
+impl SymbolChecker {
+    fn new(diagnostics: DiagnosticsBagCell) -> Self {
+        SymbolChecker {
+            symbols: HashMap::new(),
+            diagnostics,
+        }
+    }
 }
 
 impl ASTVisitor for SymbolChecker {
@@ -32,7 +43,7 @@ impl ASTVisitor for SymbolChecker {
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
         if !self.symbols.get(&variable_expression.identifier.span.literal).is_none() {
-            let mut diagnostics_binding = self.diagnostics_bag.borrow_mut();
+            let mut diagnostics_binding = self.diagnostics.borrow_mut();
             diagnostics_binding.report_undeclared_variable(&variable_expression.identifier);
         }
     }
@@ -87,8 +98,8 @@ fn main() -> Result<(), ()> {
     // Diagnostics printer
     check_diagnostics(&text, &diagnostics_bag)?;
     let mut symbol_checker = SymbolChecker {
-        symbols: Vec::new(),
-        diagnostics_bag: Rc::clone(&diagnostics_bag),
+        symbols: HashMap::new(),
+        diagnostics: Rc::clone(&diagnostics_bag),
     };
     ast.visit(&mut symbol_checker);
     check_diagnostics(&text, &diagnostics_bag)?;
