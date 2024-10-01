@@ -97,10 +97,7 @@ fn main() -> Result<(), ()> {
 
     // Diagnostics printer
     check_diagnostics(&text, &diagnostics_bag)?;
-    let mut symbol_checker = SymbolChecker {
-        symbols: HashMap::new(),
-        diagnostics: Rc::clone(&diagnostics_bag),
-    };
+    let mut symbol_checker = SymbolChecker::new(Rc::clone(&diagnostics_bag));
     ast.visit(&mut symbol_checker);
     check_diagnostics(&text, &diagnostics_bag)?;
 
