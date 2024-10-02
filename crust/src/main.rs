@@ -38,6 +38,7 @@ impl SymbolChecker {
 impl ASTVisitor for SymbolChecker {
     fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
         let identifier = let_statement.identifier.span.literal.clone();
+        self.visit_expression(&let_statement.initializer);
         self.symbols.insert(identifier, ());
     }
 
