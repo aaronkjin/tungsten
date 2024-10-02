@@ -75,7 +75,7 @@ pub trait ASTVisitor {
     }
 
     // FIXME: Actually visit the error
-    fn visit_error(&mut self, span: &TextSpan) {}
+    fn visit_error(&mut self, _span: &TextSpan) {}
 
     fn visit_expression(&mut self, expression: &ASTExpression) {
         self.do_visit_expression(expression);
@@ -228,7 +228,7 @@ impl ASTStatement {
 // AST let statements
 pub struct ASTLetStatement {
     pub identifier: Token,
-    initializer: ASTExpression,
+    pub initializer: ASTExpression,
 }
 
 // AST number expressions
