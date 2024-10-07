@@ -184,7 +184,6 @@ impl ASTVisitor for ASTPrinter {
         self.visit_expression(&binary_expression.right);
     }
 
-    //
     fn visit_parenthesized_expression(
         &mut self,
         parenthesized_expression: &ASTParenthesizedExpression
