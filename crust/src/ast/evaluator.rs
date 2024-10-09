@@ -26,11 +26,9 @@ impl ASTVisitor for ASTEvaluator {
     fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
         self.visit_expression(&let_statement.initializer);
 
-        // Only insert if evaluation is successful
         if let Some(value) = self.last_value {
             self.variables.insert(let_statement.identifier.span.literal.clone(), value);
         } else {
-            // Handle case where the expression resulted in an error
             println!(
                 "Error: Could not evaluate let statement for variable {}",
                 let_statement.identifier.span.literal
@@ -87,7 +85,6 @@ impl ASTVisitor for ASTEvaluator {
         if let Some(value) = self.variables.get(var_name) {
             self.last_value = Some(*value);
         } else {
-            // Handle the case where the variable is undeclared
             println!("Error: Undeclared variable '{}'", var_name);
             self.last_value = None;
         }
