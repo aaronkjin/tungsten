@@ -41,14 +41,13 @@ impl<'a> DiagnosticsPrinter<'a> {
         let error_message = Self::format_error_message(diagnostic, indent);
 
         format!(
-            "{}{}{}{}{}\n{}{:indent$}^\n{}",
+            "{}{}{}{}{}\n{}\n{}\n{}",
             prefix,
             Fg(Red),
             span,
             Fg(Reset),
             suffix,
             arrow_pointers,
-            indent + 1,
             arrow_line,
             error_message
         )
