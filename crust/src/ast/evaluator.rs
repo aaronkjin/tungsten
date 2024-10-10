@@ -24,6 +24,7 @@ impl ASTEvaluator {
 
 impl ASTVisitor for ASTEvaluator {
     fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
+        /*
         self.visit_expression(&let_statement.initializer);
 
         if let Some(value) = self.last_value {
@@ -34,14 +35,13 @@ impl ASTVisitor for ASTEvaluator {
                 let_statement.identifier.span.literal
             );
         }
+        */
 
-        /*
         self.visit_expression(&let_statement.initializer);
         self.variables.insert(
             let_statement.identifier.span.literal.clone(),
             self.last_value.unwrap()
         );
-        */
     }
 
     fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
@@ -54,6 +54,7 @@ impl ASTVisitor for ASTEvaluator {
     }
 
     fn visit_binary_expression(&mut self, expr: &ASTBinaryExpression) {
+        /*
         self.visit_expression(&expr.left);
         let left = match self.last_value {
             Some(value) => value,
@@ -62,12 +63,12 @@ impl ASTVisitor for ASTEvaluator {
                 return;
             }
         };
-
-        /*
-        self.visit_expression(&expr.left);
-        let left = self.last_value.unwrap();
         */
 
+        self.visit_expression(&expr.left);
+        let left = self.last_value.unwrap();
+
+        /*
         self.visit_expression(&expr.right);
         let right = match self.last_value {
             Some(value) => value,
@@ -76,11 +77,10 @@ impl ASTVisitor for ASTEvaluator {
                 return;
             }
         };
+        */
 
-        /*
         self.visit_expression(&expr.right);
         let right = self.last_value.unwrap();
-        */
 
         self.last_value = Some(match expr.operator.kind {
             ASTBinaryOperatorKind::Plus => left + right,
@@ -98,6 +98,7 @@ impl ASTVisitor for ASTEvaluator {
     }
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
+        /*
         let var_name = &variable_expression.identifier.span.literal;
 
         if let Some(value) = self.variables.get(var_name) {
@@ -106,11 +107,10 @@ impl ASTVisitor for ASTEvaluator {
             println!("Error: Undeclared variable '{}'", var_name);
             self.last_value = None;
         }
+        */
 
-        /*
         self.last_value = Some(
             *self.variables.get(&variable_expression.identifier.span.literal).unwrap()
         );
-        */
     }
 }

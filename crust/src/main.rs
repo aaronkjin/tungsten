@@ -43,7 +43,7 @@ impl ASTVisitor for SymbolChecker {
     }
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
-        if !self.symbols.get(&variable_expression.identifier.span.literal).is_none() {
+        if !self.symbols.contains_key(&variable_expression.identifier.span.literal) {
             let mut diagnostics_binding = self.diagnostics.borrow_mut();
             diagnostics_binding.report_undeclared_variable(&variable_expression.identifier);
         }
