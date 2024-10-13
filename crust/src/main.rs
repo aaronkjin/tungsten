@@ -49,7 +49,6 @@ impl ASTVisitor for SymbolChecker {
         }
     }
 
-    // TODO: fix visit error
     fn visit_error(&mut self, _span: &TextSpan) {}
 
     fn visit_number_expression(&mut self, _number: &ASTNumberExpression) {}
