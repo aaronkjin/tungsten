@@ -9,16 +9,19 @@ use crate::ast::{
     ASTVariableExpression,
 };
 
+use crate::DiagnosticsBagCell;
+
 use std::collections::HashMap;
 
 pub struct ASTEvaluator {
     pub last_value: Option<i64>,
     pub variables: HashMap<String, i64>,
+    pub diagnostics: DiagnosticsBagCell,
 }
 
 impl ASTEvaluator {
     pub fn new() -> Self {
-        Self { last_value: None, variables: HashMap::new() }
+        Self { last_value: None, variables: HashMap::new(), diagnostics }
     }
 }
 
@@ -98,8 +101,14 @@ impl ASTVisitor for ASTEvaluator {
     }
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
-        self.last_value = Some(
-            *self.variables.get(&variable_expression.identifier.span.literal).unwrap()
-        );
+        let var_name = &variable_expression.identifier.span.literal;
+
+        if let Some(value) = self.variables.get(var_name) {
+            self.last_value = Some(*value);
+        } else {
+            let mut diagnostics = self.diagnostics.borrow_mut();
+            diagnostics.report_undeclared_variable(&variable_expression.identifier);
+            self.last_value = None;
+        }
     }
 }
