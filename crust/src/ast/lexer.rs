@@ -1,4 +1,4 @@
-use std::fmt::{ Display, Formatter };
+use std::fmt::{ Display, Formatter, write };
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum TokenKind {
@@ -30,10 +30,10 @@ impl Display for TokenKind {
             TokenKind::RightParen => write!(f, ")"),
             TokenKind::Bad => write!(f, "Bad"),
             TokenKind::Whitespace => write!(f, "Whitespace"),
+            TokenKind::Eof => write!(f, "Eof"),
             TokenKind::Let => write!(f, "Let"),
             TokenKind::Identifier => write!(f, "Identifier"),
             TokenKind::Equals => write!(f, "="),
-            TokenKind::Eof => write!(f, "Eof"),
         }
     }
 }
@@ -47,11 +47,7 @@ pub struct TextSpan {
 
 impl TextSpan {
     pub fn new(start: usize, end: usize, literal: String) -> Self {
-        Self {
-            start,
-            end,
-            literal,
-        }
+        Self { start, end, literal }
     }
 
     pub fn length(&self) -> usize {
@@ -71,12 +67,6 @@ impl Token {
     }
 }
 
-impl Display for Token {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.kind)
-    }
-}
-
 // Take expression in as input, transform into tokens as output
 pub struct Lexer<'a> {
     input: &'a str,
@@ -85,57 +75,54 @@ pub struct Lexer<'a> {
 
 impl<'a> Lexer<'a> {
     pub fn new(input: &'a str) -> Self {
-        Self {
-            input,
-            current_pos: 0,
-        }
+        Self { input, current_pos: 0 }
     }
 
     pub fn next_token(&mut self) -> Option<Token> {
         // Make sure we don't go over
-        if self.current_pos > self.input.len() {
-            return None;
-        }
-
-        // End of token stream
         if self.current_pos == self.input.len() {
             let eof_char: char = '\0';
             self.current_pos += 1;
 
+            // End of token stream
             return Some(Token::new(TokenKind::Eof, TextSpan::new(0, 0, eof_char.to_string())));
         }
 
-        let c: char = self.current_char()?;
+        let c = self.current_char();
 
-        // Check if char is number token
-        let start = self.current_pos;
-        let kind: TokenKind;
-        if Lexer::is_number_start(&c) {
-            let number: i64 = self.consume_number();
-            kind = TokenKind::Number(number);
-        } else if Self::is_whitespace(&c) {
-            // Edge case: Whitespace as token
-            self.consume();
-            kind = TokenKind::Whitespace;
-        } else if Self::is_identifier_start(&c) {
-            // Edge case: Variable identifier as token
-            let identifier = self.consume_identifier();
-            kind = match identifier.as_str() {
-                "let" => TokenKind::Let,
-                _ => TokenKind::Identifier,
-            };
-        } else {
-            // Edge case: Invalid token
-            kind = self.consume_symbol();
-        }
+        return c.map(|c| {
+            // Check if char is number token
+            let start = self.current_pos;
+            let mut kind = TokenKind::Bad;
 
-        let end = self.current_pos;
-        let literal = self.input[start..end].to_string();
-        let span = TextSpan::new(start, end, literal);
-        Some(Token::new(kind, span))
+            if Self::is_number_start(&c) {
+                let number: i64 = self.consume_number();
+                kind = TokenKind::Number(number);
+            } else if Self::is_whitespace(&c) {
+                // Edge case: Whitespace as token
+                self.consume();
+                kind = TokenKind::Whitespace;
+            } else if Self::is_identifier_start(&c) {
+                // Edge case: Variable identifier as token
+                let identifier = self.consume_identifier();
+                kind = match identifier.as_str() {
+                    "let" => TokenKind::Let,
+                    _ => TokenKind::Identifier,
+                };
+            } else {
+                // Edge case: Invalid token
+                kind = self.consume_punctuation();
+            }
+
+            let end = self.current_pos;
+            let literal = self.input[start..end].to_string();
+            let span = TextSpan::new(start, end, literal);
+
+            Token::new(kind, span)
+        });
     }
 
-    fn consume_symbol(&mut self) -> TokenKind {
+    fn consume_punctuation(&mut self) -> TokenKind {
         let c = self.consume().unwrap();
         match c {
             '+' => TokenKind::Plus,
@@ -168,34 +155,18 @@ impl<'a> Lexer<'a> {
 
     // Helper method to consume char for consume_number
     fn consume(&mut self) -> Option<char> {
-        let c = self.current_char()?;
-        self.current_pos += 1;
-
-        if self.current_pos > self.input.len() {
+        if self.current_pos >= self.input.len() {
             return None;
         }
+        let c = self.current_char();
+        self.current_pos += 1;
 
-        Some(c)
-    }
-
-    fn consume_number(&mut self) -> i64 {
-        let start = self.current_pos;
-
-        while let Some(c) = self.current_char() {
-            if c.is_digit(10) {
-                self.consume();
-            } else {
-                break;
-            }
-        }
-
-        self.input[start..self.current_pos].parse::<i64>().unwrap()
+        c
     }
 
     // To consume non-numeric, alphabetical identifiers
     fn consume_identifier(&mut self) -> String {
         let mut identifier = String::new();
-
         while let Some(c) = self.current_char() {
             if Self::is_identifier_start(&c) {
                 self.consume().unwrap();
@@ -205,5 +176,18 @@ impl<'a> Lexer<'a> {
             }
         }
         identifier
+    }
+
+    fn consume_number(&mut self) -> i64 {
+        let mut number: i64 = 0;
+        while let Some(c) = self.current_char() {
+            if c.is_digit(10) {
+                self.consume().unwrap();
+                number = number * 10 + (c.to_digit(10).unwrap() as i64);
+            } else {
+                break;
+            }
+        }
+        number
     }
 }
