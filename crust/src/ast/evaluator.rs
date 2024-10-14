@@ -98,17 +98,6 @@ impl ASTVisitor for ASTEvaluator {
     }
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
-        /*
-        let var_name = &variable_expression.identifier.span.literal;
-
-        if let Some(value) = self.variables.get(var_name) {
-            self.last_value = Some(*value);
-        } else {
-            println!("Error: Undeclared variable '{}'", var_name);
-            self.last_value = None;
-        }
-        */
-
         self.last_value = Some(
             *self.variables.get(&variable_expression.identifier.span.literal).unwrap()
         );
