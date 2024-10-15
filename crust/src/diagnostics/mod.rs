@@ -44,16 +44,15 @@ impl DiagnosticsBag {
 
     pub fn report_unexpected_token(&mut self, expected: &TokenKind, token: &Token) {
         self.report_error(
-            format!("Expected <{}>, Found <{}>", expected, token.kind),
+            format!("Expected <{}>, found <{}>", expected, token.kind),
             token.span.clone()
         );
     }
-
     pub fn report_expected_expression(&mut self, token: &Token) {
         self.report_error(
             format!("Expected expression, found <{}>", token.kind),
             token.span.clone()
-        )
+        );
     }
 
     pub fn report_undeclared_variable(&mut self, token: &Token) {
