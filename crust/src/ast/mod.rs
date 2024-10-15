@@ -1,17 +1,17 @@
+use termion::color;
+use termion::color::{ Fg, Reset };
+
+use crate::ast::lexer::{ TextSpan, Token };
+
 pub mod lexer;
 pub mod parser;
 pub mod evaluator;
 
-use crate::ast::lexer::{ TextSpan, Token };
-
-use termion::color;
-use termion::color::{ Fg, Reset };
-
+// Diagram AST out as a... tree (I know, shocking)
 pub struct Ast {
     pub statements: Vec<ASTStatement>,
 }
 
-// Diagram AST out as a... tree (I know, shocking)
 impl Ast {
     pub fn new() -> Self {
         Self { statements: Vec::new() }
@@ -45,15 +45,10 @@ pub trait ASTVisitor {
             }
         }
     }
-
+    fn visit_let_statement(&mut self, let_statement: &ASTLetStatement);
     fn visit_statement(&mut self, statement: &ASTStatement) {
         self.do_visit_statement(statement);
     }
-
-    fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
-        self.visit_expression(&let_statement.initializer);
-    }
-
     fn do_visit_expression(&mut self, expression: &ASTExpression) {
         match &expression.kind {
             ASTExpressionKind::Number(number) => {
@@ -73,30 +68,26 @@ pub trait ASTVisitor {
             }
         }
     }
-
-    // FIXME: Actually visit the error
-    fn visit_error(&mut self, _span: &TextSpan) {}
-
     fn visit_expression(&mut self, expression: &ASTExpression) {
         self.do_visit_expression(expression);
     }
 
-    // FIXME: Actually visit the number
+    fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression);
+
     fn visit_number_expression(&mut self, number: &ASTNumberExpression);
+
+    fn visit_error(&mut self, span: &TextSpan);
 
     fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
         self.visit_expression(&binary_expression.left);
         self.visit_expression(&binary_expression.right);
     }
-
     fn visit_parenthesized_expression(
         &mut self,
         parenthesized_expression: &ASTParenthesizedExpression
     ) {
         self.visit_expression(&parenthesized_expression.expression);
     }
-
-    fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression);
 }
 
 pub struct ASTPrinter {
@@ -110,10 +101,6 @@ impl ASTPrinter {
     const KEYWORD_COLOR: color::Magenta = color::Magenta;
     const VARIABLE_COLOR: color::Green = color::Green;
 
-    pub fn new() -> Self {
-        Self { indent: 0, result: String::new() }
-    }
-
     fn add_whitespace(&mut self) {
         self.result.push_str(" ");
     }
@@ -122,28 +109,28 @@ impl ASTPrinter {
         self.result.push_str("
 ");
     }
+
+    pub fn new() -> Self {
+        Self { indent: 0, result: String::new() }
+    }
 }
 
 impl ASTVisitor for ASTPrinter {
-    fn visit_statement(&mut self, statement: &ASTStatement) {
-        Self::do_visit_statement(self, statement);
-        self.result.push_str(&format!("{}", Fg(Reset)));
-        self.add_newline();
-    }
-
     fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
         self.result.push_str(&format!("{}let", Self::KEYWORD_COLOR.fg_str()));
-
         self.add_whitespace();
         self.result.push_str(
             &format!("{}{}", Self::TEXT_COLOR.fg_str(), let_statement.identifier.span.literal)
         );
-
         self.add_whitespace();
         self.result.push_str(&format!("{}=", Self::TEXT_COLOR.fg_str()));
-
         self.add_whitespace();
         self.visit_expression(&let_statement.initializer);
+    }
+
+    fn visit_statement(&mut self, statement: &ASTStatement) {
+        Self::do_visit_statement(self, statement);
+        self.result.push_str(&format!("{}\n", Fg(Reset)));
     }
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
@@ -153,10 +140,9 @@ impl ASTVisitor for ASTPrinter {
                 Self::VARIABLE_COLOR.fg_str(),
                 variable_expression.identifier.span.literal
             )
-        )
+        );
     }
 
-    // Change this method to visit_number_expression
     fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
         self.result.push_str(&format!("{}{}", Self::NUMBER_COLOR.fg_str(), number.number));
     }
@@ -205,6 +191,12 @@ pub enum ASTStatementKind {
     LetStatement(ASTLetStatement),
 }
 
+// AST let statements
+pub struct ASTLetStatement {
+    pub identifier: Token,
+    pub initializer: ASTExpression,
+}
+
 pub struct ASTStatement {
     kind: ASTStatementKind,
 }
@@ -225,30 +217,26 @@ impl ASTStatement {
     }
 }
 
-// AST let statements
-pub struct ASTLetStatement {
+pub enum ASTExpressionKind {
+    Number(ASTNumberExpression),
+    Binary(ASTBinaryExpression),
+    Parenthesized(ASTParenthesizedExpression),
+
+    Variable(ASTVariableExpression),
+    Error(TextSpan),
+}
+
+// AST variable expressions
+pub struct ASTVariableExpression {
     pub identifier: Token,
-    pub initializer: ASTExpression,
 }
 
-// AST number expressions
-pub struct ASTNumberExpression {
-    number: i64,
+impl ASTVariableExpression {
+    pub fn identifier(&self) -> &str {
+        &self.identifier.span.literal
+    }
 }
 
-// AST parenthesized expressions
-pub struct ASTParenthesizedExpression {
-    expression: Box<ASTExpression>,
-}
-
-// AST binary expressions
-pub struct ASTBinaryExpression {
-    left: Box<ASTExpression>,
-    operator: ASTBinaryOperator,
-    right: Box<ASTExpression>,
-}
-
-// AST binary operators
 #[derive(Debug)]
 pub enum ASTBinaryOperatorKind {
     Plus,
@@ -257,6 +245,7 @@ pub enum ASTBinaryOperatorKind {
     Divide,
 }
 
+// AST binary operators
 pub struct ASTBinaryOperator {
     kind: ASTBinaryOperatorKind,
     token: Token,
@@ -267,7 +256,6 @@ impl ASTBinaryOperator {
         ASTBinaryOperator { kind, token }
     }
 
-    // Precedence of +/- 0, 1, 2...
     pub fn precedence(&self) -> u8 {
         match self.kind {
             ASTBinaryOperatorKind::Plus => 1,
@@ -278,13 +266,21 @@ impl ASTBinaryOperator {
     }
 }
 
-// AST expressions
-pub enum ASTExpressionKind {
-    Number(ASTNumberExpression),
-    Binary(ASTBinaryExpression),
-    Parenthesized(ASTParenthesizedExpression),
-    Variable(ASTVariableExpression),
-    Error(TextSpan),
+// AST binary expressions
+pub struct ASTBinaryExpression {
+    left: Box<ASTExpression>,
+    operator: ASTBinaryOperator,
+    right: Box<ASTExpression>,
+}
+
+// AST number expressions
+pub struct ASTNumberExpression {
+    number: i64,
+}
+
+// AST parenthesized expressions
+pub struct ASTParenthesizedExpression {
+    expression: Box<ASTExpression>,
 }
 
 pub struct ASTExpression {
@@ -324,14 +320,5 @@ impl ASTExpression {
 
     pub fn error(span: TextSpan) -> Self {
         ASTExpression::new(ASTExpressionKind::Error(span))
-    }
-}
-pub struct ASTVariableExpression {
-    pub identifier: Token,
-}
-
-impl ASTVariableExpression {
-    pub fn identifier(&self) -> &str {
-        &self.identifier.span.literal
     }
 }
