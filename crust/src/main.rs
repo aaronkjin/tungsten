@@ -60,6 +60,8 @@ impl ASTVisitor for SymbolChecker {
 fn main() -> Result<(), ()> {
     let input =
         "
+        10 + a
+        1 & z
         let a = 10 + 30
         let b = 20
         let d = 10 + e
