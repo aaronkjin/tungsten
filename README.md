@@ -42,10 +42,11 @@ Previously:
 - Parser
 - Evaluator
 - Error-reporter
+- Support for `let` statements
 
-Currently: Add suport for variables.
+Currently: Add support for if statements.
 
-Next: Add support let + if statements.
+Next: Unary expressions.
 
 ## Developer
 
