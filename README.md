@@ -44,9 +44,9 @@ Previously:
 - Error-reporter
 - Support for `let` statements
 
-Currently: Add support for if statements.
+Currently: If statements.
 
-Next: Unary expressions.
+Next: While loops, scoping.
 
 ## Developer
 
