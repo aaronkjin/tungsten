@@ -58,6 +58,16 @@ impl ASTVisitor for SymbolChecker {
 }
 
 fn main() -> Result<(), ()> {
+    // AST
+    // Variable decl
+    //  Identifier: a
+    //  Initializer: BinaryExpression
+    //      Left: NumberExpression
+    //          Number: 10
+    //      Operator: Plus
+    //      Right: NumberExpression
+    //          Number: 30
+
     let input =
         "\
         let a = 10 + 30
