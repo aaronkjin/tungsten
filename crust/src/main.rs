@@ -59,7 +59,7 @@ impl ASTVisitor for SymbolChecker {
 
 fn main() -> Result<(), ()> {
     let input =
-        "
+        "\
         let a = 10 + 30
         let b = 20
         let d = 10 + e
