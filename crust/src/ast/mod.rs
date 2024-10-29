@@ -325,5 +325,10 @@ impl ASTExpression {
 
 #[cfg(test)]
 mod test {
-    struct AST {}
+    enum TestASTNode {
+        Number(i64),
+        Binary,
+    }
+
+    struct ASTVerifier {}
 }
