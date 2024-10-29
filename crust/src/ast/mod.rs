@@ -322,3 +322,8 @@ impl ASTExpression {
         ASTExpression::new(ASTExpressionKind::Error(span))
     }
 }
+
+#[cfg(test)]
+mod test {
+    struct AST {}
+}
