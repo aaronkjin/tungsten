@@ -57,7 +57,7 @@ pub struct CompilationUnit {
 }
 
 impl CompilationUnit {
-    pub fn compile(input: &str) -> CompilationUnit {
+    pub fn compile(input: &str) -> Result<CompilationUnit, CompilationUnit> {
         let text = text::SourceText::new(input.to_string());
 
         // Part I: Lexer
@@ -84,7 +84,9 @@ impl CompilationUnit {
         ast.visualize();
 
         // Diagnostics printer
-        Self::check_diagnostics(&text, &diagnostics_bag)?;
+        Self::check_diagnostics(&text, &diagnostics_bag).map_err(|_|
+            Self::create_compilation_unit(ast, diagnostics_bag)
+        )?;
         let mut symbol_checker = SymbolChecker::new(Rc::clone(&diagnostics_bag));
         ast.visit(&mut symbol_checker);
         Self::check_diagnostics(&text, &diagnostics_bag)?;
