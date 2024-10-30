@@ -21,6 +21,7 @@ use crate::text::SourceText;
 mod ast;
 mod diagnostics;
 mod text;
+mod compilation_unit;
 
 struct SymbolChecker {
     symbols: HashMap<String, ()>,
