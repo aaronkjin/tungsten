@@ -89,7 +89,9 @@ impl CompilationUnit {
         )?;
         let mut symbol_checker = SymbolChecker::new(Rc::clone(&diagnostics_bag));
         ast.visit(&mut symbol_checker);
-        Self::check_diagnostics(&text, &diagnostics_bag)?;
+        Self::check_diagnostics(&text, &diagnostics_bag).map_err(|_|
+            Self::create_compilation_unit(ast, diagnostics_bag)
+        )?;
     }
 
     fn create_compilation_unit(ast: Ast, diagnostics_bag: DiagnosticsBagCell) -> CompilationUnit {
