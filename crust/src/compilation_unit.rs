@@ -90,6 +90,13 @@ impl CompilationUnit {
         Self::check_diagnostics(&text, &diagnostics_bag)?;
     }
 
+    fn create_compilation_unit(ast: Ast, diagnostics_bag: DiagnosticsBagCell) -> CompilationUnit {
+        CompilationUnit {
+            ast,
+            diagnostics_bag,
+        }
+    }
+
     fn check_diagnostics(
         text: &text::SourceText,
         diagnostics_bag: &DiagnosticsBagCell
