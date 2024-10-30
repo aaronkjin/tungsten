@@ -328,7 +328,17 @@ mod test {
     enum TestASTNode {
         Number(i64),
         Binary,
+        Parenthesized,
+        LetStmt,
+        Variable,
     }
 
-    struct ASTVerifier {}
+    struct ASTVerifier {
+        expected: Vec<TestASTNode>,
+        actual: Vec<TestASTNode>,
+    }
+
+    impl ASTVerifier {
+        pub fn new(input: &str, expected: Vec<TestASTNode>) -> Self {}
+    }
 }
