@@ -14,6 +14,7 @@ use crate::ast::{
 use crate::ast::evaluator::ASTEvaluator;
 use crate::ast::lexer::{ Lexer, TextSpan };
 use crate::ast::parser::Parser;
+use crate::compilation_unit::CompilationUnit;
 use crate::diagnostics::DiagnosticsBagCell;
 use crate::diagnostics::printer::DiagnosticsPrinter;
 use crate::text::SourceText;
@@ -49,10 +50,8 @@ fn main() -> Result<(), ()> {
         let c = (a + b) * d
     ";
 
-    // Evaluator
-    let mut eval = ASTEvaluator::new();
-    ast.visit(&mut eval);
-    println!("Result: {:?}", eval.last_value);
+    let compilation_unit = CompilationUnit::compile(input);
+    compilation_unit.run();
 
-    Ok(())
+    let Ok(());
 }
