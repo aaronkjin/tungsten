@@ -94,7 +94,13 @@ impl CompilationUnit {
         if Self::check_diagnostics(&text, &diagnostics_bag).is_err() {
             return Self::create_compilation_unit(ast, diagnostics_bag);
         }
-        Self::create_compilation_unit(ast, diagnostics_bag);
+        Self::create_compilation_unit(ast, diagnostics_bag)
+    }
+
+    pub fn run(&self) {
+        let mut eval = ASTEvaluator::new();
+        self.ast.visit(&mut eval);
+        println!("Result: {:?}", eval.last_value);
     }
 
     fn create_compilation_unit(ast: Ast, diagnostics_bag: DiagnosticsBagCell) -> CompilationUnit {
