@@ -45,8 +45,8 @@ impl ASTVisitor for SymbolChecker {
 }
 
 pub struct CompilationUnit {
-    ast: Ast,
-    diagnostics_bag: DiagnosticsBagCell,
+    pub ast: Ast,
+    pub diagnostics_bag: DiagnosticsBagCell,
 }
 
 impl CompilationUnit {

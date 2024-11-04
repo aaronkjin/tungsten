@@ -325,6 +325,9 @@ impl ASTExpression {
 
 #[cfg(test)]
 mod test {
+    use crate::ast::Ast;
+    use crate::compilation_unit::CompilationUnit;
+
     enum TestASTNode {
         Number(i64),
         Binary,
@@ -339,6 +342,12 @@ mod test {
     }
 
     impl ASTVerifier {
-        pub fn new(input: &str, expected: Vec<TestASTNode>) -> Self {}
+        pub fn new(input: &str, expected: Vec<TestASTNode>) -> Self {
+            let compilation_unit = CompilationUnit::new(input);
+            let flattened = Self::flatten_ast(compilation_unit.ast);
+            ASTVerifier { expected, actual: flattened }
+        }
+
+        fn flatten_ast(ast: &Ast) -> Vec<TestASTNode> {}
     }
 }
