@@ -1,14 +1,7 @@
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
-use crate::ast::{
-    Ast,
-    ASTLetStatement,
-    ASTNumberExpression,
-    ASTUnaryExpression,
-    ASTVariableExpression,
-    ASTVisitor,
-};
+use crate::ast::{ Ast, ASTLetStatement, ASTNumberExpression, ASTVariableExpression, ASTVisitor };
 use crate::ast::lexer::{ Lexer, TextSpan };
 use crate::diagnostics::DiagnosticsBagCell;
 use crate::{ diagnostics, text };
