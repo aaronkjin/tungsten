@@ -356,4 +356,22 @@ mod test {
             ast.visit(&mut *self);
         }
     }
+
+    impl ASTVisitor for ASTVerifier {
+        fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
+            todo!()
+        }
+
+        fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
+            todo!()
+        }
+
+        fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
+            todo!()
+        }
+
+        fn visit_error(&mut self, span: &TextSpan) {
+            todo!()
+        }
+    }
 }
