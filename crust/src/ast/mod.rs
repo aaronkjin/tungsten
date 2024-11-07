@@ -344,12 +344,16 @@ mod test {
     impl ASTVerifier {
         pub fn new(input: &str, expected: Vec<TestASTNode>) -> Self {
             let compilation_unit = CompilationUnit::new(input);
-            let verifier = ASTVerifier { expected, actual: Vec::new() };
-            let flattened = verifier.flatten_ast(compilation_unit.ast);
+            let mut verifier = ASTVerifier { expected, actual: Vec::new() };
+            verifier.flatten_ast(compilation_unit.ast);
 
             verifier
         }
 
-        fn flatten_ast(&self, ast: &Ast) -> Vec<TestASTNode> {}
+        fn flatten_ast(&mut self, ast: &Ast) {
+            self.actual.clear();
+
+            ast.visit(&mut *self);
+        }
     }
 }
