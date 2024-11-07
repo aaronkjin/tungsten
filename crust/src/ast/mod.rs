@@ -348,8 +348,6 @@ mod test {
             ASTVerifier { expected, actual: flattened }
         }
 
-        fn flatten_ast(ast: &Ast) -> Vec<TestASTNode> {
-            let flattened = Vec::new();
-        }
+        fn flatten_ast(&self, ast: &Ast) -> Vec<TestASTNode> {}
     }
 }
