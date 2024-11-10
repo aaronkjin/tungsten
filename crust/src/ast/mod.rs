@@ -325,7 +325,16 @@ impl ASTExpression {
 
 #[cfg(test)]
 mod test {
-    use crate::ast::Ast;
+    use crate::ast::{
+        Ast,
+        ASTBinaryExpression,
+        ASTLetStatement,
+        ASTNumberExpression,
+        ASTParenthesizedExpression,
+        ASTVariableExpression,
+        ASTVisitor,
+    };
+    use crate::ast::lexer::TextSpan;
     use crate::compilation_unit::CompilationUnit;
 
     enum TestASTNode {
