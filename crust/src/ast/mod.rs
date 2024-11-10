@@ -359,15 +359,15 @@ mod test {
 
     impl ASTVisitor for ASTVerifier {
         fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
-            todo!()
+            self.actual.push(TestASTNode::LetStmt);
         }
 
         fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
-            todo!()
+            self.actual.push(TestASTNode::Variable);
         }
 
         fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
-            todo!()
+            self.actual.push(TestASTNode::Number(number.number));
         }
 
         fn visit_error(&mut self, span: &TextSpan) {
