@@ -373,5 +373,16 @@ mod test {
         fn visit_error(&mut self, span: &TextSpan) {
             todo!()
         }
+
+        fn visit_parenthesized_expression(
+            &mut self,
+            parenthesized_expression: &ASTParenthesizedExpression
+        ) {
+            self.actual.push(TestASTNode::Parenthesized);
+        }
+
+        fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
+            self.actual.push(TestASTNode::Binary);
+        }
     }
 }
