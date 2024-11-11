@@ -337,6 +337,7 @@ mod test {
     use crate::ast::lexer::TextSpan;
     use crate::compilation_unit::CompilationUnit;
 
+    #[derive(Debug, PartialEq, Eq)]
     enum TestASTNode {
         Number(i64),
         Binary,
@@ -417,5 +418,19 @@ mod test {
         fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
             self.actual.push(TestASTNode::Binary);
         }
+    }
+
+    #[test]
+    pub fn should_parse_binary_expression() {
+        let input = "let a = 1 + 2";
+        let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Binary,
+            TestASTNode::Number(1),
+            TestASTNode::Number(2)
+        ];
+
+        let verifier = ASTVerifier::new(input, expected);
+        verifier.verify();
     }
 }
