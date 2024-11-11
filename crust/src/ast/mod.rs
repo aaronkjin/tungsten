@@ -364,6 +364,12 @@ mod test {
 
             ast.visit(&mut *self);
         }
+
+        pub fn verify(&self) {
+            for (index, expected) in self.expected.iter().enumerate() {
+                let actual = self.actual.get(index);
+            }
+        }
     }
 
     impl ASTVisitor for ASTVerifier {
