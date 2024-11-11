@@ -366,8 +366,26 @@ mod test {
         }
 
         pub fn verify(&self) {
-            for (index, expected) in self.expected.iter().enumerate() {
-                let actual = self.actual.get(index);
+            assert_eq!(
+                self.expected.len(),
+                self.actual.len(),
+                "Expected {} nodes, but got {}",
+                self.expected.len(),
+                self.actual.len()
+            );
+
+            for (index, (expected, actual)) in self.expected
+                .iter()
+                .zip(self.actual.iter())
+                .enumerate() {
+                assert_eq!(
+                    expected,
+                    actual,
+                    "Expected {:?} at index {}, but got {:?}",
+                    expected,
+                    index,
+                    actual
+                );
             }
         }
     }
