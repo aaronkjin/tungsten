@@ -394,6 +394,7 @@ mod test {
     impl ASTVisitor for ASTVerifier {
         fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {
             self.actual.push(TestASTNode::LetStmt);
+            self.visit_expression(&let_statement.initializer);
         }
 
         fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
