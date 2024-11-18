@@ -353,9 +353,10 @@ mod test {
 
     impl ASTVerifier {
         pub fn new(input: &str, expected: Vec<TestASTNode>) -> Self {
-            let compilation_unit = CompilationUnit::new(input);
+            // let compilation_unit = CompilationUnit::new(input);
+            let compilation_unit = CompilationUnit::compile(input);
             let mut verifier = ASTVerifier { expected, actual: Vec::new() };
-            verifier.flatten_ast(compilation_unit.ast);
+            verifier.flatten_ast(&compilation_unit.ast);
 
             verifier
         }
