@@ -32,6 +32,9 @@ cd crust
 
 # run Cargo
 cargo run src/main.rs
+
+# for tests, run
+cargo test
 ```
 
 ## Progress
