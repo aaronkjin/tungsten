@@ -417,6 +417,8 @@ mod test {
 
         fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
             self.actual.push(TestASTNode::Binary);
+            self.visit_expression(&binary_expression.left);
+            self.visit_expression(&binary_expression.right);
         }
     }
 
