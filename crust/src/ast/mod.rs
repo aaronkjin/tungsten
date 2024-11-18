@@ -413,6 +413,7 @@ mod test {
             parenthesized_expression: &ASTParenthesizedExpression
         ) {
             self.actual.push(TestASTNode::Parenthesized);
+            self.visit_expression(&parenthesized_expression.expression);
         }
 
         fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
