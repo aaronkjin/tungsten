@@ -343,7 +343,7 @@ mod test {
         Binary,
         Parenthesized,
         LetStmt,
-        Variable,
+        Variable(String),
     }
 
     struct ASTVerifier {
@@ -399,7 +399,7 @@ mod test {
         }
 
         fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {
-            self.actual.push(TestASTNode::Variable);
+            self.actual.push(TestASTNode::Variable(variable_expression.identifier().to_string()));
         }
 
         fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
@@ -454,6 +454,22 @@ mod test {
             TestASTNode::Number(1),
             TestASTNode::Number(2),
             TestASTNode::Number(3)
+        ];
+
+        assert_tree(input, expected);
+    }
+
+    #[test]
+    pub fn should_parse_parenthesized_binary_expression_with_variable() {
+        let input = "let a = (1 + 2) * b";
+        let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Binary,
+            TestASTNode::Parenthesized,
+            TestASTNode::Binary,
+            TestASTNode::Number(1),
+            TestASTNode::Number(2),
+            TestASTNode::Variable("b".to_string())
         ];
 
         assert_tree(input, expected);
