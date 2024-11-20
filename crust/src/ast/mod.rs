@@ -425,6 +425,11 @@ mod test {
         }
     }
 
+    fn assert_tree(input: &str, expected: Vec<TestASTNode>) {
+        let verifier = ASTVerifier::new(input, expected);
+        verifier.verify();
+    }
+
     #[test]
     pub fn should_parse_basic_binary_expression() {
         let input = "let a = 1 + 2";
@@ -438,8 +443,19 @@ mod test {
         assert_tree(input, expected);
     }
 
-    fn assert_tree(input: &str, expected: Vec<TestASTNode>) {
-        let verifier = ASTVerifier::new(input, expected);
-        verifier.verify();
+    #[test]
+    pub fn should_parse_parenthesized_binary_expression() {
+        let input = "let a = (1 + 2) * 3";
+        let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Binary,
+            TestASTNode::Parenthesized,
+            TestASTNode::Binary,
+            TestASTNode::Number(1),
+            TestASTNode::Number(2),
+            TestASTNode::Number(3)
+        ];
+
+        assert_tree(input, expected);
     }
 }
