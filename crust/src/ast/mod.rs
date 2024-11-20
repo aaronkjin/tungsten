@@ -426,7 +426,7 @@ mod test {
     }
 
     #[test]
-    pub fn should_parse_binary_expression() {
+    pub fn should_parse_basic_binary_expression() {
         let input = "let a = 1 + 2";
         let expected = vec![
             TestASTNode::LetStmt,
@@ -435,6 +435,10 @@ mod test {
             TestASTNode::Number(2)
         ];
 
+        assert_tree(input, expected);
+    }
+
+    fn assert_tree(input: &str, expected: Vec<TestASTNode>) {
         let verifier = ASTVerifier::new(input, expected);
         verifier.verify();
     }
