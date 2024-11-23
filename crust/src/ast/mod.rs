@@ -474,4 +474,22 @@ mod test {
 
         assert_tree(input, expected);
     }
+
+    #[test]
+    pub fn should_parse_parenthesized_binary_expression_with_variable_and_number() {
+        let input = "let a = (1 + 2) * b + 3";
+        let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Binary,
+            TestASTNode::Binary,
+            TestASTNode::Parenthesized,
+            TestASTNode::Binary,
+            TestASTNode::Number(1),
+            TestASTNode::Number(2),
+            TestASTNode::Variable("b".to_string()),
+            TestASTNode::Number(3)
+        ];
+
+        assert_tree(input, expected);
+    }
 }
