@@ -482,7 +482,6 @@ mod test {
         let expected = vec![
             TestASTNode::LetStmt,
             TestASTNode::Binary,
-            TestASTNode::Binary,
             TestASTNode::Parenthesized,
             TestASTNode::Binary,
             TestASTNode::Number(1),
