@@ -371,9 +371,10 @@ mod test {
             assert_eq!(
                 self.expected.len(),
                 self.actual.len(),
-                "Expected {} nodes, but got {}",
+                "Expected {} nodes, but got {}, Actual nodes: {:?}",
                 self.expected.len(),
-                self.actual.len()
+                self.actual.len(),
+                self.actual
             );
 
             for (index, (expected, actual)) in self.expected
@@ -491,5 +492,7 @@ mod test {
         ];
 
         assert_tree(input, expected);
+
+        // 31:41
     }
 }
