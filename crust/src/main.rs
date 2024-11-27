@@ -6,14 +6,10 @@ mod text;
 mod compilation_unit;
 
 fn main() {
-    let input =
-        "\
-        let a = 10 + 30
-        let b = 20
-        let d = 10 + e
-        let c = (a + b) * d
+    let input = "\
+        let a = (1 + 2) * b + 3
     ";
 
     let compilation_unit = CompilationUnit::compile(input);
-    compilation_unit.run();
+    compilation_unit.maybe_run();
 }
