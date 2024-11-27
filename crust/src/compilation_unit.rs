@@ -90,7 +90,15 @@ impl CompilationUnit {
         Self::create_compilation_unit(ast, diagnostics_bag)
     }
 
-    pub fn run(&self) {
+    pub fn maybe_run(&self) {
+        // Edge case: Don't run when we have errors
+        if self.diagnostics_bag.borrow().diagnostics.len() > 0 {
+            return;
+        }
+        self.run();
+    }
+
+    fn run(&self) {
         let mut eval = ASTEvaluator::new();
         self.ast.visit(&mut eval);
         println!("Result: {:?}", eval.last_value);

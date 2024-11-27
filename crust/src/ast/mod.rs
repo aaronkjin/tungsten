@@ -491,7 +491,5 @@ mod test {
         ];
 
         assert_tree(input, expected);
-
-        // 31:41
     }
 }
