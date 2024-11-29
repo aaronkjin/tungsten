@@ -62,3 +62,11 @@ impl DiagnosticsBag {
         );
     }
 }
+
+#[cfg(test)]
+mod test {
+    struct DiagnosticsVerifier {
+        actual: Vec<Diagnostic>,
+        expected: Vec<Diagnostic>,
+    }
+}
