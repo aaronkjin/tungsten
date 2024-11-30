@@ -4,11 +4,13 @@ use std::cell::RefCell;
 use std::rc::Rc;
 use crate::ast::lexer::{ TextSpan, Token, TokenKind };
 
+#[derive(Clone, Copy)]
 pub enum DiagnosticKind {
     Error,
     Warning,
 }
 
+#[derive(Clone)]
 pub struct Diagnostic {
     pub message: String,
     pub span: TextSpan,
@@ -73,8 +75,28 @@ mod test {
     }
 
     impl DiagnosticsVerifier {
-        pub fn new(input: &str, expected: Vec<Diagnostic>) -> Self {
-            Self { expected, actual: Vec::new() }
+        pub fn new(input: &str, messages: Vec<&str>) -> Self {
+            let expected = Self::parse_input(input, messages);
+            let actual = Self::compile(input);
+            Self { expected, actual }
         }
+
+        fn compile(input: &str) -> Vec<Diagnostic> {
+            let compilation_unit = CompilationUnit::compile(input);
+            let diagnostics = compilation_unit.diagnostics_bag.borrow();
+            diagnostics.diagnostics.clone()
+        }
+
+        fn parse_input(input: &str, messages: Vec<&str>) -> Vec<Diagnostic> {}
+
+        fn verify(&self) {}
+    }
+
+    #[test]
+    fn should_report_undeclared_variable() {
+        let input = "let a = «b»";
+        let expected = vec!["Undeclared variable 'b'"];
+
+        let verifier = DiagnosticsVerifier::new(input, expected);
     }
 }
