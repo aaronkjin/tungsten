@@ -65,8 +65,16 @@ impl DiagnosticsBag {
 
 #[cfg(test)]
 mod test {
+    use crate::diagnostics::Diagnostic;
+
     struct DiagnosticsVerifier {
         actual: Vec<Diagnostic>,
         expected: Vec<Diagnostic>,
+    }
+
+    impl DiagnosticsVerifier {
+        pub fn new(input: &str, expected: Vec<Diagnostic>) -> Self {
+            Self { expected, actual: Vec::new() }
+        }
     }
 }
