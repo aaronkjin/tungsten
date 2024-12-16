@@ -93,8 +93,32 @@ mod test {
         }
 
         fn parse_input(input: &str, messages: Vec<&str>) -> Vec<Diagnostic> {
+            let raw_text = Self::get_raw_text(input);
             let mut start_index_stack = vec![];
+
             let mut current_position = 0;
+            let mut diagnostics = vec![];
+
+            for (index, c) in input.enumerate() {
+                match c {
+                    '«' => {
+                        start_index_stack.push(index);
+                    }
+                    '»' => {
+                        let start_index = start_index_stack.pop().unwrap();
+                        let end_index = index;
+                        let span = TextSpan::new(start_index, end_index);
+
+                        let message = messages[current_position].to_string();
+                        let diagnostic = Diagnostic::new(message, DiagnosticKind::Error);
+                        diagnostics.push(diagnostic);
+                    }
+                    _ => {
+                        current_position += 1;
+                    }
+                }
+            }
+            diagnostics
         }
 
         fn verify(&self) {}
