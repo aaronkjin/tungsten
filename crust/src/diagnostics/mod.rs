@@ -82,12 +82,20 @@ mod test {
         }
 
         fn compile(input: &str) -> Vec<Diagnostic> {
-            let compilation_unit = CompilationUnit::compile(input);
+            let raw = Self::get_raw_text(input);
+            let compilation_unit = CompilationUnit::compile(&raw);
             let diagnostics = compilation_unit.diagnostics_bag.borrow();
             diagnostics.diagnostics.clone()
         }
 
-        fn parse_input(input: &str, messages: Vec<&str>) -> Vec<Diagnostic> {}
+        fn get_raw_text(input: &str) -> String {
+            input.replace("«", "").replace("»", "")
+        }
+
+        fn parse_input(input: &str, messages: Vec<&str>) -> Vec<Diagnostic> {
+            let mut start_index_stack = vec![];
+            let mut current_position = 0;
+        }
 
         fn verify(&self) {}
     }
