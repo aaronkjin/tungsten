@@ -27,10 +27,7 @@ source ~/.bashrc  # For bash
 Quick setup to get the compiler running:
 
 ```bash
-# go into crust directory
-cd crust
-
-# run Cargo
+# run
 cargo run src/main.rs
 
 # for tests, run
