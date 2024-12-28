@@ -67,7 +67,8 @@ impl DiagnosticsBag {
 
 #[cfg(test)]
 mod test {
-    use crate::diagnostics::Diagnostic;
+    use crate::CompilationUnit;
+    use crate::diagnostics::{ Diagnostic, DiagnosticKind, TextSpan };
 
     struct DiagnosticsVerifier {
         actual: Vec<Diagnostic>,
@@ -99,7 +100,7 @@ mod test {
             let mut current_position = 0;
             let mut diagnostics = vec![];
 
-            for (index, c) in input.enumerate() {
+            for (index, c) in input.chars().enumerate() {
                 match c {
                     '«' => {
                         start_index_stack.push(index);
@@ -111,7 +112,7 @@ mod test {
                         let literal = &raw_text[current_position..end_index];
                         let span = TextSpan::new(start_index, end_index, literal.to_string());
                         let message = messages[diagnostics.len()].to_string();
-                        let diagnostic = Diagnostic::new(message, DiagnosticKind::Error);
+                        let diagnostic = Diagnostic::new(message, span, DiagnosticKind::Error);
                         diagnostics.push(diagnostic);
                     }
                     _ => {
