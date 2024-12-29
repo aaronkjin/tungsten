@@ -107,7 +107,7 @@ mod test {
                     }
                     '»' => {
                         let start_index = start_index_stack.pop().unwrap();
-                        let end_index = index;
+                        let end_index = current_position;
 
                         let literal = &raw_text[current_position..end_index];
                         let span = TextSpan::new(start_index, end_index, literal.to_string());
