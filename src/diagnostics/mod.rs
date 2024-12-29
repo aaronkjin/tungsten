@@ -123,7 +123,46 @@ mod test {
             diagnostics
         }
 
-        fn verify(&self) {}
+        fn verify(&self) {
+            assert_eq!(
+                self.actual.len(),
+                self.expected.len(),
+                "Expected {} diagnostics, found {}",
+                self.expected.len(),
+                self.actual.len()
+            );
+
+            for (actual, expected) in self.actual.iter().zip(self.expected.iter()) {
+                assert_eq!(
+                    actual.message,
+                    expected.message,
+                    "Expected message '{}', found '{}'",
+                    expected.message,
+                    actual.message
+                );
+                assert_eq!(
+                    actual.span.start,
+                    expected.span.start,
+                    "Expected start index {}, found {}",
+                    expected.span.start,
+                    actual.span.start
+                );
+                assert_eq!(
+                    actual.span.end,
+                    expected.span.end,
+                    "Expected end index {}, found {}",
+                    expected.span.end,
+                    actual.span.end
+                );
+                assert_eq!(
+                    actual.span.literal,
+                    expected.span.literal,
+                    "Expected literal {}, found {}",
+                    expected.span.literal,
+                    actual.span.literal
+                );
+            }
+        }
     }
 
     #[test]
@@ -132,5 +171,6 @@ mod test {
         let expected = vec!["Undeclared variable 'b'"];
 
         let verifier = DiagnosticsVerifier::new(input, expected);
+        verifier.verify();
     }
 }
