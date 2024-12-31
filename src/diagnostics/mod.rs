@@ -109,7 +109,7 @@ mod test {
                         let start_index = start_index_stack.pop().unwrap();
                         let end_index = current_position;
 
-                        let literal = &raw_text[current_position..end_index];
+                        let literal = &raw_text[start_index..end_index];
                         let span = TextSpan::new(start_index, end_index, literal.to_string());
                         let message = messages[diagnostics.len()].to_string();
                         let diagnostic = Diagnostic::new(message, span, DiagnosticKind::Error);
@@ -154,7 +154,6 @@ mod test {
                     expected.span.end,
                     actual.span.end
                 );
-                /*
                 assert_eq!(
                     actual.span.literal,
                     expected.span.literal,
@@ -162,7 +161,6 @@ mod test {
                     expected.span.literal,
                     actual.span.literal
                 );
-                */
             }
         }
     }
