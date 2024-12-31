@@ -173,4 +173,22 @@ mod test {
         let verifier = DiagnosticsVerifier::new(input, expected);
         verifier.verify();
     }
+
+    #[test]
+    fn should_report_unexpected_expression() {
+        let input = "let a = «+»";
+        let expected = vec!["Expected expression, found <+>"];
+
+        let verifier = DiagnosticsVerifier::new(input, expected);
+        verifier.verify();
+    }
+
+    #[test]
+    fn should_report_bad_token() {
+        let input = "let a = 7 + «@»";
+        let expected = vec!["Expected expression, found <Bad>"];
+
+        let verifier = DiagnosticsVerifier::new(input, expected);
+        verifier.verify();
+    }
 }
