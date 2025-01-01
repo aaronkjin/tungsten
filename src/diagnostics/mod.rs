@@ -4,13 +4,13 @@ use std::cell::RefCell;
 use std::rc::Rc;
 use crate::ast::lexer::{ TextSpan, Token, TokenKind };
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub enum DiagnosticKind {
     Error,
     Warning,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Diagnostic {
     pub message: String,
     pub span: TextSpan,
