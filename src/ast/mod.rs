@@ -492,4 +492,51 @@ mod test {
 
         assert_tree(input, expected);
     }
+
+    #[test]
+    pub fn should_parse_bitwise_and() {
+        let input = "let a = 1 & 2";
+        let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Binary,
+            TestASTNode::Number(1),
+            TestASTNode::Number(2)
+        ];
+
+        assert_tree(input, expected);
+    }
+
+    #[test]
+    pub fn should_parse_bitwise_or() {
+        let input = "let a = 1 | 2";
+        let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Binary,
+            TestASTNode::Number(1),
+            TestASTNode::Number(2)
+        ];
+
+        assert_tree(input, expected);
+    }
+
+    #[test]
+    pub fn should_parse_bitwise_xor() {
+        let input = "let a = 1 ^ 2";
+        let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Binary,
+            TestASTNode::Number(1),
+            TestASTNode::Number(2)
+        ];
+
+        assert_tree(input, expected);
+    }
+
+    #[test]
+    pub fn should_parse_bitwise_not() {
+        let input = "let a = ~1";
+        let expected = vec![TestASTNode::LetStmt, TestASTNode::Binary, TestASTNode::Number(1)];
+
+        assert_tree(input, expected);
+    }
 }
