@@ -535,7 +535,28 @@ mod test {
     #[test]
     pub fn should_parse_bitwise_not() {
         let input = "let a = ~1";
-        let expected = vec![TestASTNode::LetStmt, TestASTNode::Binary, TestASTNode::Number(1)];
+        let expected = vec![TestASTNode::LetStmt, TestASTNode::Unary, TestASTNode::Number(1)];
+
+        assert_tree(input, expected);
+    }
+
+    #[test]
+    pub fn should_parse_negation() {
+        let input = "let a = -1";
+        let expected = vec![TestASTNode::LetStmt, TestASTNode::Unary, TestASTNode::Number(1)];
+
+        assert_tree(input, expected);
+    }
+
+    #[test]
+    pub fn should_parse_power() {
+        let input = "let a = 1 ** 2";
+        let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Binary,
+            TestASTNode::Number(1),
+            TestASTNode::Number(2)
+        ];
 
         assert_tree(input, expected);
     }
