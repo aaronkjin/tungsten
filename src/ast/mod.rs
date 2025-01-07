@@ -220,8 +220,8 @@ impl ASTStatement {
 pub enum ASTExpressionKind {
     Number(ASTNumberExpression),
     Binary(ASTBinaryExpression),
+    Unary(ASTUnaryExpression),
     Parenthesized(ASTParenthesizedExpression),
-
     Variable(ASTVariableExpression),
     Error(TextSpan),
 }
