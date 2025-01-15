@@ -39,6 +39,10 @@ impl ASTVisitor for SymbolChecker {
         }
     }
 
+    fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {
+        self.visit_expression(&unary_expression.operand);
+    }
+
     fn visit_number_expression(&mut self, number: &ASTNumberExpression) {}
 
     fn visit_error(&mut self, span: &TextSpan) {}
