@@ -434,6 +434,12 @@ mod test {
             todo!()
         }
 
+        fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
+            self.actual.push(TestASTNode::Binary);
+            self.visit_expression(&binary_expression.left);
+            self.visit_expression(&binary_expression.right);
+        }
+
         fn visit_parenthesized_expression(
             &mut self,
             parenthesized_expression: &ASTParenthesizedExpression
@@ -442,10 +448,9 @@ mod test {
             self.visit_expression(&parenthesized_expression.expression);
         }
 
-        fn visit_binary_expression(&mut self, binary_expression: &ASTBinaryExpression) {
-            self.actual.push(TestASTNode::Binary);
-            self.visit_expression(&binary_expression.left);
-            self.visit_expression(&binary_expression.right);
+        fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {
+            self.actual.push(TestASTNode::Unary);
+            self.visit_expression(&unary_expression.operand);
         }
     }
 
