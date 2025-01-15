@@ -66,6 +66,9 @@ pub trait ASTVisitor {
             ASTExpressionKind::Variable(expr) => {
                 self.visit_variable_expression(expr);
             }
+            ASTExpressionKind::Unary(expr) => {
+                self.visit_unary_expression(expr);
+            }
         }
     }
     fn visit_expression(&mut self, expression: &ASTExpression) {
@@ -88,6 +91,8 @@ pub trait ASTVisitor {
     ) {
         self.visit_expression(&parenthesized_expression.expression);
     }
+
+    fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {}
 }
 
 pub struct ASTPrinter {
