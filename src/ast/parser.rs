@@ -80,7 +80,7 @@ impl Parser {
     }
 
     fn parse_binary_expression(&mut self, precedence: u8) -> ASTExpression {
-        let mut left = self.parse_primary_expression();
+        let mut left = self.parse_unary_expression();
 
         while let Some(operator) = self.parse_binary_operator() {
             self.consume();
@@ -97,6 +97,15 @@ impl Parser {
         }
 
         return left;
+    }
+
+    fn parse_unary_expression(&mut self) -> ASTExpression {
+        if let Some(operator) = self.parse_unary_operator() {
+            let operand = self.parse_unary_expression();
+            return ASTExpression::unary(operator, operand);
+        }
+
+        return self.parse_primary_expression();
     }
 
     fn parse_binary_operator(&mut self) -> Option<ASTBinaryOperator> {
