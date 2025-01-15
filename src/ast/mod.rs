@@ -367,6 +367,7 @@ mod test {
         ASTLetStatement,
         ASTNumberExpression,
         ASTParenthesizedExpression,
+        ASTUnaryExpression,
         ASTVariableExpression,
         ASTVisitor,
     };
