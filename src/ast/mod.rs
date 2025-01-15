@@ -77,7 +77,9 @@ pub trait ASTVisitor {
 
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression);
 
-    fn visit_number_expression(&mut self, number: &ASTNumberExpression);
+    fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
+        self.last_value = Some(number.number);
+    }
 
     fn visit_error(&mut self, span: &TextSpan);
 
@@ -92,7 +94,9 @@ pub trait ASTVisitor {
         self.visit_expression(&parenthesized_expression.expression);
     }
 
-    fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {}
+    fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {
+        todo!()
+    }
 }
 
 pub struct ASTPrinter {
