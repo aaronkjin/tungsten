@@ -226,6 +226,12 @@ pub enum ASTExpressionKind {
     Error(TextSpan),
 }
 
+// AST unary expressions
+pub struct ASTUnaryExpression {
+    pub operator: Token,
+    pub operand: Box<ASTExpression>,
+}
+
 // AST variable expressions
 pub struct ASTVariableExpression {
     pub identifier: Token,
