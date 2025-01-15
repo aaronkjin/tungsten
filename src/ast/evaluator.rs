@@ -5,6 +5,7 @@ use crate::ast::{
     ASTLetStatement,
     ASTNumberExpression,
     ASTParenthesizedExpression,
+    ASTUnaryExpression,
     ASTVariableExpression,
     ASTVisitor,
 };
@@ -62,5 +63,9 @@ impl ASTVisitor for ASTEvaluator {
         parenthesized_expression: &ASTParenthesizedExpression
     ) {
         self.visit_expression(&parenthesized_expression.expression);
+    }
+
+    fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {
+        todo!()
     }
 }

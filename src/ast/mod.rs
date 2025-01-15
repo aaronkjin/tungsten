@@ -78,7 +78,7 @@ pub trait ASTVisitor {
     fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression);
 
     fn visit_number_expression(&mut self, number: &ASTNumberExpression) {
-        self.last_value = Some(number.number);
+        todo!()
     }
 
     fn visit_error(&mut self, span: &TextSpan);
