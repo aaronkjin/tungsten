@@ -248,6 +248,16 @@ pub struct ASTUnaryExpression {
     pub operand: Box<ASTExpression>,
 }
 
+pub struct ASTUnaryOperator {
+    kind: ASTUnaryOperatorKind,
+    token: Token,
+}
+
+pub enum ASTUnaryOperatorKind {
+    Plus,
+    Minus,
+}
+
 // AST variable expressions
 pub struct ASTVariableExpression {
     pub identifier: Token,
