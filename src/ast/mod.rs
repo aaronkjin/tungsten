@@ -190,13 +190,9 @@ impl ASTVisitor for ASTPrinter {
 
     fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {
         self.result.push_str(
-            &format!(
-                "{}{}",
-                Self::TEXT_COLOR.fg_str(),
-                unary_expression.operator.token.span.literal
-            )
+            &format!("{}{}", Self::TEXT_COLOR.fg_str(), unary_expression.operator.span.literal)
         );
-        self.visit_expression(&unary_expression.expression);
+        self.visit_expression(&unary_expression.operand);
     }
 }
 
