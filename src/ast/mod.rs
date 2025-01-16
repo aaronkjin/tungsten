@@ -257,6 +257,12 @@ pub struct ASTUnaryOperator {
     token: Token,
 }
 
+impl ASTUnaryOperator {
+    pub fn new(kind: ASTUnaryOperatorKind, token: Token) -> Self {
+        ASTUnaryOperator { kind, token }
+    }
+}
+
 pub enum ASTUnaryOperatorKind {
     Plus,
     Minus,
