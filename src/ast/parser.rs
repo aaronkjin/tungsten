@@ -108,6 +108,17 @@ impl Parser {
         return self.parse_primary_expression();
     }
 
+    fn parse_unary_operator(&mut self) -> Option<ASTUnaryOperator> {
+        let token = self.current();
+        let kind = match token.kind {
+            TokenKind::Plus => { Some(ASTUnaryOperatorKind::Plus) }
+            TokenKind::Minus => { Some(ASTUnaryOperatorKind::Minus) }
+            _ => { None }
+        };
+
+        return kind.map(|kind| ASTUnaryOperator::new(kind, token.clone()));
+    }
+
     fn parse_binary_operator(&mut self) -> Option<ASTBinaryOperator> {
         let token = self.current();
 
