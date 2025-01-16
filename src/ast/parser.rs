@@ -1,4 +1,11 @@
-use crate::ast::{ ASTBinaryOperator, ASTBinaryOperatorKind, ASTExpression, ASTStatement };
+use crate::ast::{
+    ASTBinaryOperator,
+    ASTBinaryOperatorKind,
+    ASTExpression,
+    ASTStatement,
+    ASTUnaryOperator,
+    ASTUnaryOperatorKind,
+};
 use crate::ast::lexer::{ Token, TokenKind };
 use crate::diagnostics::DiagnosticsBagCell;
 use std::cell::Cell;
