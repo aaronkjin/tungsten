@@ -360,6 +360,12 @@ impl ASTExpression {
         ASTExpression::new(ASTExpressionKind::Variable(ASTVariableExpression { identifier }))
     }
 
+    pub fn unary(operator: ASTUnaryOperator, operand: ASTExpression) -> Self {
+        ASTExpression::new(
+            ASTExpressionKind::Unary(ASTUnaryExpression { operator, operand: Box::new(operand) })
+        )
+    }
+
     pub fn error(span: TextSpan) -> Self {
         ASTExpression::new(ASTExpressionKind::Error(span))
     }
