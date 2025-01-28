@@ -310,8 +310,8 @@ impl ASTBinaryOperator {
             ASTBinaryOperatorKind::Plus => 18,
             ASTBinaryOperatorKind::Minus => 18,
             ASTBinaryOperatorKind::BitwiseAnd => 17,
-            ASTBinaryOperatorKind::BitwiseOr => 15,
             ASTBinaryOperatorKind::BitwiseXor => 16,
+            ASTBinaryOperatorKind::BitwiseOr => 15,
         }
     }
 }
