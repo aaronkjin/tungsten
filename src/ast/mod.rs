@@ -285,6 +285,10 @@ pub enum ASTBinaryOperatorKind {
     Minus,
     Multiply,
     Divide,
+    Power,
+    BitwiseAnd,
+    BitwiseOr,
+    BitwiseXor,
 }
 
 // AST binary operators
@@ -300,10 +304,14 @@ impl ASTBinaryOperator {
 
     pub fn precedence(&self) -> u8 {
         match self.kind {
-            ASTBinaryOperatorKind::Plus => 1,
-            ASTBinaryOperatorKind::Minus => 1,
-            ASTBinaryOperatorKind::Multiply => 2,
-            ASTBinaryOperatorKind::Divide => 2,
+            ASTBinaryOperatorKind::Power => 20,
+            ASTBinaryOperatorKind::Multiply => 19,
+            ASTBinaryOperatorKind::Divide => 19,
+            ASTBinaryOperatorKind::Plus => 18,
+            ASTBinaryOperatorKind::Minus => 18,
+            ASTBinaryOperatorKind::BitwiseAnd => 17,
+            ASTBinaryOperatorKind::BitwiseOr => 15,
+            ASTBinaryOperatorKind::BitwiseXor => 16,
         }
     }
 }
