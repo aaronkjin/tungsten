@@ -6,6 +6,7 @@ mod text;
 mod compilation_unit;
 
 fn main() {
+    // Precedence: paren, unary, mult/div, add/sub, bitwise (shift, AND, XOR, OR)
     let input = "\
         let a = (1 + 2) * -b + 3
     ";
