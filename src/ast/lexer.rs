@@ -41,6 +41,10 @@ impl Display for TokenKind {
             TokenKind::Let => write!(f, "Let"),
             TokenKind::Identifier => write!(f, "Identifier"),
             TokenKind::Equals => write!(f, "="),
+            TokenKind::Ampersand => write!(f, "&"),
+            TokenKind::Pipe => write!(f, "|"),
+            TokenKind::Caret => write!(f, "^"),
+            TokenKind::DoubleAsterisk => write!(f, "**"),
         }
     }
 }
