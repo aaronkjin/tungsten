@@ -2,19 +2,26 @@ use std::fmt::{ Display, Formatter, write };
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum TokenKind {
+    // Literals
     Number(i64),
-    // PEMDAS operators
+    // Operators
     Plus,
     Minus,
     Asterisk,
     Slash,
+    Equals,
+    Ampersand,
+    Pipe,
+    Caret,
+    DoubleAsterisk,
+    // Keywords
+    Let,
+    // Misc.
     LeftParen,
     RightParen,
     Bad,
     Whitespace,
-    Let,
     Identifier,
-    Equals,
     Eof,
 }
 
