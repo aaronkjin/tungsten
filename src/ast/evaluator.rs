@@ -56,7 +56,9 @@ impl ASTVisitor for ASTEvaluator {
             ASTBinaryOperatorKind::Multiply => left * right,
             ASTBinaryOperatorKind::Divide => left / right,
             ASTBinaryOperatorKind::Power => left.pow(right as u32),
-            // Add other operators here
+            ASTBinaryOperatorKind::BitwiseAnd => left & right,
+            ASTBinaryOperatorKind::BitwiseOr => left | right,
+            ASTBinaryOperatorKind::BitwiseXor => left ^ right,
         });
     }
 
