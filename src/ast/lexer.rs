@@ -138,11 +138,27 @@ impl<'a> Lexer<'a> {
         match c {
             '+' => TokenKind::Plus,
             '-' => TokenKind::Minus,
-            '*' => TokenKind::Asterisk,
+            '*' => {
+                if let Some(next) = self.current_char() {
+                    if next == '*' {
+                        // Edge case: Exponents
+                        self.consume().unwrap();
+                        TokenKind::DoubleAsterisk
+                    } else {
+                        // Base case: Multiplication
+                        TokenKind::Asterisk
+                    }
+                } else {
+                    TokenKind::Asterisk
+                }
+            }
             '/' => TokenKind::Slash,
             '(' => TokenKind::LeftParen,
             ')' => TokenKind::RightParen,
             '=' => TokenKind::Equals,
+            '&' => TokenKind::Ampersand,
+            '|' => TokenKind::Pipe,
+            '^' => TokenKind::Caret,
             _ => TokenKind::Bad,
         }
     }
