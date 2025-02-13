@@ -135,6 +135,10 @@ impl Parser {
             TokenKind::Minus => { Some(ASTBinaryOperatorKind::Minus) }
             TokenKind::Asterisk => { Some(ASTBinaryOperatorKind::Multiply) }
             TokenKind::Slash => { Some(ASTBinaryOperatorKind::Divide) }
+            TokenKind::Ampersand => { Some(ASTBinaryOperatorKind::BitwiseAnd) }
+            TokenKind::Pipe => { Some(ASTBinaryOperatorKind::BitwiseOr) }
+            TokenKind::Caret => { Some(ASTBinaryOperatorKind::BitwiseXor) }
+            TokenKind::DoubleAsterisk => { Some(ASTBinaryOperatorKind::Power) }
             _ => { None }
         };
 
