@@ -266,6 +266,7 @@ impl ASTUnaryOperator {
 pub enum ASTUnaryOperatorKind {
     Plus,
     Minus,
+    BitwiseNot,
 }
 
 // AST variable expressions

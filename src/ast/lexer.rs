@@ -14,6 +14,7 @@ pub enum TokenKind {
     Pipe,
     Caret,
     DoubleAsterisk,
+    Tilde,
     // Keywords
     Let,
     // Misc.
@@ -45,6 +46,7 @@ impl Display for TokenKind {
             TokenKind::Pipe => write!(f, "|"),
             TokenKind::Caret => write!(f, "^"),
             TokenKind::DoubleAsterisk => write!(f, "**"),
+            TokenKind::Tilde => write!(f, "~"),
         }
     }
 }
@@ -159,6 +161,7 @@ impl<'a> Lexer<'a> {
             '&' => TokenKind::Ampersand,
             '|' => TokenKind::Pipe,
             '^' => TokenKind::Caret,
+            '~' => TokenKind::Tilde,
             _ => TokenKind::Bad,
         }
     }

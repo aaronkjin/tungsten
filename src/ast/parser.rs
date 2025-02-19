@@ -127,6 +127,7 @@ impl Parser {
         let kind = match token.kind {
             TokenKind::Plus => { Some(ASTUnaryOperatorKind::Plus) }
             TokenKind::Minus => { Some(ASTUnaryOperatorKind::Minus) }
+            TokenKind::Tilde => { Some(ASTUnaryOperatorKind::BitwiseNot) }
             _ => { None }
         };
 
