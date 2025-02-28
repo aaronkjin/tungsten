@@ -62,6 +62,10 @@ pub struct CompilationUnit {
 
 impl CompilationUnit {
     pub fn compile(input: &str) -> CompilationUnit {
+        Self::compile_with_options(input, false)
+    }
+
+    pub fn compile_with_options(input: &str, skip_symbol_checking: bool) -> CompilationUnit {
         let text = text::SourceText::new(input.to_string());
 
         // Part I: Lexer
@@ -92,12 +96,16 @@ impl CompilationUnit {
             return Self::create_compilation_unit(ast, diagnostics_bag);
         }
 
-        let mut symbol_checker = SymbolChecker::new(Rc::clone(&diagnostics_bag));
-        ast.visit(&mut symbol_checker);
+        // Only perform symbol checking if not skipped
+        if !skip_symbol_checking {
+            let mut symbol_checker = SymbolChecker::new(Rc::clone(&diagnostics_bag));
+            ast.visit(&mut symbol_checker);
 
-        if Self::check_diagnostics(&text, &diagnostics_bag).is_err() {
-            return Self::create_compilation_unit(ast, diagnostics_bag);
+            if Self::check_diagnostics(&text, &diagnostics_bag).is_err() {
+                return Self::create_compilation_unit(ast, diagnostics_bag);
+            }
         }
+
         Self::create_compilation_unit(ast, diagnostics_bag)
     }
 

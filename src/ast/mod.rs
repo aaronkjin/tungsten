@@ -412,7 +412,7 @@ mod test {
 
     impl ASTVerifier {
         pub fn new(input: &str, expected: Vec<TestASTNode>) -> Self {
-            let compilation_unit = CompilationUnit::compile(input);
+            let compilation_unit = CompilationUnit::compile_with_options(input, true);
             assert!(
                 compilation_unit.diagnostics_bag.borrow().diagnostics.len() == 0,
                 "Expected no diagnostics, found {:?}",
@@ -553,7 +553,6 @@ mod test {
             TestASTNode::LetStmt,
             TestASTNode::Number(1),
             TestASTNode::LetStmt,
-            TestASTNode::Binary,
             TestASTNode::Binary,
             TestASTNode::Parenthesized,
             TestASTNode::Binary,
