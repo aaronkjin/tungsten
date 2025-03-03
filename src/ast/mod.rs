@@ -530,8 +530,12 @@ mod test {
 
     #[test]
     pub fn should_parse_parenthesized_binary_expression_with_variable() {
-        let input = "let a = (1 + 2) * b";
+        let input = "\
+        let b = 1
+        let a = (1 + 2) * b";
         let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Number(1),
             TestASTNode::LetStmt,
             TestASTNode::Binary,
             TestASTNode::Parenthesized,
