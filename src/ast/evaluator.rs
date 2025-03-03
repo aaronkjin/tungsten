@@ -1,11 +1,13 @@
 use std::collections::HashMap;
-use crate::ast::{
+use super::{
     ASTBinaryExpression,
     ASTBinaryOperatorKind,
+    ASTExpression,
     ASTLetStatement,
     ASTNumberExpression,
     ASTParenthesizedExpression,
     ASTUnaryExpression,
+    ASTUnaryOperatorKind,
     ASTVariableExpression,
     ASTVisitor,
 };
@@ -70,6 +72,12 @@ impl ASTVisitor for ASTEvaluator {
     }
 
     fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {
-        todo!()
+        self.visit_expression(&unary_expression.operand);
+        let operand = self.last_value.unwrap();
+        self.last_value = Some(match unary_expression.operator.kind() {
+            ASTUnaryOperatorKind::Plus => operand,
+            ASTUnaryOperatorKind::Minus => -operand,
+            ASTUnaryOperatorKind::BitwiseNot => !operand,
+        });
     }
 }

@@ -261,6 +261,10 @@ impl ASTUnaryOperator {
     pub fn new(kind: ASTUnaryOperatorKind, token: Token) -> Self {
         ASTUnaryOperator { kind, token }
     }
+
+    pub fn kind(&self) -> &ASTUnaryOperatorKind {
+        &self.kind
+    }
 }
 
 pub enum ASTUnaryOperatorKind {
