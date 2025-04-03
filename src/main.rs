@@ -9,7 +9,7 @@ mod compilation_unit;
 fn main() {
     let input = "\
         let b = 1
-        let a = (1 + 2) * -b & 3
+        let a = (1 + 2) * -------b & 3
     ";
 
     let compilation_unit = CompilationUnit::compile(input);
