@@ -115,7 +115,7 @@ impl Parser {
                 return ASTExpression::error(operator_token.span.clone());
             }
 
-            let operand = self.parse_expression();
+            let operand = self.parse_unary_expression();
             return ASTExpression::unary(operator, operand);
         }
 

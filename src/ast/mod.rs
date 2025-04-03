@@ -640,4 +640,30 @@ mod test {
 
         assert_tree(input, expected);
     }
+
+    #[test]
+    pub fn should_parse_hilarious_amount_of_unary_operators() {
+        let input = "let a = -1 + -2 * -3 ** ------4";
+        let expected = vec![
+            TestASTNode::LetStmt,
+            TestASTNode::Binary,
+            TestASTNode::Unary,
+            TestASTNode::Number(1),
+            TestASTNode::Binary,
+            TestASTNode::Unary,
+            TestASTNode::Number(2),
+            TestASTNode::Binary,
+            TestASTNode::Unary,
+            TestASTNode::Number(3),
+            TestASTNode::Unary,
+            TestASTNode::Unary,
+            TestASTNode::Unary,
+            TestASTNode::Unary,
+            TestASTNode::Unary,
+            TestASTNode::Unary,
+            TestASTNode::Number(4)
+        ];
+
+        assert_tree(input, expected);
+    }
 }
