@@ -42,11 +42,11 @@ Previously:
 - Parser
 - Evaluator
 - Error-reporter
-- Support for `let` statements
+- Support for `let` statements, binary operators, unary expressions
 
-Currently: If statements.
+Currently: If/while statements.
 
-Next: While loops, scoping.
+Next: Scoping.
 
 ## Developer
 

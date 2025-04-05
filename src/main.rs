@@ -8,8 +8,7 @@ mod compilation_unit;
 // Precedence: paren, unary, mult/div, add/sub, bitwise (shift, AND, XOR, OR)
 fn main() {
     let input = "\
-        let b = 1
-        let a = (1 + 2) * -------b & 3
+        let a = -1 + 2
     ";
 
     let compilation_unit = CompilationUnit::compile(input);
