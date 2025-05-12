@@ -1,11 +1,15 @@
 use termion::color;
 use termion::color::{ Fg, Reset };
+use printer::ASTPrinter;
+use visitor::ASTVisitor;
 
 use crate::ast::lexer::{ TextSpan, Token };
 
 pub mod lexer;
 pub mod parser;
 pub mod evaluator;
+pub mod visitor;
+pub mod printer;
 
 // Diagram AST out as a... tree (I know, shocking)
 pub struct Ast {
