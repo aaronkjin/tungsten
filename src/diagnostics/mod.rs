@@ -25,6 +25,7 @@ impl Diagnostic {
 
 pub type DiagnosticsBagCell = Rc<RefCell<DiagnosticsBag>>;
 
+#[derive(Debug)]
 pub struct DiagnosticsBag {
     pub diagnostics: Vec<Diagnostic>,
 }
@@ -84,7 +85,10 @@ impl DiagnosticsBag {
     }
 
     pub fn report_function_already_declared(&mut self, token: &Token) {
-        self.report_error(format!("Function '{}' already declared"), token.span.clone());
+        self.report_error(
+            format!("Function '{}' already declared", token.span.literal),
+            token.span.clone()
+        );
     }
 }
 

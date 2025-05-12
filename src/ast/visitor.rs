@@ -1,4 +1,3 @@
-use termion::color::{ Fg, Reset };
 use crate::ast::{
     ASTAssignmentExpression,
     ASTBinaryExpression,
@@ -20,7 +19,6 @@ use crate::ast::{
     ASTWhileStatement,
 };
 use crate::ast::lexer::TextSpan;
-use crate::ast::printer::ASTPrinter;
 
 pub trait ASTVisitor<'a> {
     fn do_visit_statement(&mut self, statement: &ASTStatement) {

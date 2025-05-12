@@ -1,4 +1,4 @@
-use std::fmt::{ Display, Formatter, write };
+use std::fmt::{ Display, Formatter };
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum TokenKind {
@@ -139,7 +139,7 @@ impl<'a> Lexer<'a> {
         return c.map(|c| {
             // Check if char is number token
             let start = self.current_pos;
-            let mut kind = TokenKind::Bad;
+            let kind;
 
             if Self::is_number_start(&c) {
                 let number: i64 = self.consume_number();

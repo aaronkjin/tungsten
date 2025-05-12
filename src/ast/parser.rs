@@ -6,7 +6,6 @@ use crate::ast::{
     ASTUnaryOperator,
     ASTUnaryOperatorKind,
     ASTElseStatement,
-    ASTUnaryExpression,
     FuncDeclParameter,
 };
 use crate::ast::lexer::{ Token, TokenKind };

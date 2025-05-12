@@ -2,7 +2,7 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
 
-use crate::{ diagnostics, main, text };
+use crate::{ diagnostics, text };
 use crate::ast::{
     Ast,
     ASTBlockStatement,
@@ -198,17 +198,17 @@ impl ASTVisitor<'_> for GlobalSymbolResolver {
             }
         }
     }
-    fn visit_let_statement(&mut self, let_statement: &ASTLetStatement) {}
+    fn visit_let_statement(&mut self, _let_statement: &ASTLetStatement) {}
 
-    fn visit_variable_expression(&mut self, variable_expression: &ASTVariableExpression) {}
+    fn visit_variable_expression(&mut self, _variable_expression: &ASTVariableExpression) {}
 
-    fn visit_number_expression(&mut self, number: &ASTNumberExpression) {}
+    fn visit_number_expression(&mut self, _number: &ASTNumberExpression) {}
 
-    fn visit_boolean_expression(&mut self, boolean: &ASTBooleanExpression) {}
+    fn visit_boolean_expression(&mut self, _boolean: &ASTBooleanExpression) {}
 
-    fn visit_error(&mut self, span: &TextSpan) {}
+    fn visit_error(&mut self, _span: &TextSpan) {}
 
-    fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {}
+    fn visit_unary_expression(&mut self, _unary_expression: &ASTUnaryExpression) {}
 }
 
 impl ASTVisitor<'_> for Resolver {
@@ -277,11 +277,11 @@ impl ASTVisitor<'_> for Resolver {
         }
     }
 
-    fn visit_number_expression(&mut self, number: &ASTNumberExpression) {}
+    fn visit_number_expression(&mut self, _number: &ASTNumberExpression) {}
 
-    fn visit_boolean_expression(&mut self, boolean: &ASTBooleanExpression) {}
+    fn visit_boolean_expression(&mut self, _boolean: &ASTBooleanExpression) {}
 
-    fn visit_error(&mut self, span: &TextSpan) {}
+    fn visit_error(&mut self, _span: &TextSpan) {}
 
     fn visit_unary_expression(&mut self, unary_expression: &ASTUnaryExpression) {
         self.visit_expression(&unary_expression.operand);

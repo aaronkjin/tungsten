@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::fmt::format;
 use crate::ast::{
     ASTAssignmentExpression,
     ASTBinaryExpression,
@@ -114,7 +113,7 @@ impl<'a> ASTEvaluator<'a> {
 }
 
 impl<'a> ASTVisitor<'_> for ASTEvaluator<'a> {
-    fn visit_func_decl_statement(&mut self, func_decl_statement: &ASTFuncDeclStatement) {}
+    fn visit_func_decl_statement(&mut self, _func_decl_statement: &ASTFuncDeclStatement) {}
 
     fn visit_while_statement(&mut self, while_statement: &ASTWhileStatement) {
         self.push_frame();
@@ -198,7 +197,7 @@ impl<'a> ASTVisitor<'_> for ASTEvaluator<'a> {
         self.last_value = Some(boolean.value as i64);
     }
 
-    fn visit_error(&mut self, span: &TextSpan) {
+    fn visit_error(&mut self, _span: &TextSpan) {
         todo!()
     }
 
