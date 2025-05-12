@@ -6,11 +6,37 @@ mod text;
 mod compilation_unit;
 
 // Precedence: paren, unary, mult/div, add/sub, bitwise (shift, AND, XOR, OR)
-fn main() {
-    let input = "\
-        let a = -1 + 2
+fn main() -> Result<(), ()> {
+    let input =
+        "\
+        func doSomething {
+        }
+        func main {
+        }
+        let a = add(1, 2)
+        func add(a, b) {
+            return a + b
+        }
+        while a < 10 {
+            a = a + 1
+        }
+        if a >= 10 {
+            a = 25
+        }
+        else
+        {
+            a = 20
+            let a = 10
+            a = 15
+        }
+        let b = 10
+        if true {
+            b = 20
+        }
+        a
+        b
     ";
-
-    let compilation_unit = CompilationUnit::compile(input);
-    compilation_unit.maybe_run();
+    let compilation_unit = CompilationUnit::compile(input).map_err(|_| ())?;
+    compilation_unit.run();
+    Ok(())
 }
