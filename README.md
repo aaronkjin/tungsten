@@ -9,19 +9,19 @@ Currently building 👷‍♂️
 Prerequisites:
 
 ```bash
-# ensure Rust is installed; if not, install
+# install Rust
 curl --proto '=https' --tlsv1.2 -sSf \
     https://sh.rustup.rs | sh
 
-# ensure Cargo is installed
+# check if Cargo is installed
 cargo --version
 
-# if Cargo are not in PATH, add them
+# add if not in PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# reload shell configuration
-source ~/.zshrc   # For zsh
-source ~/.bashrc  # For bash
+# reload shell config for zsh or bash
+source ~/.zshrc
+source ~/.bashrc
 ```
 
 Quick setup to get the compiler running:
@@ -29,6 +29,9 @@ Quick setup to get the compiler running:
 ```bash
 # run
 cargo run src/main.rs
+
+# to build, run
+cargo build
 
 # for tests, run
 cargo test
