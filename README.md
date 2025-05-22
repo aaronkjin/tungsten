@@ -1,8 +1,8 @@
 # Tungsten
 
-A compiler, except build-it-yourself version. And by yourself, I mean me.
+A compiler built from scratch with no libraries.
 
-Currently building 👷‍♂️
+Currently building!
 
 ## Getting Started
 
@@ -39,17 +39,41 @@ cargo test
 
 ## Progress
 
-Previously:
+Currently supports:
 
-- Lexer
-- Parser
-- Evaluator
-- Error-reporter
-- Support for `let` statements, binary operators, unary expressions
+```rust
+// var declarations
+let a = 10
+let b = true
 
-Currently: If/while statements.
+// arithmetic expressions
+let res = (a + 5) * 2
 
-Next: Scoping.
+// func declaraations
+func add(x, y) {
+    return x + y
+}
+
+// func calls
+let sum = add(1, 2)
+
+// conditional statements
+if a > 5 {
+    a = 25
+} else {
+    a = 20
+}
+
+// while loops
+while a < 10 {
+    a = a + 1
+}
+
+// block scoping
+{
+    let local_var = 15
+}
+```
 
 ## Developer
 
