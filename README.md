@@ -75,6 +75,11 @@ while a < 10 {
 }
 ```
 
+## Next Steps
+
+- Function calls
+- Function declarations
+
 ## Developer
 
 Aaron Jin  
